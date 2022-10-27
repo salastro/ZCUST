@@ -1,0 +1,93 @@
+
+\hspace{-70pt}
+\begin{forest}
+  forked edges,
+  /tikz/every pin edge/.append style={Latex-, shorten <=2.5pt, darkgray},
+  /tikz/every pin/.append style={darkgray, font=\sffamily},
+  /tikz/every label/.append style={darkgray, font=\sffamily},
+  before typesetting nodes={
+    delay={
+      where content={}{coordinate}{},
+    },
+    where n children=0{tier=terminus, label/.process={Ow{content}{right:#1}}, content=}{},
+  },
+  for tree={
+    grow'=0,
+    s sep'+=10pt,
+    l sep'+=15pt,
+  },
+  %l sep'+=50pt,
+  [Eukaryotes
+      [
+          [Lungfishes]
+          [
+              [Coelacanth]
+              [Ray-finned fish]
+          ]
+      ]
+      [Tetrapods
+          [Amphibians
+              [Caecilian]
+              [
+                  [Frogs]
+                  [Salamander]
+              ]
+          ]
+          [Amniotes
+              [Mammals
+                  [Apes
+                      [Monkeys]
+                      [
+                          [Gibbons]
+                          [
+                              [Orangutans]
+                              [
+                                  [Gorilla]
+                                  [
+                                      [Human]
+                                      [Chimp]
+                                  ]
+                              ]
+                          ]
+                      ]
+                  ]
+                  [Cats
+                      [
+                          [
+                              [
+                                  [Lion]
+                                  [Leopard]
+                              ]
+                              [Jaguar]
+                          ]
+                          [Tiger]
+                      ]
+                      [Domestic cat]
+                  ]
+              ]
+              [
+                  [Snakes]
+                  [
+                      [
+                          [Turtles]
+                          [Crocodiles]
+                      ]
+                      [Birds
+                          [Ostriches]
+                          [
+                              [Hawks]
+                              [
+                                  [Ducks]
+                                  [
+                                      [Geese]
+                                      [Swans]
+                                  ]
+                              ]
+                          ]
+                      ]
+                  ]
+              ]
+          ]
+      ]
+  ]
+\end{forest}
