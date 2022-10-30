@@ -14,6 +14,19 @@
 
 We use arrows to represent vectors graphically, the choice of arrows is very similar to the choice of lengths to represent numbers.
 
+\begin{figure}[H]
+    \begin{center}
+        \begin{tikzpicture}[scale=1, transform shape]
+            \draw[thick, -{Latex}] (0,0) -- (2,2) node[above] {Sense};
+            \draw[thick, -{Latex}] (0,0) -- (2,2) node[midway, above, rotate=45] {Magnitude};
+            \fill (0,0) circle[radius=2pt];
+            \draw[thick, dashed] (0,0) -- (-1, -1) node[below] {Direction};
+        \end{tikzpicture}
+    \end{center}
+    \caption{A vector represented graphically using an arrow.}%
+    \label{fig:vector}
+\end{figure}
+
 \begin{definition}[Vector equality]
     For $\vec{a}$ to be equal to $\vec{b}$
     \begin{itemize}
@@ -48,8 +61,6 @@ The choice of such an equality, although looks natural, is a made construct. Thi
                 {$\vec{B}$};
             \draw[thick,-{latex}] (0,0) -- (3,2) node[above]
                 {$\vec{A}+\vec{B}$};
-            % \draw[thick,dashed,->] (2,0) -- (3,2) node[right] {$\vec{B}$};
-            % \draw[thick,dashed,->] (1,2) -- (3,2) node[above] {$\vec{A}$};
         \end{tikzpicture}
     \end{center}
     \caption{Sum of two vectors}%
@@ -70,7 +81,7 @@ This definition is based on the practicality of such a geometrical construct acc
         \end{tikzpicture}
     \end{center}
     \caption{Commutative property of vector sum}%
-    \label{fig:vector-sum-com}
+    \label{fig:vector-sum-commutative}
 \end{figure}
 
 \begin{figure}[htpb]
@@ -85,7 +96,7 @@ This definition is based on the practicality of such a geometrical construct acc
         \end{tikzpicture}
     \end{center}
     \caption{Associative property of vector sum}%
-    \label{fig:vector-sum-com}
+    \label{fig:vector-sum-associative}
 \end{figure}
 
 We define the zero vector due to the usefulness of zero in normal arithmetic.
@@ -93,105 +104,190 @@ We define the zero vector due to the usefulness of zero in normal arithmetic.
 \begin{definition}[Zero Vector]
     \[
         \vec{v}+\vec{0}=\vec{v}
-    .\] 
+    .\]
 \end{definition}
 
 \begin{note}
     \begin{align*}
-        \vec{0} & \neq 0. \\
-        |\vec{0}| & = 0.
+         \vec{0}  & \neq 0. \\
+        |\vec{0}| &   =  0.
     \end{align*}
 \end{note}
 
-\subsection{Cartesian coordinates}%
-\label{sub:cartesian}
+We also want $\vec{v}+(-\vec{v})=\vec{0}$ to be true, which means that $-\vec{v}$ has to has the opposite sense of $\vec{v}$ but the same magnitude and direction, following the definition of addition and zero vector.
 
-\change{Add operations before this}
+\subsubsection{Scalar multiplication}%
+\label{ssub:vector-scalar-multiplication}
 
-To use vectors in a more practical context, we put them onto the Cartesian coordinates where:
-\begin{itemize}
-    \item All vectors starts from the origin point of the coordinate system we chose.
-    \item The tip of the vector lies inside the coordinate space we chose.
-\end{itemize}
-
-It is not physically helpful to use vectors starting from different origin points, and when this is needed, it helps to clarify the difference between various systems for calculations to be accurate.
-
-In order to actually use the proprieties of the Cartesian coordinate, we have to associate the vector's tip with some point $(a,b)$. Sometimes vectors and points are used interchangeably. Whenever they are used in such manner, the physical context clarifies this confusion, but in some cases, they both are used within the same system where the distinction between them is needed.
-
-\begin{note}
-    Vectors are not points, neither are equivalent to them.
-\end{note}
-
-\subsubsection{Unit vectors}%
-\label{ssub:unit-vectors}
-
-
-To both avoid the confusion with points and make calculations more computable we use unit vectors. Unite vectors are like a reference point for a given system. Their physical value is completely arbitrary, although usually used with real life units (meter, km, mile, etc).
-
-\begin{definition}[Unit vectors]
-    Vectors of length 1, orthogonal to each other, and parallel to the axes of the coordinate system, such that:
-    \begin{itemize}
-        \item the tip of $e_1$ is on the point $(1,0,\ldots)$.
-        \item the tip of $e_2$ is on the point $(0,1,\ldots)$.
-            \\ \vdots
-        \item the tip of $e_n$ is on the point $(0,0,\ldots,1)$.
-    \end{itemize}
+\begin{definition}[Scalar multiplication]
+    $c \vec{v}$ is a vector which has a $|c|$ times the magnitude of $\vec{v}$ in the same direction, and the same sense only if $c>0$, otherwise, the opposite sense.
 \end{definition}
 
-We usually refer to the first unit vectors as:
-\begin{itemize}
-    \item $e_1 = \hat{i}$
-    \item $e_2 = \hat{j}$
-    \item $e_3 = \hat{k}$
-\end{itemize}
+\begin{note}
+    \begin{align*}
+         d\vec{a}          &=  \vec{a}d. \\
+        c(\vec{a}+\vec{b}) &= c\vec{a}+c\vec{b}. \\
+        (c+d)\vec{a}       &= c\vec{a}+d\vec{a}. \\
+        c( d\vec{a} )      &= d(c\vec{a}).
+    \end{align*}
+\end{note}
+\change{explain this}
 
-$\hat{i}$ and $\hat{j}$ forms the relation $\vec{A}=a\hat{i}+b\hat{j}$.
+\subsubsection{Inner product}%
+\label{ssub:vector-inner-product}
 
-% - Here, we define scalar multiplication and unit vectors.
-% - ==NOTE:== vectors **are not** points
-% - Although they are similar mathematical objects, their definitions are vastly different, so whenever they are used in the same context the difference need to be clarified.
-% - The notation may be used interchangeably if the physical context does not need differentiation between them.
+It is formulated to represent linear relations like $W=\vec{F} \cdot  \vec{r}$, where only the components of the two vectors that are parallel to each other are relevant.
 
-% \begin{theorem}
-% This is a theorem.
-% \end{theorem}
-% \begin{proof}
-% This is a proof.
-% \end{proof}
-% \begin{example}
-% This is an example.
-% \end{example}
-% \begin{explanation}
-% This is an explanation.
-% \end{explanation}
-% \begin{claim}
-% This is a claim.
-% \end{claim}
-% \begin{corollary}
-% This is a corollary.
-% \end{corollary}
-% \begin{prop}
-% This is a proposition.
-% \end{prop}
-% \begin{lemma}
-% This is a lemma.
-% \end{lemma}
-% \begin{question}
-% This is a question.
-% \end{question}
-% \begin{solution}
-% This is a solution.
-% \end{solution}
-% \begin{exercise}
-% This is an exercise.
-% \end{exercise}
-% \begin{definition}[Definition]
-% This is a definition.
-% \end{definition}
-% \begin{note}
-% This is a note.
-% \end{note}
+\begin{figure}[htpb]
+\begin{center}
+\begin{tikzpicture}[scale=1, transform shape]
+    \draw[thick,-{latex}] (0,0) -- (2,0) node[below] {$\vec{r}$};
+    \draw[thick,-{latex}] (0,0) -- (1,2) node[left] {$\vec{F}$};
+    \draw[thick,-{latex},red] (0,0) -- (1,0) node[midway, below] {$\vec{F}\cos\theta$};
+    \draw[dashed, blue] (1,0) -- (1,2);
+    \fill (0,0) circle (2pt);
+\end{tikzpicture}
+\end{center}
+\caption{Inner product applied on work}%
+\label{fig:work-inner-product}
+\end{figure}
 
-% subsection sub_section_2 (end)
+\begin{figure}[htpb]
+    \begin{center}
+        \begin{tikzpicture}[scale=1, transform shape]
+            \draw[thick,-{latex}] (0,0) -- (3,0) node[below] {$\vec{a}$};
+            \draw[thick,-{latex}] (0,0) -- (1,2) node[left] {$\vec{b}$};
+            \draw[thick,-{latex}] (1,2) -- (2,1) node[right] {$\vec{c}$};
+            \draw[thick,-{latex}] (0,0) -- (2,1) node[midway, above,rotate=30] {$\vec{b}+\vec{c}$};
+            \draw[thick,-{latex},red] (0,0) -- (1,0) node[midway, below] {$\vec{b}_\perp$};
+            \draw[thick,-{latex},red] (1,0) -- (2,0) node[midway, below] {$\vec{a}_\perp$};
+            \draw[thick,|-|] (0,-1) -- (2,-1) node[midway, below] {$(b+c)_\perp$};
+            \draw[dashed, blue] (1,0) -- (1,2);
+            \draw[dashed, blue] (2,0) -- (2,1);
+            % \fill (0,0) circle (2pt);
+        \end{tikzpicture}
+    \end{center}
+    \caption{Distributive property of inner product}%
+    \label{fig:inner-product-distributive}
+\end{figure}
+
+\[
+    \vec{a} \cdot ( \vec{b} + \vec{c} ) = \vec{a}\cdot\vec{b} + \vec{a}\cdot\vec{c}
+.\]
+
+\begin{definition}[Inner product]
+    \[
+        \vec{a} \cdot \vec{b} = |a| |b| \cos\theta
+    .\]
+\end{definition}
+
+\begin{note}
+    Inner product results in a scalar. Thus, it can \textbf{not} be \textit{commutative} ($\vec{a}\cdot \vec{b}\cdot \vec{c}$ is meaningless by definition). However, it \textbf{is} \textit{associative} ($\vec{a}\cdot \vec{b}=\vec{b}\cdot \vec{a}$).
+\end{note}
+
+\subsubsection{Outer product}%
+\label{ssub:vector-outer-product}
+
+In contrast to inner product, outer product is formulated to represent rotational relations like $\vec{\tau} = \vec{F} \wedge \vec{r}$, where only the components of the two vectors that are perpendicular to each other are relevant. However, it creates a new mathematical object, the bivector, which is oriented plane segment like how vectors are oriented line segments. They are closely related to pseudovectors.
+
+\begin{figure}[htpb]
+\begin{center}
+\begin{tikzpicture}[scale=1, transform shape]
+    \fill (0,0) circle (2pt);
+    \draw[thick,-{latex}] (0,0) -- (2,0) node[below] {$\vec{r}$};
+    \draw[thick,-{latex}] (0,0) -- (1,2) node[left] {$\vec{F}$};
+    \draw[thick,-{latex},blue] (1,0) -- (1,2) node[midway, right] {$\vec{F}\sin\theta$};
+\end{tikzpicture}
+\end{center}
+\caption{Outer product applied on torque}%
+\label{fig:torque-outer-product}
+\end{figure}
+
+\begin{definition}[Outer product]
+    \[
+        |\vec{a} \wedge \vec{b}| = |a| |b| \sin\theta
+    .\]
+\end{definition}
+
+\begin{figure}[H]
+    \begin{center}
+        \begin{tikzpicture}[scale=1, transform shape]
+            \filldraw[color=blue!60, fill=blue!5] (0,0) -- (1,2) -- (3,2) node[black, right] {$\vec{F}\wedge\vec{r}$} -- (2,0) -- cycle;
+            \draw[thick,-{latex}] (0,0) -- (2,0) node[below] {$\vec{r}$};
+            \draw[thick,-{latex}] (0,0) -- (1,2) node[left] {$\vec{F}$};
+            \node [scale=3] at (1.5,1) {$\circlearrowright$};
+
+            \filldraw[color=blue!60, fill=blue!5] (4,0) -- (5,2) -- (7,2) -- (6,0) node[black, right] {$-\vec{F}\wedge\vec{r}$} -- cycle;
+            \draw[thick,-{latex}] (5,2) -- (7,2) node[below] {$\vec{r}$};
+            \draw[thick,-{latex}] (4,0) -- (5,2) node[left] {$\vec{F}$};
+            \node [scale=3] at (5.5,1) {$\circlearrowleft$};
+        \end{tikzpicture}
+    \end{center}
+    \caption{The bivector result of outer product.}%
+    \label{fig:bivector-result}
+\end{figure}
+
+The difference between clockwise and counterclockwise is represented through the anticommutative property ($\vec{a}\wedge\vec{b}=-\vec{b}\wedge \vec{a}$).
+
+\begin{figure}[htpb]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/bivectors-dist.PNG}
+    \caption{Distributive property of outer product}
+    \label{fig:outer-product-distributive}
+\end{figure}
+
+\begin{align*}
+    \vec{b} + \vec{c} &= (\vec{b}_\parallel+\vec{b}_\perp) + (\vec{c}_\parallel+\vec{c}_\perp) \\
+    &= (\vec{b}_\parallel+\vec{b}_\perp) + (\vec{c}_\parallel-\vec{b}_\perp) \\
+    &= \vec{b}_\parallel + \vec{c}_\parallel
+\end{align*}
+
+\begin{align*}
+    \vec{a} \wedge ( \vec{b} + \vec{c} ) &= \vec{a} \wedge (\vec{b}_\parallel + \vec{c}_\parallel) \\
+                                         &= \vec{a} \wedge \vec{b}_\parallel + \vec{a} \wedge \vec{c}_\parallel \\
+                                         &= \vec{a} \wedge \vec{b} + \vec{a} \wedge \vec{c}
+\end{align*}
+
+The next step after bivectors is trivectors. They are oriented volume. They are closely related to pseudoscalers in physics.
+
+\[
+( \vec{a} \wedge \vec{b} ) \wedge  \vec{c} = T
+.\]
+
+However, we do not define tetravectors (4-vectors) because they are not helpful in the \textit{current} dimensional space.
+
+\[
+    ( ( \vec{a} \wedge \vec{b} ) \wedge  \vec{c} ) \wedge \vec{d} = 0
+.\] 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \newpage
