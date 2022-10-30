@@ -13,7 +13,8 @@
 % Lets us create multiple columns.
 \usepackage{multicol}
 % Gives us better math syntax.
-\usepackage{amsmath,amsfonts,mathtools,amsthm,amssymb}
+\usepackage{amsmath,amsfonts,mathtools,amsthm,amssymb, scalerel, bm}
+\usepackage[single]{accents}
 % Lets us strikethrough text.
 \usepackage{cancel}
 % Lets us edit the caption of a figure.
@@ -41,6 +42,14 @@
 \let\impliedby\Leftarrow
 \let\iff\Leftrightarrow
 \let\epsilon\varepsilon
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%  Special notations  %
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand*{\ellipse}{\hstretch{2}{\circ}}
+\newcommand*{\bivec}[1]{\accentset{\ellipse}{#1}}
+\newcommand*{\trivec}[1]{\bm{#1}}
 
 %%%%%%%%%%%%
 %  Tables  %

@@ -188,7 +188,13 @@ It is formulated to represent linear relations like $W=\vec{F} \cdot  \vec{r}$, 
 \subsubsection{Outer product}%
 \label{ssub:vector-outer-product}
 
-In contrast to inner product, outer product is formulated to represent rotational relations like $\vec{\tau} = \vec{F} \wedge \vec{r}$, where only the components of the two vectors that are perpendicular to each other are relevant. However, it creates a new mathematical object, the bivector, which is oriented plane segment like how vectors are oriented line segments. They are closely related to pseudovectors.
+In contrast to inner product, outer product is formulated to represent rotational relations like $\vec{\tau} = \vec{F} \wedge \vec{r}$, where only the components of the two vectors that are perpendicular to each other are relevant.
+
+However, it creates a new mathematical object, the bivector, which is oriented plane segment like how vectors are oriented line segments. They are related to pseudovectors in physics (e.g. angular velocity).
+
+\[
+    \vec{a}\wedge \vec{b}=\bivec{B}
+.\]
 
 \begin{figure}[htpb]
 \begin{center}
@@ -241,25 +247,23 @@ The difference between clockwise and counterclockwise is represented through the
     &= (\vec{b}_\parallel+\vec{b}_\perp) + (\vec{c}_\parallel-\vec{b}_\perp) \\
     &= \vec{b}_\parallel + \vec{c}_\parallel
 \end{align*}
-
 \begin{align*}
     \vec{a} \wedge ( \vec{b} + \vec{c} ) &= \vec{a} \wedge (\vec{b}_\parallel + \vec{c}_\parallel) \\
                                          &= \vec{a} \wedge \vec{b}_\parallel + \vec{a} \wedge \vec{c}_\parallel \\
                                          &= \vec{a} \wedge \vec{b} + \vec{a} \wedge \vec{c}
 \end{align*}
 
-The next step after bivectors is trivectors. They are oriented volume. They are closely related to pseudoscalers in physics.
+The next step after bivectors is trivectors. Just like vectors and bivectors but for three dimensions, they are oriented volume. In addition, they are closely related to pseudoscalers in physics (e.g. magnetic flux).
 
 \[
-( \vec{a} \wedge \vec{b} ) \wedge  \vec{c} = T
+    ( \vec{a} \wedge \vec{b} ) \wedge  \vec{c} = \trivec{T}
 .\]
 
 However, we do not define tetravectors (4-vectors) because they are not helpful in the \textit{current} dimensional space.
 
 \[
     ( ( \vec{a} \wedge \vec{b} ) \wedge  \vec{c} ) \wedge \vec{d} = 0
-.\] 
-
+.\]
 
 
 
