@@ -39,7 +39,7 @@ We use arrows to represent vectors graphically, the choice of arrows is very sim
 The choice of such an equality, although looks natural, is a made construct. This specific equality is useful for our calculations. However, it is as real as $\frac{1}{2}=\frac{3}{6}$, which, even though represents the notion of ratios, is not \textit{real} since, clearly, the process of cutting a pizza into 2 pieces is different from cutting it into 6 piece.
 
 \begin{note}
-    Notice how the equality is defined in terms of the original definition.
+    Equality is defined in terms of the original definition.
 \end{note}
 
 \subsection{Arithmetic}%
@@ -63,7 +63,7 @@ The choice of such an equality, although looks natural, is a made construct. Thi
                 {$\vec{A}+\vec{B}$};
         \end{tikzpicture}
     \end{center}
-    \caption{Sum of two vectors}%
+    \caption{Sum of two vectors.}%
     \label{fig:vector-sum}
 \end{figure}
 
@@ -80,7 +80,7 @@ This definition is based on the practicality of such a geometrical construct acc
             \draw[thick,-{latex}] (0,0) -- (3,2) node[above, left=-1.1] {$\vec{B}+\vec{A}$};
         \end{tikzpicture}
     \end{center}
-    \caption{Commutative property of vector sum}%
+    \caption{Commutative property of vector sum.}%
     \label{fig:vector-sum-commutative}
 \end{figure}
 
@@ -95,7 +95,7 @@ This definition is based on the practicality of such a geometrical construct acc
             \draw[thick,-{latex}] (0,0) -- (1.5,1.5) node[midway, left] {$\vec{A}+\vec{B}+\vec{C}$};
         \end{tikzpicture}
     \end{center}
-    \caption{Associative property of vector sum}%
+    \caption{Associative property of vector sum.}%
     \label{fig:vector-sum-associative}
 \end{figure}
 
@@ -111,7 +111,7 @@ We define the zero vector due to the usefulness of zero in normal arithmetic.
     \begin{align*}
          \vec{0}  & \neq 0. \\
         |\vec{0}| &   =  0.
-    \end{align*}
+    .\end{align*}
 \end{note}
 
 We also want $\vec{v}+(-\vec{v})=\vec{0}$ to be true, which means that $-\vec{v}$ has to has the opposite sense of $\vec{v}$ but the same magnitude and direction, following the definition of addition and zero vector.
@@ -129,9 +129,9 @@ We also want $\vec{v}+(-\vec{v})=\vec{0}$ to be true, which means that $-\vec{v}
         c(\vec{a}+\vec{b}) &= c\vec{a}+c\vec{b}. \\
         (c+d)\vec{a}       &= c\vec{a}+d\vec{a}. \\
         c( d\vec{a} )      &= d(c\vec{a}).
-    \end{align*}
+    .\end{align*}
 \end{note}
-\change{explain this}
+\change{Explain this.}
 
 \subsubsection{Inner product}%
 \label{ssub:vector-inner-product}
@@ -148,7 +148,7 @@ It is formulated to represent linear relations like $W=\vec{F} \cdot  \vec{r}$, 
     \fill (0,0) circle (2pt);
 \end{tikzpicture}
 \end{center}
-\caption{Inner product applied on work}%
+\caption{Inner product applied on work.}%
 \label{fig:work-inner-product}
 \end{figure}
 
@@ -167,7 +167,7 @@ It is formulated to represent linear relations like $W=\vec{F} \cdot  \vec{r}$, 
             % \fill (0,0) circle (2pt);
         \end{tikzpicture}
     \end{center}
-    \caption{Distributive property of inner product}%
+    \caption{Distributive property of inner product.}%
     \label{fig:inner-product-distributive}
 \end{figure}
 
@@ -205,7 +205,7 @@ However, it creates a new mathematical object, the bivector, which is oriented p
     \draw[thick,-{latex},blue] (1,0) -- (1,2) node[midway, right] {$\vec{F}\sin\theta$};
 \end{tikzpicture}
 \end{center}
-\caption{Outer product applied on torque}%
+\caption{Outer product applied on torque.}%
 \label{fig:torque-outer-product}
 \end{figure}
 
@@ -246,12 +246,12 @@ The difference between clockwise and counterclockwise is represented through the
     \vec{b} + \vec{c} &= (\vec{b}_\parallel+\vec{b}_\perp) + (\vec{c}_\parallel+\vec{c}_\perp) \\
     &= (\vec{b}_\parallel+\vec{b}_\perp) + (\vec{c}_\parallel-\vec{b}_\perp) \\
     &= \vec{b}_\parallel + \vec{c}_\parallel
-\end{align*}
+.\end{align*}
 \begin{align*}
     \vec{a} \wedge ( \vec{b} + \vec{c} ) &= \vec{a} \wedge (\vec{b}_\parallel + \vec{c}_\parallel) \\
                                          &= \vec{a} \wedge \vec{b}_\parallel + \vec{a} \wedge \vec{c}_\parallel \\
                                          &= \vec{a} \wedge \vec{b} + \vec{a} \wedge \vec{c}
-\end{align*}
+.\end{align*}
 
 The next step after bivectors is trivectors. Just like vectors and bivectors but for three dimensions, they are oriented volume. In addition, they are closely related to pseudoscalers in physics (e.g. magnetic flux).
 
@@ -261,37 +261,85 @@ The next step after bivectors is trivectors. Just like vectors and bivectors but
 
 However, we do not define tetravectors (4-vectors) because they are not helpful in the \textit{current} dimensional space.
 
+\begin{align*}
+    ( ( \vec{a} \wedge \vec{b} ) \wedge  \vec{c} ) \wedge \vec{d} &= 0 \\
+    \vec{a} \wedge \vec{b} \wedge  \vec{c} \wedge \vec{d} &= 0 \\
+    \trivec{T} \wedge \vec{d} &= 0
+.\end{align*}
+
+\begin{figure}[htpb]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/trivectors.PNG}
+    \caption{The trivector result of outer product.}
+    \label{fig:trivetors}
+\end{figure}
+
+\begin{note}
+    Outer product is associative: $( \vec{a}\wedge \vec{b} )\wedge \vec{c}=\vec{a}\wedge (\vec{b}\wedge \vec{c})$.
+\end{note}
+\change{Explain this.}
+
+\subsubsection{Geometric product}%
+\label{ssub:geometric-product}
+
+While the inner product captures the parallelism between vectors and the outer product captures the perpendicularity between vectors, none captures both. Therefore, the formulation of geometric product is needed.
+
+\begin{definition}
+    \[
+    \vec{a}\vec{b}=\vec{a}\cdot\vec{b} + \vec{a}\wedge\vec{b}
+    .\]
+\end{definition}
+
+It is simply defined as their sum, although they are different mathematical objects, similar to how we define complex numbers ($a+bi$). Following this definition we conclude the geometric product properties.
+
+\begin{align*}
+    \vec{a}\vec{b} &\neq \vec{b}\vec{a} \\
+                   &= \vec{a}\cdot \vec{b}-\vec{b}\wedge \vec{a}
+.\end{align*}
+
+\begin{align*}
+    \vec{a}(\vec{b}+\vec{c}) &= a\cdot(b+c) + a\wedge(b+c) \\
+                             &= ( a\cdot b + a\wedge b ) + ( a\cdot c + a\wedge c ) \\
+                             &= \vec{a}\vec{b} + \vec{a}\vec{c}
+.\end{align*}
+
 \[
-    ( ( \vec{a} \wedge \vec{b} ) \wedge  \vec{c} ) \wedge \vec{d} = 0
+    c \vec{a}\vec{b}=(c \vec{a})\vec{b} = a(c \vec{b})
 .\]
 
+\begin{align*}
+    \vec{a}\vec{b}+\vec{b}\vec{a} &= ( a \cdot b + \vec{a}\wedge \vec{b} ) + ( b \cdot a - \vec{a}\wedge \vec{b} ) \\
+                                  &= 2 a \cdot b \\
+    \therefore \vec{a} \cdot \vec{b} &= \frac{1}{2}(\vec{a}\vec{b}+\vec{b}\vec{a})
+.\end{align*}
 
+\begin{align*}
+    \vec{a}\vec{b}-\vec{b}\vec{a} &= ( a \cdot b + \vec{a}\wedge \vec{b} ) + ( - b \cdot a + \vec{a}\wedge \vec{b} ) \\
+                                  &= 2 \vec{a} \wedge \vec{b} \\
+    \therefore \vec{a} \wedge \vec{b} &= \frac{1}{2}(\vec{a}\vec{b}-\vec{b}\vec{a})
+.\end{align*}
 
+\subsubsection{Geometric division}%
+\label{ssub:geometric-division}
 
+Now we can define geometric division as $\trivec{A_k}^{-1}\trivec{A_k}=1$, where $A_k$ is a multivector, and follow to conclude a formula.
 
+\begin{align*}
+    \trivec{A_k}^{-1}\trivec{A_k}&=1 \\
+    \trivec{A_k}^{-1}\trivec{A_k}\trivec{A_k}&=\trivec{A_k} \\
+    \trivec{A_k}^{-1}\trivec{A_k}^2&=\trivec{A_k} \\
+    \trivec{A_k}^{-1}|\trivec{A_k}|^2&=\trivec{A_k} \\
+    \trivec{A_k}^{-1}&=\frac{\trivec{A_k}}{|\trivec{A_k}|^2} \\
+.\end{align*}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+\begin{note}
+    \begin{align*}
+        A_kA_k&=A_k^2 \\
+              &=A_k \cdot A_k + A_k \wedge  A_k \\
+              &=|A_k| |A_k| \cos 0 + |A_k| |A_k| \sin 0 \\
+              &=|A_k| |A_k| + 0 \\
+              &=|A_k|^2
+    .\end{align*}
+\end{note}
 
 \newpage
