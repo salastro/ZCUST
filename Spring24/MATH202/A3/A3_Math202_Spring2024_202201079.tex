@@ -1,0 +1,279 @@
+\documentclass{zc-ust-hw}
+
+% % Laplace
+\renewcommand{\L}[1]{\mathscr{L}\left\{#1\right\}}
+\newcommand{\Li}[1]{\mathscr{L}^{-1}\left\{#1\right\}}
+
+\name{SalahDin Ahmed Salh Rezk}
+\id{202201079}
+\course{Ordinary Differential Equations (MATH 202)}
+\assignment{Assignment 3}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+  \item Find Laplace Transform of the following functions:
+    \begin{enumerate}
+      \item $f(t)=(2 t-1)^3$
+        \begin{sol}
+          \begin{align}
+            \L{(2 t-1)^3} &= \L{8 t^3 - 12 t^2 + 6 t - 1} \\
+            &= \frac{8\cdot 3!}{s^{4} }-\frac{12\cdot 2}{s^3 }+\frac{6}{s^2}-\frac{1}{2} \\
+            &= \frac{48}{s^{4} }-\frac{24}{s^3 }+\frac{6}{s^2}-\frac{1}{s}
+          .\end{align}
+        \end{sol}
+      \item $f(t)=e^{3 t} \cos (6 t) \cos (3 t)$
+        \begin{sol}
+          \begin{align}
+            \L{e^{3 t} \cos (6 t) \cos (3 t)} &= \L{\frac{1}{2}e^{3 t}\left( \cos (9t) + \cos (3t) \right) } \\
+            &= \frac{1}{2}\left( \L{e^{3t}\cos(9t) + \L{e^{3t}\cos (3t) } } \right) \\
+            &= \frac{1}{2} \left[ \frac{s-3}{(s-3)^2+9^2}+\frac{s-3}{(s-3)^2+3^2} \right]
+          .\end{align}
+        \end{sol}
+      \item $f(t)=t e^{4 t} \cos 3 t$
+        \begin{sol}
+          \begin{align}
+            \L{t e^{4 t} \cos 3 t} &= -\frac{d}{ds}\L{e^{4t}\cos(3t)} \\
+            &= -\frac{d}{ds}\left[ \frac{s-4}{(s-4)^2+3^2} \right] \\
+            &= -\frac{d}{ds}\left[ \frac{s-4}{(s-4)^2+9} \right] \\
+            &= \frac{2(s-4)}{\left[ (s-4)^2+9 \right]^2}-\frac{1}{(s-4)^2+9}
+          .\end{align}
+        \end{sol}
+        \newpage
+      \item $f(t)=t \cos (2 t) \cosh (3 t)$
+        \begin{sol}
+          \begin{align}
+            \L{t \cos (2 t) \cosh (3 t)} &= -\frac{d}{ds}\L{\cos(2t)\cosh(3t)} \\
+                                         &= -\frac{d}{ds}\L{\frac{e^{2ti}+e^{-2ti}}{2}\cdot \frac{e^{3t}+e^{-3t}  }{2} } \\
+                                         &= -\frac{d}{ds}\L{\frac{1}{2}(e^{2ti}+e^{-2ti})\cdot (e^{3t}+e^{-3t} ) } \\
+                                         &= -\frac{1}{4}\frac{d}{ds}\L{(e^{2ti}+e^{-2ti})\cdot (e^{3t}+e^{-3t} ) } \\
+                                         &= -\frac{1}{4}\frac{d}{ds}\L{
+                                         e^{t(3+2i)}+e^{t(3-2i)}+e^{t(-3+2i)}+e^{t(-3-2i)}
+                                       } \\
+                                         &= -\frac{1}{4}\frac{d}{ds}\left(
+                                           \begin{array}{rl}
+                                             &\dfrac{1}{s-3-2i}+\dfrac{1}{s-3+2i}\\
+                                             \\
+                                             +&\dfrac{1}{s+3-2i}+\dfrac{1}{s+3+2i}
+                                           \end{array} \right) \\
+                                         &= \frac{1}{4}\left(
+                                           \begin{array}{rl}
+                                             &\dfrac{1}{(s-3-2i)^2}+\dfrac{1}{(s-3+2i)^2}\\
+                                             \\
+                                             +&\dfrac{1}{(s+3-2i)^2}+\dfrac{1}{(s+3+2i)^2}
+                                           \end{array} \right) \\
+                                           \intertext{Using a symbolic calculator to simplify the above expression, we get:}
+                                         &=\frac{{s^6 - 5s^4 - 457s^2 + 845}}{{s^8 - 20s^6 + 438s^4 - 3380s^2 + 28561}}
+          .\end{align}
+        \end{sol}
+    \end{enumerate}
+  \item Find the Inverse Laplace Transform of the following functions:
+    \begin{enumerate}
+      \item $F(s)=\frac{s^2+1}{s^4-2 s^3-s^2+2 s}$ \\
+        \begin{sol}
+          \begin{align}
+            \Li{F(s)} &= \Li{\frac{s^2+1}{s^4-2 s^3-s^2+2 s}} \\
+                      &= \Li{\frac{s^2+1}{s(s-1)(s+1)(s-2)}} \\
+                      &= \Li{\frac{A}{s}+\frac{B}{s-2}+\frac{C}{s+1}+\frac{D}{s-1}} \\
+                  \intertext{\( A=\frac{1}{2},B=\frac{5}{6},C=-\frac{1}{3},D=-1 \)}
+                      &= \Li{\frac{1}{2s}+\frac{5}{6(s-2)}-\frac{1}{3(s+1)}-\frac{1}{s-1}} \\
+                      &= \frac{1}{2}+\frac{5}{6}e^{2t}-\frac{1}{3}e^{-t}-e^{t} 
+          .\end{align}
+        \end{sol}
+        \newpage
+      \item $F(s)=\frac{s}{(s+2)\left(s^2+4\right)}$ \\
+        \begin{sol}
+          \begin{align}
+            \Li{F(s)} &= \Li{\frac{s}{(s+2)\left(s^2+4\right)}} \\
+                      &= \Li{\frac{A}{s+2}+\frac{Bs+C}{s^2+4}} \\
+                      \intertext{\( A=\frac{1}{4},B=-\frac{1}{4},C=\frac{1}{2} \)}
+                      &= \Li{\frac{1}{4(s+2)}+\frac{-\frac{1}{4}s+\frac{1}{2}}{(s^2+4)}} \\
+                      &= \Li{\frac{1}{4(s+2)}-\frac{s-2}{4(s^2+4)}} \\
+                      &= \frac{1}{4}e^{-2t}-\frac{1}{4}(\cos 2t - \sin 2t)
+          .\end{align}
+        \end{sol}
+      \item $F(s)=\ln \left(\frac{s+1}{s-1}\right)$
+        \begin{sol}
+          \begin{align}
+            \Li{F(s)} &= \Li{\ln \left(\frac{s+1}{s-1}\right)} \\
+                      &= \Li{\ln (s+1)-\ln (s-1)} \\
+                      \intertext{Using \( \L{t^{n}
+                      f(t)}(s)=(-1)^{n}\dfrac{d^{n}F(s) }{ds^{n} } \)}
+                      &= -\frac{1}{t}\Li{\frac{d}{ds}\left[ \ln (s+1)-\ln (s-1) \right]} \\
+                      &= -\frac{1}{t}\Li{\frac{1}{s+1}-\frac{1}{s-1}} \\
+                      &= -\frac{1}{t}\left( e^{-t}-e^{t}   \right) \\
+                      &= \frac{e^{t}-e^{-t}}{t} \\
+                      &= \frac{2\sinh t}{t}
+          .\end{align}
+        \end{sol}
+        \newpage
+      \item $\frac{s^2+a^2}{\left(s^2-a^2\right)^2}$ Use the convolution.
+        \begin{sol}
+          \begin{gather}
+            \Li{\frac{s^2+a^2}{\left(s^2-a^2\right)^2}} \\
+            = \Li{\frac{s}{s^2-a^2}\cdot \frac{s}{s^2-a^2}+\frac{a}{s^2-a^2}\cdot \frac{a}{s^2-a^2}} \\
+            = \Li{\Li{\cosh at}\cdot\Li{\cosh at}+\Li{\sinh at}\cdot\Li{\sinh at}} \\
+            = \cosh at\ast\cosh at+\sinh at\ast\sinh at \\
+          = \int_{0}^{t} \cosh a(t-\tau)\cosh a\tau d\tau + \int_{0}^{t} \sinh a(t-\tau)\sinh a\tau d\tau \\
+          = \int_{0}^{t} \cosh(at)+\cosh(at-2a\tau) d\tau + \int_{0}^{t} \cosh(at)-\cosh(at-2a\tau) d\tau \\
+          = 2\int_{0}^{t} \cosh(at) d\tau \\
+          = 2\sinh at
+          .\end{gather}
+        \end{sol}
+    \end{enumerate}
+
+  \item Solve the following IVPs using Laplace transform:
+    \begin{enumerate}
+        \item $y^{\prime \prime}-4 y^{\prime}+4 y=t^3 e^{2 t}, \quad y(0)=0, \quad y^{\prime}(0)=0$
+          \begin{sol}
+            \begin{gather}
+              \L{y^{\prime\prime}-4 y^{\prime}+4 y} = \L{t^3 e^{2t}} \\
+              \left( s^2 Y(s)-sy(0)-y^{\prime}(0) \right)-4\left( sY(s)-y(0) \right)+4Y(s) = \frac{6}{(s-2)^4} \\
+              s^2 Y(s) -4 sY(s) +4Y(s) = \frac{6}{(s-2)^4} \\
+              Y(s)(s^2-4s+4) = \frac{6}{(s-2)^4} \\
+              Y(s)(s-2)^2 = \frac{6}{(s-2)^4} \\
+              Y(s)= \frac{6}{(s-2)^6} \\
+              y(t)= \frac{1}{20}t^5e^{2t}
+            .\end{gather}
+          \end{sol}
+          \newpage
+        \item $y^{\prime \prime}-2 y^{\prime}+5 y=1+t, \quad y(0)=0, \quad y^{\prime}(0)=4$
+          \begin{sol}
+            \begin{gather}
+              \L{y^{\prime\prime}-2 y^{\prime}+5 y} = \L{1+t} \\
+              \left( s^2 Y(s)-sy(0)-y^{\prime}(0) \right)-2\left( sY(s)-y(0) \right)+5Y(s) = \frac{1}{s}+\frac{1}{s^2} \\
+              s^2 Y(s) -2 sY(s) +5Y(s) -4 = \frac{1}{s}+\frac{1}{s^2} \\
+              Y(s)(s^2-2s+5) = \frac{1}{s}+\frac{1}{s^2}+4 \\
+              Y(s)[(s-1)^2+4] = \frac{1}{s}+\frac{1}{s^2}+4 \\
+              Y(s) = \frac{1}{s[(s-1)^2+4]}+\frac{1}{s^2[(s-1)^2+4]}+\frac{4}{(s-1)^2+4} \\
+              y = 1 \ast \frac{1}{2}e^{t}\sin(2t) + t \ast \frac{1}{2}e^{t}\sin(2t) + e^{t}\sin(2t) \\
+              y(t) = \frac{1}{2}\int_{0}^{t} e^{\tau }\sin(2\tau ) d\tau  + \frac{1}{2}\int_{0}^{t}  (t-\tau)e^{\tau }\sin (2\tau )d\tau  + e^{t}\sin(2t) \\
+              y(t) = \frac{1}{10} \left( {\mathrm{e}^t\sin\left(2t\right)-2\mathrm{e}^t\cos\left(2t\right)}+2 \right) - \frac{1}{50} \left( 3e^{t}\sin (2t) +4e^{t}\cos (2t)-10t-4   \right) + e^{t}\sin(2t) \\ 
+              y(t) = \frac{1}{25} (5t + 26e^t \sin(2t) - 7e^t \cos(2t) + 7)
+            \end{gather}
+          \end{sol}
+        \item $y^{\prime \prime}+y=\sqrt{2} \sin (\sqrt{2} t), \quad y(0)=10, \quad y^{\prime}(0)=0$
+          \begin{sol}
+            \begin{gather}
+              s^2 Y(s)-sy(0)-y^{\prime}(0)+Y(s) = \frac{2}{s^2+2} \\
+              s^2 Y(s)-10s+Y(s) = \frac{2}{s^2+2} \\
+              Y(s)(s^2+1) = \frac{2}{s^2+2}+10s \\
+            .\end{gather}
+            \begin{align}
+              Y(s) &= \frac{2}{(s^2+2)(s^2+1)}+\frac{10s}{s^2+1} \\
+              &= 2 \left( \frac{(s^2+2)-(s^2+1)}{(s^2+2)(s^2+1)} \right)+\frac{10s}{s^2+1} \\
+              &= 2 \left( \frac{1}{s^2+1}-\frac{1}{s^2+2} \right)+\frac{10s}{s^2+1} \\
+              y(t)&= 2\sin t-2\sin (2t)+10\cos t
+            .\end{align}
+          \end{sol}
+          \newpage
+        \item $y^{\prime \prime}+y=\delta(t)+H(t-4)+f(t), \quad y(0)=0, \quad y^{\prime}(0)=0,$
+          \\where $f(t)=
+            \begin{cases}
+              \cos t, & 0 \leq t<\pi  \\
+              0, & t \geq \pi 
+            \end{cases}$
+            \begin{sol}
+              \begin{align}
+                f(t) &= \cos t \cdot (H(t-0)-H(t-\pi)) + 0 \cdot H(t-\pi) \\
+                &= \cos t \cdot H(t) - \cos t \cdot H(t-\pi)
+              .\end{align}
+              \begin{align}
+                y^{''}+y&=\delta(t)+H(t-4)+\cos t \cdot H(t) - \cos t \cdot H(t-\pi) \\
+                \L{y^{''}+y} &= \L{\delta(t)+H(t-4)+\cos t \cdot H(t) - \cos t \cdot H(t-\pi)} \\
+              .\end{align}
+              \begin{equation}
+                s^2 Y(s)-sy(0)-y^{\prime}(0)+Y(s) = 1+\frac{e^{-4s}}{s}+\frac{s}{s^2+1}+\frac{s}{s^2+1}e^{-\pi s}
+              \end{equation}
+              \begin{align}
+                Y(s)(s^2+1) &= 1+\frac{e^{-4s}}{s}+\frac{s}{s^2+1}+\frac{s}{s^2+1}e^{-\pi s} \\
+                Y(s) &= \frac{1}{s^2+1}+\frac{e^{-4s}}{s(s^2+1)}+\frac{s}{(s^2+1)^2}+\frac{e^{-\pi s}}{s^2+1} \\
+                 &= \frac{1}{s^2+1}+{e^{-4s}}(\frac{1}{s}-\frac{s}{s^2+1})+\frac{s}{(s^2+1)^2}+\frac{e^{-\pi s}}{s^2+1} \\
+                y &= \sin t + H(t-4)\left( 1-\cos (t-4) \right) +
+                \frac{1}{2}t\sin t -H(t-\pi)\sin t
+              .\end{align}
+            \end{sol}
+    \end{enumerate}
+
+  \item Prove the following identities:
+    \begin{enumerate}
+      \item $\L{f''(t)}(s) = s^2F(s)-sf(0)-f'(0) $
+        \begin{sol}
+          \begin{align}
+            \L{f''(t)}(s) &= \int_{0}^{\infty} e^{-st}f''(t)dt \\
+            &= \left. e^{-st}f'(t) \right|_{0}^{\infty} - s\int_{0}^{\infty} e^{-st}f'(t)dt \\
+            &= -f'(0)+s\L{f'(t)}(s) \\
+            &= -f'(0)+s\left( \int_{0}^{\infty} e^{-st}f'(t)dt \right) \\
+            &= -f'(0)+s\left( \left. e^{-st}f(t) \right|_{0}^{\infty} - \int_{0}^{\infty} e^{-st}f(t)dt \right) \\
+            &= -f'(0)+s\left( f(0)-f(0)+\L{f(t)}(s) \right) \\
+            &= -f'(0)+s\left( f(0)+F(s) \right) \\
+            &= s^2F(s)-sf(0)-f'(0)
+          .\end{align}
+        \end{sol}
+
+        \newpage
+
+      \item \( \L{\int_{0}^{t} f(\tau ) d\tau }(s)=\frac{F(s)}{s} \)
+        \begin{sol}
+          \begin{align}
+            \L{\int_{0}^{t} f(\tau ) d\tau }(s) &= \int_{0}^{\infty} e^{-st}\left( \int_{0}^{t} f(\tau ) d\tau  \right)dt \\
+            &= \left. \frac{e^{-st}}{s}\int_{0}^{t} f(\tau ) d\tau  \right|_{0}^{\infty} + \frac{1}{s} \int_{0}^{\infty} e^{-st}\left( \frac{d}{dt}\int_{0}^{t} f(\tau ) d\tau  \right)dt \\
+            &= \frac{1}{s} \int_{0}^{\infty} e^{-st}\left( \frac{d}{dt}\int_{0}^{t} f(\tau ) d\tau  \right)dt \\
+            &= \frac{1}{s} \int_{0}^{\infty} e^{-st}\left( \frac{d}{dt}\int_{0}^{t} f(\tau ) d\tau  \right)dt \\
+            \intertext{Using the Fundamental Theorem of Calculus}
+            &= \frac{1}{s} \int_{0}^{\infty} e^{-st}\left[ f(t)\cdot \frac{d}{dt}t - f(0) \cdot \frac{d}{dt}0 \right] dt \\
+            &= \frac{1}{s} \int_{0}^{\infty} e^{-st}f(t)dt \\
+            &= \frac{1}{s} \L{f(t)}(s) \\
+            &= \frac{F(s)}{s}
+          .\end{align}
+        \end{sol}
+        
+      \item \( \frac{d}{dt}(f\ast g) = f' \ast g + f(0)g(t) \)
+        \begin{sol}
+          \begin{align}
+            \frac{d}{dt}(f\ast g) &= \frac{d}{dt}\int_{0}^{t} f(\tau )g(t-\tau )d\tau \\
+            \intertext{Using the Leibniz Rule}
+            &= \int_{0}^{t} \frac{d}{dt}f(\tau )g(t-\tau )d\tau + f(t)g(0) \\
+            &= f\ast g' + f(t)g(0)
+            \intertext{Using the definition of convolution}
+            &= f' \ast g + f(0)g(t)
+          \end{align}
+        \end{sol}
+    \end{enumerate}
+
+    \newpage
+    
+  \item Use Laplace transform to solve the following system of linear DEs:
+    \begin{align*}
+      x''+x-y&=0,\\
+      y''+y-x&=0
+    .\end{align*}
+    where
+    \[
+      x(0)=0, \quad y(0)=0, \quad x'(0)=-2, \quad y'(0)=1
+    .\] 
+
+    \begin{sol}
+      \begin{gather}
+        \intertext{Applying Laplace}
+        s^2X(s)-sx(0)-x'(0)+X(s)-Y(s) = 0 \\
+        s^2Y(s)-sy(0)-y'(0)+Y(s)-X(s) = 0 \\
+        s^2X(s)+2+X(s) = Y(s) \\
+        X(s)(s^2+1) = Y(s)-2 \\
+        s^2Y(s)-1+Y(s) = X(s) \\
+        Y(s)(s^2+1) = X(s)+1 \\
+        \intertext{Substitute the first equation into the second}
+        X(s)(s^2+1)(s^2+1) = X(s)+1-2 \\
+        X(s) = \frac{1-2(s^2+1)}{s^2(s^2+2)} \\
+        Y(s) = -\frac{s^2+2+3s^2+s^4+2s^2}{2s^2(s^2+1)(s^2+2)}
+      .\end{gather}
+      \begin{align}
+          x(t) &= -\frac{3}{2\sqrt{2} }\sin (\sqrt{2} t) -\frac{1}{2}t\\
+          y(t) &= \frac{3}{2\sqrt{2} }\sin (\sqrt{2} t)-\frac{1}{2}t
+      .\end{align}
+    \end{sol}
+\end{enumerate}
+
+\end{document}

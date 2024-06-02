@@ -1,0 +1,506 @@
+\documentclass{zc-ust-hw}
+
+\usepackage{breqn}
+
+\name{SalahDin Ahmed Salh Rezk}
+\id{202201079}
+\course{Ordinary Differential Equations (MATH 202)}
+\assignment{Assignment 1}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+  \item Obtain the general solution of the following differential equations:
+    \begin{enumerate}
+      \item $x \sin (y)+\left(x^2+1\right) \cos (y) y'=0$
+        \begin{sol}
+          \begin{align}
+            \left(x^2+1\right) \cos (y) y'&=-x \sin (y) \\
+            \frac{\cos(y)}{\sin(y)} y'&=-\frac{x}{x^2+1} \\
+            \frac{\cos(y)}{\sin(y)} \frac{dy}{dx}&=-\frac{x}{x^2+1} \\
+            \frac{\cos(y)}{\sin(y)} dy &=-\frac{x}{x^2+1} dx \\
+            \int \frac{\cos(y)}{\sin(y)} dy &=-\int \frac{x}{x^2+1} dx \\
+            \intertext{Using substitution}
+            u&=\sin(y)\\
+            du&=\cos(y) dy\\
+            \frac{du}{\cos(y)}&= dy\\
+            \intertext{We have}
+            \int \frac{\cos (y)}{u} \frac{du}{\cos(y)}&=-\int \frac{x}{x^2+1} dx\\
+            \int \frac{1}{u}du&=-\int \frac{x}{x^2+1} dx\\
+            \ln |u|&=-\int \frac{x}{x^2+1} dx\\
+            \ln |\sin(y)|&=-\int \frac{x}{x^2+1} dx\\
+            \intertext{Using substitution}
+            u&=x^2+1\\
+            du&=2x dx\\
+            \frac{du}{2x}&=dx\\
+            \intertext{We have}
+            \ln |\sin(y)|&=-\int \frac{x}{u} \frac{du}{2x}\\
+                         &=-\frac{1}{2}\int \frac{1}{u} du\\
+                         &=-\frac{1}{2}\ln |u|+C\\
+                         &=-\frac{1}{2}\ln \left( x^2+1 \right) +C\\
+                         &=\ln \left(x^2+1 \right)^{-\frac{1}{2}}   +C\\
+                         &=\ln \left( \frac{1}{\sqrt{x^2+1}} \right) +C\\
+            \sin (y)&=e^C \frac{1}{\sqrt{x^2+1}}\\
+                    &= C \frac{1}{\sqrt{x^2+1}}\\
+            y&=\sin^{-1}\left(\frac{C}{\sqrt{x^2+1}}\right)
+          .\end{align}
+        \end{sol}
+      \item $3 x^2 \tan (y)+1+\left(x^3 \sec ^2(y)-1\right) \frac{d y}{d x}=0$
+        \begin{sol}
+          \begin{align}
+            3x^2\tan(y)+1&+\left(x^3\sec^2(y)-1\right)y'=0
+            \intertext{Using the technique of exact differential equations}
+            M(x,y)&=3x^2\tan(y)+1\\
+            N(x,y)&=x^3\sec^2(y)-1\\
+            \frac{\partial M}{\partial y}&=3x^2\sec^2(y)\\
+            \frac{\partial N}{\partial x}&=3x^2\sec^2(y)\\
+            \intertext{Since $\frac{\partial M}{\partial y}=\frac{\partial
+            N}{\partial x}$, the given DE is exact.}
+            f(x,y)&=\int M(x,y) dx + g(y)\\
+                  &=\int (3x^2\tan(y)+1) dx + g(y)\\
+                  &=x^3\tan(y)+x+g(y)\\
+            \frac{\partial f}{\partial y}&=x^3\sec^2(y)+g'(y)\\
+            \intertext{Comparing with $N(x,y)$, we have}
+            g'(y)&=-1\\
+            g(y)&=-y+C\\
+            \intertext{Then}
+            f(x,y)&=x^3\tan(y)+x-y+C\\
+            \intertext{Since $f(x,y)=0$, we have}
+            C&=x^3\tan(y)+x-y
+          .\end{align}
+        \end{sol}
+      \item $\left(1+e^{\frac{x}{y}}\right) d x+2 e^{\frac{x}{y}}\left(1-\frac{x}{y}\right) d y=0$
+        \begin{sol}
+          No elementary method can be used, refer to WolframAlpha.
+          \[
+            \int_{1}^{\frac{y}{x}} \frac{e^{\frac{1}{\xi}} (\xi - 1)}{\xi \left(e^{\frac{1}{\xi}} (2 \xi - 1) + 1\right)} \, d\xi = c_1 - \frac{\log(x)}{2}
+          .\] 
+        \end{sol}
+      \item $\frac{d y}{d x}+x(x+y)=x^3(x+y)^3-1$
+        \begin{sol}
+          \begin{align}
+            \frac{dy}{dx}+x(x+y)&=x^3(x+y)^3-1\\
+            \intertext{Using substitution}
+            u&=x+y\\
+            \frac{du}{dx}&=1+\frac{dy}{dx}\\
+            \frac{dy}{dx}&=\frac{du}{dx}-1\\
+            \intertext{We have}
+            \frac{du}{dx}-1+xu&=x^3u^3-1\\
+            \frac{du}{dx}+xu&=x^3u^3\\
+            u'+xu&=x^3u^3\\
+            \intertext{Using the method of substitution in Bernoulli’s equation}
+            v&=u^{-2}\\
+            v'&=-2u^{-3}u'\\
+            \intertext{Divide the DE by $u^3$}
+            \frac{u'}{u^3}+\frac{xu}{u^3}&=\frac{x^3u}{u^3}\\
+            u'u^{-3} +xu^{-2} &=x^3\\
+            -\frac{1}{2}v'+xv&=x^3\\
+            v'-2xv&=-2x^3\\
+            \intertext{Using the method of integrating factor}
+            \mu(x)&=e^{\int -2x dx}=e^{-x^2}\\
+            \intertext{We have}
+            \frac{d}{dx}\left(e^{-x^2}v\right)&=-2x^3e^{-x^2}\\
+            e^{-x^2}v&=\int -2x^3e^{-x^2} dx\\
+            \intertext{Using substitution}
+            w&=-x^2\\
+            dw&=-2xdx\\
+            \frac{dw}{-2x}&=dx\\
+            \intertext{We have}
+            e^{-x^2}v&=\int -2x^3e^w \frac{dw}{-2x}\\
+                     &=\int x^2e^w dw\\
+                     &=-\int we^w dw\\
+            \intertext{Using integration by parts}
+            u&=w, dv=e^w dw\\
+            du&=dw, v=e^w\\
+            \intertext{We have}
+            e^{-x^2}v&=-(we^w-e^w+C)\\
+                     &=e^w-we^w+C\\
+                     &=e^{-x^2} -(-x^2)e^{-x^2} +C\\
+                     &=e^{-x^2}+x^2e^{-x^2} +C\\
+            v&=\frac{e^{-x^2}+x^2e^{-x^2} +C}{e^{-x^2}}\\
+             &= 1+x^2+C e^{x^2}\\
+            u^{-2} &= 1+x^2+C e^{x^2}\\
+            u &= \pm\frac{1}{\sqrt{1+x^2+C e^{x^2}}}\\
+            x+y &= \pm\frac{1}{\sqrt{1+x^2+C e^{x^2}}}\\
+            y &= -x\pm\frac{1}{\sqrt{1+x^2+C e^{x^2}}}\\
+          .\end{align}
+        \end{sol}
+      \item $y'+\frac{y}{x}=\frac{y^2}{x^2}$
+        \begin{sol}
+          \begin{align}
+            y'+\frac{y}{x}&=\frac{y^2}{x^2} \\
+            \intertext{Using the method of substitution in Bernoulli's
+            equation}
+            u &= y^{-1} \\
+            u' &= -y^{-2} y' \\
+            \intertext{Divide the DE by $y^2$}
+            \frac{y'}{y^2}+\frac{1}{xy}&=\frac{1}{x^2}\\
+            -u'+\frac{1}{x}u&=\frac{1}{x^2}\\
+            u'-\frac{1}{x}u&=-\frac{1}{x^2}\\
+            \intertext{Using the method of integrating factor}
+            \mu(x)&=e^{\int -\frac{1}{x} dx}=e^{-\ln x}=\frac{1}{x}\\
+            \intertext{We have}
+            \frac{1}{x}u'-\frac{1}{x^2}u&=-\frac{1}{x^3}\\
+            \frac{d}{dx}\left(\frac{1}{x}u\right)&=-\frac{1}{x^3}\\
+            \frac{1}{x}u&=-\int\frac{1}{x^3} dx\\
+                        &=\frac{1}{2x^2}+C\\
+            u&=\frac{1}{2x}+Cx\\
+             &=\frac{1+2Cx^2}{2x}\\
+             &=\frac{1+Cx^2}{2x}\\
+            y^{-1}&=\frac{1+Cx^2}{2x}\\
+            y&=\frac{2x}{1+Cx^2}
+          .\end{align}
+        \end{sol}
+      \item $\frac{d y}{d x}=\frac{2 x+4 y+1}{x+2 y+3}$
+        \begin{sol} Using substitution
+          \begin{align}
+            u&=x+2y\\
+            \frac{du}{dx}&=1+2\frac{dy}{dx}\\
+            \frac{dy}{dx}&=\frac{1}{2}\left(\frac{du}{dx}-1\right)\\
+          \end{align}
+            We have
+            \begin{align}
+            \frac{1}{2}\left(\frac{du}{dx}-1\right)&=\frac{2u+1}{u+3}\\
+            \frac{1}{2}\left(u'-1\right)&=\frac{2u+1}{u+3}\\
+            (u'-1)(u+3)&=4u+2\\
+            u'u+3u'-u-3&=4u+2\\
+            u'u+3u'&=4u+2+u+3\\
+            u'u+3u'&=5u+5\\
+            u'(u+3)&=5u+5\\
+            u'&=\frac{5u+5}{u+3}\\
+            \frac{du}{dx}&=\frac{5u+5}{u+3}\\
+            \int \frac{u+3}{5u+5} du&=\int dx\\
+            \frac{1}{5} \int \frac{u+3}{u+1} du&=\int dx\\
+          \end{align}
+          \begin{align}
+            \frac{1}{5} \left( \int \frac{u}{u+1} du + \int \frac{3}{u+1} du \right) &= x + C \\
+            2\ln |u+1|+u &= 5x + C \\
+            2\ln |x+2y+1|+x+2y &= 5x + C \\
+            2\ln |x+2y+1|+2y &= 4x + C \\
+            \ln |x+2y+1|+y &= 2x + C
+          .\end{align}
+          A separable form can be obtained by using Lambert W function
+          \[
+            y = W\left(-e^{\frac{5x}{2} + C - 1}\right) + \frac{1}{2}(-x - 1)
+          ,\] 
+          where \( W(xe^{x} )=x \). There is also trivial solution
+          \[
+            y = -\frac{x+1}{2}
+          .\] 
+        \end{sol}
+      \item $y'+y+x+x^2+x^3=0$
+        \begin{sol}
+          \begin{align}
+            y'+y&=-x-x^2-x^3\\
+            y'+y&=-(x+x^2+x^3)\\
+            \intertext{Using the method of integrating factor}
+            \mu(x)&=e^{\int 1 dx}=e^x\\
+            \intertext{We have}
+            e^x y'+e^x y&=-e^x(x+x^2+x^3)\\
+            \frac{d}{dx}(e^x y)&=-e^x(x+x^2+x^3)\\
+            e^x y&=\int -e^x(x+x^2+x^3) dx\\
+            e^x y&=-\int e^x(x+x^2+x^3) dx\\
+            e^x y&=-\left(\int x e^x dx+\int x^2 e^x dx+\int x^3 e^x dx\right)\\
+            \intertext{Using integration by parts}
+            u&=x^n, dv=e^x dx\\
+            du&=nx^{n-1} dx, v=e^x\\
+            \intertext{We have}
+            \nonumber
+            e^x y=-&\left(xe^{x}-e^{x}+x^2e^{x}-2x^{x}+2e^{x} \right. \\
+                 &\left. +x^3e^{x}-3x^2e^{x}+6xe^{x}-6e^{x}+C \right) \\
+            \nonumber
+            y=-&e^{-x}\left(  xe^{x}-e^{x}+x^2e^{x}-2x^{x}+2e^{x} \right. \\
+                 &\left. +x^3e^{x}-3x^2e^{x}+6xe^{x}-6e^{x}+C \right) \\
+            y=-&x^3 +2x^2-5x+5+Ce^{-x}
+          .\end{align}
+        \end{sol}
+    \end{enumerate}
+
+  \item Solve the following IVPs:
+    \begin{enumerate}
+      \item $\left(y e^{x y}+4 y^3\right)+\left(x e^{x y}+12 x y^2-2 y\right) y^{\prime}=0 \quad y(0)=2$
+        \begin{sol} Using the method of exact differential equations
+          \begin{align}
+            M(x,y)&=y e^{x y}+4 y^3\\
+            N(x,y)&=x e^{x y}+12 x y^2-2 y\\
+            \frac{\partial M}{\partial y}&=e^{x y}+x y e^{x y}+12 y^2\\
+            \frac{\partial N}{\partial x}&=e^{x y}+x y e^{x y}+12 y^2\\
+            \intertext{Since $\frac{\partial M}{\partial y}=\frac{\partial
+            N}{\partial x}$, the given DE is exact.}
+            f(x,y)&=\int M(x,y) dx + g(y)\\
+                  &=\int (y e^{x y}+4 y^3) dx + g(y)\\
+                  &=e^{xy}+4xy^3+g(y)\\
+            \frac{\partial f}{\partial y}&=xe^{xy}+12xy^2+g'(y)\\
+            \intertext{Comparing with $N(x,y)$, we have}
+            g'(y)&=-2y\\
+            g(y)&=-y^2+C\\
+            \intertext{Then}
+            f(x,y)&=e^{xy}+4xy^3-y^2+C\\
+            \intertext{Since $f(x,y)=0$, we have}
+            C&=e^{xy}+4xy^3-y^2\\
+            \intertext{Using the initial condition}
+            C&=e^{0\cdot2}+4\cdot0\cdot2^3-2^2\\
+             &=1-4=-3\\
+            \intertext{Then}
+            0&=e^{xy}+4xy^3-y^2+3
+          .\end{align}
+        \end{sol}
+      \item $(3 x y+3 y-4) d x+(1+x)^2 d y=0 \quad y(0)=1$
+        \begin{sol} Using the method of non-exact differential equations
+          integrating factor
+          \begin{align}
+            M(x,y)&=3xy+3y-4\\
+            N(x,y)&=(1+x)^2\\
+            \frac{\partial M}{\partial y}&=3x+3\\
+            \frac{\partial N}{\partial x}&=2(1+x)\\
+            \intertext{Since $\frac{\partial M}{\partial y}\neq\frac{\partial
+            N}{\partial x}$, the given DE is non-exact.}
+            \mu(x)&=e^{\int \frac{\frac{\partial M}{\partial y}-\frac{\partial
+            N}{\partial x}}{N} dx}\\
+                  &=e^{\int \frac{3x+3-2(1+x)}{(1+x)^2} dx}\\
+                  &=e^{\int \frac{x+1}{(1+x)^2} dx}\\
+                  &=e^{\int \frac{1}{1+x} dx}\\
+                  &=e^{\ln |1+x|}\\
+                  &=1+x
+          \end{align}
+          We have
+          \begin{align}
+            (3xy+3y-4)(1+x)dx+(1+x)^3dy&=0\\
+            3xy+3y-4+3x^2y+3xy-4x+(1+x)^3 \frac{dy}{dx}&=0\\
+            6xy+3y-4+3x^2y-4x + (1+x)^3 y'&=0
+          \end{align}
+          Using the method of exact differential equations
+          \begin{align}
+            M(x,y)&=6xy+3y-4+3x^2y-4x\\
+            N(x,y)&=(1+x)^3\\
+            \frac{\partial M}{\partial y}&=6x+3+3x^2\\
+            \frac{\partial N}{\partial x}&=3(1+x)^2\\
+                                         &=3+6x+3x^2\\
+            \intertext{Since $\frac{\partial M}{\partial y}=\frac{\partial
+            N}{\partial x}$, the given DE is exact.}
+            f(x,y)&=\int M(x,y) dx + g(y)\\
+                  &=\int (6xy+3y-4+3x^2y-4x) dx + g(y)\\
+                  &=3x^2y+3xy-4x+x^3y-2x^2+g(y)\\
+            \frac{\partial f}{\partial y}&=3x^2+3x+x^3+g'(y)\\
+            \intertext{Comparing with the first $N(x,y)$, we have}
+            g'(y)&=-x^3 -2x^2-x+1\\
+            g(y)&=-x^3y-2x^2y-xy+y+C\\
+          \end{align}
+          Then
+          \begin{align}
+            f(x,y)&=3x^2y+3xy-4x+x^3y-2x^2-x^3y-2x^2y-xy+y+C\\
+                  &=x^2y-2x^2+2xy-4x+y+C\\
+          \intertext{Since $f(x,y)=0$, we have}
+            0&=x^2y-2x^2+2xy-4x+y+C\\
+            C&=x^2y-2x^2+2xy-4x+y\\
+          \intertext{Using the initial condition}
+            C&=0-0+2\cdot0-4\cdot0+1\\
+             &=1\\
+             \intertext{Then}
+            1&=x^2y-2x^2+2xy-4x+y
+           .\end{align}
+        \end{sol}
+      \newpage
+      \item $\frac{d y}{d x}+y \ln (y)=y e^{-3 x} \quad y(1)=1$
+        \begin{sol} Using substitution
+          \begin{align}
+            u&=\ln(y)\\
+            e^{u}&=y\\
+            \frac{du}{dx}&=\frac{1}{y}\frac{dy}{dx}\\
+            \frac{dy}{dx}&=y\frac{du}{dx}\\
+                         &=e^{u}\frac{du}{dx}\\
+            \intertext{We have}
+            e^{u}\frac{du}{dx}+e^{u}u&=e^{u}e^{-3x}\\
+            \intertext{Divide the DE by $e^{u}$}
+            \frac{du}{dx}+u&=e^{-3x}\\
+            \intertext{Using the method of integrating factor}
+            \mu(x)&=e^{\int 1 dx}=e^x\\
+            \intertext{We have}
+            \frac{d}{dx}\left(e^x u\right)&=e^x e^{-3x}\\
+            e^x u&=\int e^{-2x} dx\\
+            u&=e^{-x}\left( -\frac{e^{-2x}}{2}+C  \right) \\
+             &= Ce^{-x}-\frac{1}{2}e^{-3x}\\
+            \ln y&=Ce^{-x}-\frac{1}{2}e^{-3x}\\
+            y&=\exp \left( Ce^{-x}-\frac{1}{2}e^{-3x} \right)\\
+            \intertext{Using the initial condition}
+            0&=Ce^{-1}-\frac{1}{2}e^{-3}\\
+            \frac{1}{2}e^{-3}&=Ce^{-1}\\
+            \frac{1}{2}e^{-2}&=C\\
+            \intertext{Then}
+            y&=\exp \left( \frac{1}{2}e^{-2-x}-\frac{1}{2}e^{-3x} \right)
+          .\end{align}
+        \end{sol}
+      \item $y'\left(x^2 y^3+x y\right)=1 \quad y(2)=3 $
+        \begin{sol}
+          \begin{align}
+            \frac{dy}{dx}&=\frac{1}{x^2 y^3+xy}\\
+            \frac{dx}{dy}&=x^2 y^3+xy\\
+            x'&=x^2 y^3+xy\\
+            \intertext{Using the method of substitution in Bernoulli's equation}
+            u&=x^{-1}\\
+            u'&=-x^{-2}x'\\
+            \intertext{Divide the DE by $x^2$}
+            x'x^{-2}&=y^3+x^{-1}y\\
+            -u'&=y^3+uy\\
+            u'&=-y^3-uy\\
+            \intertext{Using the method of integrating factor}
+            \mu(y)&=e^{\int -y dy}\\
+                  &=e^{-\frac{y^2}{2}}\\
+                  \intertext{We have}
+            \frac{d}{dy}\left(e^{-\frac{y^2}{2}}u\right)&=-e^{-\frac{y^2}{2}}y^3\\
+            e^{-\frac{y^2}{2}}u&=\int -e^{-\frac{y^2}{2}}y^3 dy\\
+            u&=-e^{\frac{y^2}{2}} \int e^{-\frac{y^2}{2}}y^3 dy\\
+            \intertext{Using substitution}
+            v&=\frac{y^2}{2}\\
+            dv&=y dy\\
+            dy&=\frac{dv}{y}\\
+            \intertext{We have}
+            u&=-e^v \int e^{-v}  y^3 \frac{dv}{y}\\
+             &= -e^v \int e^{-v} y^2 dv\\
+             &= -e^v \int e^{-v} 2v dv\\
+             &= -2e^v \int ve^{-v}  dv\\
+             \intertext{Using integration by parts}
+            u &= -2e^{v}\left( -ve^{-v} + e^{-v} + C \right)\\
+              &= 2v - 2 + Ce^{v}\\
+              &= y^2 -2 + Ce^{\frac{y^2}{2}} \\
+            x^{-1}&=y^2 -2 + Ce^{\frac{y^2}{2}} \\ 
+            x&=\frac{1}{y^2 -2 + Ce^{\frac{y^2}{2}}} \\
+            2&=\frac{1}{3^2 -2 + Ce^{\frac{3^2}{2}}} \\
+            \frac{1}{2}&=9-2+Ce^{\frac{9}{2}} \\
+            Ce^{\frac{9}{2}} &=\frac{1}{2}-7 \\
+            C&=-6.5e^{-\frac{9}{2}} \\
+            x&=\frac{1}{y^2 -2 -6.5e^{\frac{y^2+9}{2}}}
+           .\end{align}
+        \end{sol}
+      \item $x^2 y^{\prime}=4 x^2+7 x y+2 y^2 \quad y(1)=1 $
+        \begin{sol}
+          \begin{align}
+            y'&=4+7\frac{y}{x}+2\frac{y^2}{x^2} \\
+            \intertext{Using substitution}
+            u&=\frac{y}{x} \\
+            y&=ux \\
+            y'&=u+xu' \\
+            \intertext{We have}
+            u+xu'&=4+7u+2u^2 \\
+            xu'&=4+6u+2u^2 \\
+            u'&=\frac{4+6u+2u^2}{x} \\
+            \frac{du}{dx}&=\frac{4+6u+2u^2}{x} \\
+            \frac{du}{4+6u+2u^2}&=\frac{dx}{x} \\
+            \int\frac{du}{4+6u+2u^2}&=\int\frac{dx}{x} \\
+          \frac{1}{2}\int\frac{du}{2+3u+u^2}&=\ln |x| + C \\
+          \frac{1}{2}\int \frac{du}{(u+1)(u+2)}&=\ln |x| + C \\
+          \intertext{Using partial fraction}
+          \frac{1}{2} \int \frac{1}{u+1}-\frac{1}{u+2}du  &=\ln |x| + C \\
+          \frac{1}{2} \ln \left| \frac{u+1}{u+2} \right|  &=\ln |x| + C \\
+          \ln \left| \frac{u+1}{u+2} \right| &= 2\ln |x| + C \\
+          \frac{u+1}{u+2} &= x^2C \\
+          \frac{\frac{y}{x}+1}{\frac{y}{x}+2} &= x^2C \\
+          \frac{y+x}{y+2x} &= x^2C \\
+          y+x&=x^2C \left( y+2x \right) \\
+          y&=x^2C \left( y+2x \right) - x\\
+           &=x^2Cy+2x^3C-x \\
+          y-x^2Cy&=2x^3C-x \\
+          y(1-x^2C)&=2x^3C-x \\
+          y&=\frac{2x^3C-x}{1-x^2C} \\
+          \intertext{Using initial conditions}
+          1&=\frac{2(1)^3C-(1)}{1-(1)^2C} \\
+          C&=\frac{3}{2} \\
+          y&=\frac{3x^3-x}{1-\frac{3}{2}x^2}
+          .\end{align}
+        \end{sol}
+      \item $\left(3 x^2 y+2 x y+y^3\right) d x+\left(x^2+y^2\right) d y=0 \quad y(0)=0 $
+        \begin{sol} Using the technique of exact differential equations
+          \begin{align}
+            M(x,y)&=3 x^2 y+2 x y+y^3\\
+            N(x,y)&=x^2+y^2\\
+            \frac{\partial M}{\partial y}&=3x^2+2x+3y^2\\
+            \frac{\partial N}{\partial x}&=2x\\
+            \intertext{Since $\frac{\partial M}{\partial y}\neq\frac{\partial
+            N}{\partial x}$, the given DE is non-exact.}
+            \mu(x)&=\exp \int \frac{\frac{\partial M}{\partial y}-\frac{\partial N}{\partial x}}{N} dx \\
+                  &=\exp \int \frac{3x^2+2x+3y^2-2x}{x^2+y^2} dx \\
+                  &=\exp \int \frac{3x^2+3y^2}{x^2+y^2} dx \\
+                  &=\exp \int \frac{3(x^2+y^2)}{x^2+y^2} dx \\
+                  &=\exp \int 3 dx \\
+                  &= \exp 3x \\
+                  &= e^{3x} 
+                  \intertext{Then}
+            e^{3x} \left(3 x^2 y+2 x y+y^3\right) d x&+e^{3x} \left(x^2+y^2\right) d y=0 \\
+            \intertext{We have}
+            M(x,y)&=3e^{3x}x^2y+2e^{3x}xy+e^{3x}y^3 \\
+            N(x,y)&= e^{3x}x^2+e^{3x}y^2   \\
+            \frac{\partial M}{\partial y} &= 3e^{3x}y^2+3x^2e^{3x}+2xe^{3x}   \\
+            \frac{\partial N}{\partial x} &= 3e^{3x}y^2+3x^2e^{3x}+2xe^{3x}   \\
+            \intertext{Since $\frac{\partial M}{\partial y}=\frac{\partial
+            N}{\partial x}$, the given DE is exact.}
+            f(x,y)&=\int M(x,y) dx + g(y)\\
+                  &=\int3e^{3x}x^2y+2e^{3x}xy+e^{3x}y^3 dx + g(y)\\
+            \intertext{Using integration by parts}
+            u&=x^{n} , dv=e^3x dx\\
+            du&=nx^{n-1} dx, v=\frac{1}{3}e^{3x}\\
+            \intertext{We have}
+            f(x,y)&= x^2e^{3x}y-\frac{2}{3}xe^{3x}y +\frac{2}{9}e^{3x}y \\
+                  &+\frac{2y}{3}xe^{3x}-\frac{2y}{9}e^{3x} +
+                  \frac{y^3}{3}e^{3x} \\
+                  &= yx^2e^{3x}+\frac{y^3 e^{3x} }{3} \\
+            \frac{\partial f}{\partial y}&=x^2e^{3x}+y^2e^{3x}  
+            \intertext{Comparing with $N(x,y)$, we have}
+            g'(y)&=0\\
+            g(y)&=C\\
+            \intertext{Then}
+            f(x,y)&=yx^2e^{3x}+\frac{y^3 e^{3x} }{3}+C\\
+            \intertext{Since $f(x,y)=0$, we have}
+            C&=yx^2e^{3x}+\frac{y^3 e^{3x} }{3}\\
+            \intertext{Using initial conditions}
+            C&=0 \\
+            \intertext{We have}
+            0&=yx^2e^{3x}+\frac{y^3 e^{3x} }{3}
+          \end{align}
+        \end{sol}
+    \end{enumerate}
+    \newpage
+  \item Solve
+    \[
+      x^3 y'=2y \left( x^2-y \right) 
+    .\] 
+    Using substitution
+    \[
+      y=x^{n}v 
+    .\] 
+    to convert the ODE to separable for special n, find n and solve the ODE?
+    \begin{sol}
+      \begin{align}
+        x^3 y'&=2y \left( x^2-y \right) \\
+        \intertext{Using substitution}
+        y &= x^{n}v \\
+        y' &= nx^{n-1}v + x^{n}v' 
+        \intertext{We have}
+        x^3\left(nx^{n-1}v + x^{n}v'\right) &= 2x^{n}v\left(x^2-x^{n}v\right)   \\
+        nx^{n+2}v+x^{n+3}v' &= 2x^{n+2}v-2x^{2n}v^2   \\  
+        x^{n+3}v' &= 2x^{n+2}v-2x^{2n}v^2-nx^{n+2}v   \\  
+                  &= x^{n+2}v(2-n)-2x^{2n}v^2 \\
+        v' &= \frac{x^{n+2}v(2-n)-2x^{2n}v^2}{x^{n+3}} \\
+           &= x^{n+2-n-3}v(2-n)-2x^{2n-n-3}v^2  \\
+           &= x^{-1}v(2-n)-2x^{n-3}v^2  \\
+           \intertext{In order for the DE to be separable, the exponents of \(
+           x \) should be equal}
+        n-3&= -1 \\
+        n&= 2 \\
+        \intertext{Then}
+        v'&= x^{-1}v(2-2)-2x^{2-3}v^2  \\
+          &= x^{-1}v(0)-2x^{-1}v^2  \\
+          &=-2x^{-1}v^2 \\
+        \frac{dv}{dx}&=-2x^{-1}v^2 \\
+        \frac{dv}{v^2}&=-2\frac{dx}{x}\\
+        \int \frac{dv}{v^2}&=\int -2\frac{dx}{x}\\
+        -v^{-1}&= -2\ln |x| + C \\
+        v&= \frac{1}{2\ln |x| + C} \\
+        \frac{y}{x^2}&= \frac{1}{2\ln |x| + C} \\
+        y&=\frac{x^2}{\ln x^2+C}
+      .\end{align}
+    \end{sol}
+\end{enumerate}
+
+\end{document}

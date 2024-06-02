@@ -1,0 +1,577 @@
+\documentclass{zc-ust-hw}
+
+\name{SalahDin Ahmed Salh Rezk}
+\id{202201079}
+\course{Ordinary Differential Equations (MATH 202)}
+\assignment{Assignment 1}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+  \item Obtain the general solution of the following DEs
+    \begin{enumerate}
+      \item \( y'''+y''-4y'+2y=0 \)
+        \begin{sol}
+          \begin{align}
+            y'''+y''-4y'+2y&=0 \\
+            \lambda^3 + \lambda^2 - 4\lambda + 2 &= 0 \\
+            \intertext{By using the cubic formula, we get}
+            \lambda_1 &= 1 \\
+            \lambda_2 &= -\sqrt{3} -1 \\
+            \lambda_3 &= \sqrt{3} -1 \\
+            \intertext{Then}
+            y &= c_1e^{x} + c_2e^{\left( \sqrt{3} -1 \right) x} + c_3e^{\left( -\sqrt{3} -1 \right) x}
+          \end{align}
+        \end{sol}
+      \item \( y^{(4)}+4y^{(2)}=0   \)
+        \begin{sol}
+          \begin{align}
+            \lambda ^{4}+4\lambda ^{2}&=0 \\ 
+            \lambda ^{2}\left( \lambda ^{2}+4 \right)&=0 \\
+            \lambda _{1}&=0 \\
+            \lambda _{2}&=0 \\
+            \lambda _{3}&=2i \\
+            \lambda _{4}&=-2i \\
+            \intertext{Then}
+            y &= c_1 + c_2x + c_3\cos\left( 2x \right) + c_4\sin\left( 2x \right)
+          .\end{align}
+        \end{sol}
+        \newpage
+        \item \( x(x-2)y''+2(x-1)y'-2y=0 \); use \( y_{1}=1-x \)
+          \begin{sol}
+            \begin{align}
+              x(x-2)y''+2(x-1)y'-2y&=0 \\
+              y''+2\frac{x-1}{x(x-2)}y'-\frac{2}{x(x-2)}y&=0
+            .\end{align}
+            \begin{align}
+              y &= c_{1}y_{1}+c_{2}y_{2} \\
+              y_{2} &= y_{1}\int \frac{dx}{\mu (x) \cdot y_{1}^2} \\
+              \mu (x) &= \exp \int p(x)dx \\
+              &= \exp \int \frac{2(x-1)}{x(x-2)}dx \\
+              &= \exp 2 \int \frac{(x-1)}{x(x-2)}dx \\
+              &= \exp 2 \left( \int \frac{x}{x(x-2)}dx - \int \frac{1}{x(x-2)}dx \right) \\
+              &= \exp 2 \left( \int \frac{dx}{(x-2)} - \int \frac{dx}{x(x-2)} \right) \\
+              &= \exp 2 \left( \ln|x-2| - \int \frac{dx}{x(x-2)} \right) \\
+              \intertext{Using partial fraction decomposition}
+              &= \exp 2 \left( \ln|x-2| - \int \frac{A}{x}+\frac{B}{x-2} dx\right) \\
+              &= \exp 2 \left( \ln|x-2| - \int \frac{A}{x}+\frac{B}{x-2} dx\right) \\
+              &= \exp 2 \left( \ln|x-2| - \int -\frac{1}{2x}+\frac{1}{2(x-2)} dx \right) \\
+              &= \exp 2 \left( \ln|x-2| + \int \frac{1}{2x}-\frac{1}{2(x-2)} dx \right) \\
+              &= \exp 2 \left( \ln|x-2| + \frac{1}{2}\ln |x| -\frac{1}{2}\ln|x-2| \right) \\
+              &= \exp 2 \left( \frac{1}{2}\ln|x-2| + \frac{1}{2}\ln |x| \right) \\
+              &= \exp \left( \ln|x-2| + \ln |x| \right) \\
+              &= \exp \left( \ln|x-2||x| \right) \\
+              &= \exp \left( \ln\left[ x(x-2) \right] \right) \\
+              &= x(x-2) \\
+              \intertext{Substituting back}
+              y_{2} &= (1-x)\int \frac{dx}{x(x-2)(1-x)^2} \\
+              \intertext{Using partial fraction decomposition}
+              &= (1-x)\int \frac{A}{x}+\frac{B}{x-2}+\frac{C}{(1-x)^2}dx \\
+              &= (1-x)\int-\frac{1}{2x}+\frac{1}{2(x-2)}-\frac{1}{(1-x)^2}dx \\
+              &= (1-x) \left( -\frac{1}{2}\ln|x|+\frac{1}{2}\ln |x-2| - \frac{1}{1-x} \right) \\
+              &= (1-x) \left( \frac{1}{2}\ln\frac{|x-2|}{|x|} - \frac{1}{1-x} \right) \\
+              &= (1-x) \left( \frac{1}{2}\ln\left|\frac{x-2}{x}\right| - \frac{1}{1-x} \right) \\
+              &= (1-x) \left( \ln \sqrt{\left|\frac{x-2}{x}\right|} - \frac{1}{1-x} \right) \\
+              &= (1-x)\ln\sqrt{\left|\frac{x-2}{x}\right|} - 1 \\
+              \intertext{Then}
+              y &= c_{1}(1-x)+c_{2}\left( (1-x)\ln\sqrt{\left|\frac{x-2}{x}\right|} - 1 \right)
+            .\end{align}
+          \end{sol}
+        \item \( y''-4y=\sin^2(x) \)
+          \begin{sol}
+            \begin{align}
+              y''-4y&=\sin^2(x) \\
+              \lambda^2-4&=0 \\
+              \lambda^2&=4 \\
+              \lambda_{1}&=2 \\
+              \lambda_{2}&=-2 \\
+              \intertext{The homogenous solution is}
+              \Aboxed{ y_{h}&=c_{1}e^{2x}+c_{2}e^{-2x} } \\
+              \intertext{For the particular solution}
+              y''-4y&=\sin^2(x) \\
+              &= \frac{1}{2}-\frac{1}{2}\cos(2x) \\
+              \intertext{Then}
+              y_{p}&=A+B\cos(2x) \\
+              y_{p}'&=-2B\sin(2x) \\
+              y_{p}''&=-4B\cos(2x) \\
+            \end{align}
+            Substituting back
+            \begin{equation}
+              -4B\cos(2x)-4(A+B\cos(2x))=\frac{1}{2}-\frac{1}{2}\cos(2x)
+            \end{equation}
+            Then
+            \begin{align}
+              -4A&=\frac{1}{2} \\
+              \Aboxed{A&=-\frac{1}{8}} \\
+              -4B-4B&=-\frac{1}{2} \\
+              -8B&=-\frac{1}{2} \\
+              \Aboxed{B&=\frac{1}{16}}
+              \intertext{The particular solution is}
+              y_{p}&=-\frac{1}{8}+\frac{1}{16}\cos(2x)
+            \end{align}
+              The general solution is
+              \begin{equation}
+                y=c_{1}e^{2x}+c_{2}e^{-2x}-\frac{1}{8}+\frac{1}{16}\cos(2x)
+              .\end{equation}
+          \end{sol}
+        \item \( y''-4y'+3y=x \); use \( y_{1}=e^{3x}  \)
+          \begin{sol}
+            \begin{align}
+              y &= c_{1}y_{1}+c_{2}y_{2} \\
+              y_{2} &= y_{1}\int \frac{dx}{\mu (x) \cdot y_{1}^2} \\
+              \mu (x) &= \exp \int p(x)dx \\
+              &= \exp \int -4dx \\
+              &= \exp -4x \\
+              &= e^{-4x} \\
+              \intertext{Substituting back}
+              y_{2} &= e^{3x}\int \frac{e^{4x}}{e^{6x}}dx \\
+              &= e^{3x}\int e^{-2x}  dx \\
+              &= e^{3x}\left( -\frac{1}{2}e^{-2x} \right) \\
+              &= -\frac{1}{2}e^{x} \\
+              \intertext{Then}
+              y &= c_{1}e^{3x}+c_{2}e^{x}
+            .\end{align}
+          \end{sol}
+          \item \( y''+5y'+6y=e^{2x}\cos x \)
+            \begin{sol}
+              \begin{align}
+                y''+5y'+6y&=e^{2x}\cos x \\
+                \lambda^2+5\lambda+6&=0 \\
+                (\lambda+2)(\lambda+3)&=0 \\
+                \lambda_{1}&=-2 \\
+                \lambda_{2}&=-3
+              \end{align}
+              The homogenous solution is
+              \begin{equation}
+                \boxed{y_{h}=c_{1}e^{-2x}+c_{2}e^{-3x}}
+              \end{equation}
+              For the particular solution
+              \begin{align}
+                y''+5y'+6y&=e^{2x}\cos x \\
+                &=e^{2x}\left( \frac{e^{ix}+e^{-ix}}{2} \right) \\
+                &=\frac{1}{2}e^{2x+ix}+\frac{1}{2}e^{2x-ix} \\
+                &=\frac{1}{2}e^{x(2+i)}+\frac{1}{2}e^{x(2-i)} \\
+                \intertext{Then}
+                y_{p}&=Ae^{x(2+i)}+Be^{x(2-i)} \\
+                y_{p}'&=(2+i)Ae^{x(2+i)}+(2-i)Be^{x(2-i)} \\
+                y_{p}''&=(2+i)^2Ae^{x(2+i)}+(2-i)^2Be^{x(2-i)} \\
+                &=(4+4i-1)Ae^{x(2+i)}+(4-4i-1)Be^{x(2-i)} \\
+                &=(3+4i)Ae^{x(2+i)}+(3-4i)Be^{x(2-i)}
+              \end{align}
+              Substituting back
+              \begin{align}
+                \begin{array}{rl}
+                  (3+4i)Ae^{x(2+i)}&+(3-4i)Be^{x(2-i)} \\
+                  +5\big[(2+i)Ae^{x(2+i)}&+(2-i)Be^{x(2-i)} \big] \\
+                  +6\big[Ae^{x(2+i)}&+Be^{x(2-i)}\big]
+                \end{array}
+                &=\frac{1}{2}e^{x(2+i)}+\frac{1}{2}e^{x(2-i)} \\
+                \begin{array}{rl}
+                  (3+4i)Ae^{x(2+i)}&+(3-4i)Be^{x(2-i)} \\
+                  +(10+5i)Ae^{x(2+i)}&+(10-5i)Be^{x(2-i)} \\
+                  +6Ae^{x(2+i)}&+6Be^{x(2-i)}
+                \end{array}
+                &=\frac{1}{2}e^{x(2+i)}+\frac{1}{2}e^{x(2-i)} \\
+                (19+9i)Ae^{x(2+i)}+(19-9i)Be^{x(2+i)}&=\frac{1}{2}e^{x(2+i)}+\frac{1}{2}e^{x(2-i)} \\
+                \implies\begin{cases}
+                  (19+9i)A&=\frac{1}{2} \\
+                  (19-9i)B&=\frac{1}{2}
+                \end{cases} \\
+                \begin{cases}
+                  A&=\frac{1}{2(19+9i)} = \frac{19-9i}{884} \\
+                  B&=\frac{1}{2(19-9i)} = \frac{19+9i}{884}
+                \end{cases}
+              \end{align}
+                The particular solution is
+                \begin{align}
+                y_{p}&=\frac{19-9i}{884}e^{x(2+i)}+\frac{19+9i}{884}e^{x(2-i)} \\
+                \nonumber \\
+                &=\begin{array}{cc}
+                  &\frac{19-9i}{884}e^{2x}(\cos x+i\sin x) \\
+                  +&\frac{19+9i}{884}e^{2x}(\cos x-i\sin x)
+                \end{array} \\
+                \nonumber \\
+                &=\begin{array}{lll}
+                  \frac{19}{884}e^{2x}\cos x+i\frac{19}{884}e^{2x}\sin x \\
+                  -i\frac{9}{884}e^{2x}\cos x+\frac{9}{884}e^{2x}\sin x\\
+                  +\frac{19}{884}e^{2x}\cos x-i\frac{19}{884}e^{2x}\sin x \\ 
+                  +i\frac{9}{884}e^{2x}\cos x+\frac{9}{884}e^{2x}\sin x
+                \end{array} \\
+                \nonumber \\
+                \Aboxed{&=\frac{9}{442}e^{2x}\sin x+\frac{19}{442}e^{2x}\cos x}
+                \end{align}
+                The general solution is
+                \begin{equation}
+                  \boxed{
+                    y=c_{1}e^{-2x}+c_{2}e^{-3x}+\frac{9}{442}e^{2x}\sin x+\frac{19}{442}e^{2x}\cos x.
+                  }
+                \end{equation}
+            \end{sol}
+          \item \( y''+y=\sec x\tan x \)
+            \begin{sol}
+              \begin{align}
+                y''+y&=\sec x\tan x \\
+                \lambda^2+1&=0 \\
+                \lambda^2&=-1 \\
+                \lambda_{1}&=i \\
+                \lambda_{2}&=-i
+                \intertext{The homogenous solution is}
+                \Aboxed{y_{h}&=c_{1}\cos x+c_{2}\sin x} \\
+                \intertext{For the particular solution}
+                y_{p} &= u_{1}y_{1}+u_{2}y_{2} \\
+                u_{i} &= \int \frac{W_{i}}{W} dx \\
+                W &= \left| \begin{array}{cc}
+                  y_{1}&y_{2} \\
+                  y_{1}' & y_{2}'
+                \end{array} \right|  \\
+                 &= \left| \begin{array}{cc}
+                   \cos x & \sin x \\
+                   -\sin x&\cos x
+                \end{array} \right|  \\
+                &= \cos ^2x+\sin ^2x\\
+                &= 1
+              \end{align}
+              \begin{align}
+                W_{1} &= \left| \begin{array}{cc}
+                  0&y_{2} \\
+                  f(x) & y_{2}'
+                \end{array} \right|  \\
+                 &= \left| \begin{array}{cc}
+                  0&\sin x \\
+                  \sec x\tan x & \cos x
+                \end{array} \right|  \\
+                 &= -\sin x\sec x\tan x \\
+                 &= -\tan ^2x \\
+                W_{2} &= \left| \begin{array}{cc}
+                  y_{1}&0\\
+                  y_{1}'&f(x)\\
+                \end{array} \right| \\
+                &= \left| \begin{array}{cc}
+                  \cos x&0\\
+                  -\sin x&\sec x\tan x\\
+                \end{array} \right| \\
+                &= \cos x\sec x\tan x\\
+                &= \tan x\\
+              \end{align}
+              Then
+              \begin{align}
+                y_{p} &= \cos x \int \frac{-\tan ^2 x}{1}dx+\sin x\int \frac{\tan x}{1}dx \\
+                &= -\cos x \left( \tan x-x \right) -\sin x\ln|\cos x| \\
+                &= -\cos x\tan x+x\cos x -\sin x\ln|\cos x| \\
+                &= -\sin x+x\cos x -\sin x\ln|\cos x| \\
+              \end{align}
+              The general solution is
+              \begin{equation}
+                \boxed{y=c_{1}\cos x+c_{2}\sin x-\sin x+x\cos x -\sin x\ln|\cos x|}
+              \end{equation}
+            \end{sol}
+          \item \( y''+3y'+2y=\frac{1}{1+e^{x} } \)
+            \begin{sol}
+              \begin{align}
+                y''+3y'+2y&=\frac{1}{1+e^{x} } \\
+                \lambda^2+3\lambda+2&=0 \\
+                (\lambda+1)(\lambda+2)&=0 \\
+                \lambda_{1}&=-1 \\
+                \lambda_{2}&=-2 \\
+                \intertext{The homogenous solution is}
+                \Aboxed{y_{h}&=c_{1}e^{-x}+c_{2}e^{-2x}} \\
+                \intertext{For the particular solution}
+                y_{p} &= u_{1}y_{1}+u_{2}y_{2} \\
+                u_{i} &= \int \frac{W_{i}}{W} dx \\
+                W &= \left| \begin{array}{cc}
+                  y_{1}&y_{2} \\
+                  y_{1}' & y_{2}'
+                \end{array} \right|  \\
+                  &= \left| \begin{array}{cc}
+                    e^{-x} & e^{-2x} \\
+                    -e^{-x} & -2e^{-2x}
+                  \end{array} \right|  \\
+                  &= e^{-x}\cdot -2e^{-2x}-e^{-2x}\cdot -e^{-x} \\
+                  &= -2e^{-3x}+e^{-3x} \\
+                  &= -e^{-3x} \\
+                W_{1} &= \left| \begin{array}{cc}
+                  0&y_{2} \\
+                  f(x) & y_{2}'
+                \end{array} \right|  \\
+                &= \left| \begin{array}{cc}
+                  0&e^{-2x} \\
+                  \frac{1}{1+e^{x} } & -2e^{-2x}
+                \end{array} \right|  \\
+                &= -\frac{1}{1+e^{x} }e^{-2x} \\
+                &= -\frac{e^{-2x}}{1+e^{x} } \\
+                W_{2} &= \left| \begin{array}{cc}
+                  y_{1}&0\\
+                  y_{1}'&f(x)\\
+                \end{array} \right| \\
+                &= \left| \begin{array}{cc}
+                  e^{-x}&0\\
+                  -e^{-x}&\frac{1}{1+e^{x} }\\
+                \end{array} \right| \\
+                &= e^{-x}\cdot \frac{1}{1+e^{x} } \\
+                &= \frac{e^{-x}}{1+e^{x} }
+              \end{align}
+              Then
+              \begin{align}
+                y_{p} &= e^{-x}\int \frac{-e^{-2x}}{1+e^{x} }\cdot \frac{1}{-e^{-3x} }dx+e^{-2x}\int \frac{e^{-x}}{1+e^{x} }\cdot \frac{1}{-e^{-3x} }dx \\
+                &= e^{-x}\int \frac{e^{-2x}}{1+e^{x} }\cdot e^{3x}dx-e^{-2x}\int \frac{e^{-x}}{1+e^{x} }\cdot e^{3x}dx \\
+                &= e^{-x}\int \frac{e^{x}}{1+e^{x} }dx+e^{-2x}\int \frac{e^{2x} }{1+e^{x}}dx \\
+                &= e^{-x}\int \frac{e^{x}}{1+e^{x} }dx+e^{-2x}\int \frac{e^{2x} }{1+e^{x}}dx \\
+                \intertext{Let \( u=1+e^{x} \) then \( du=e^{x}dx \)}
+                &= e^{-x}\int \frac{1}{u}du+e^{-2x}\int \frac{u-1}{u}du \\
+                &= e^{-x}\ln u+e^{-2x}\left( u-\ln u \right) \\
+                \intertext{Substituting \( u \)}
+                &= e^{-x}\ln(1+e^{x})+e^{-2x}\left( 1+e^{x}-\ln(1+e^{x}) \right) \\
+                &= e^{-x}\ln(1+e^{x})+e^{-2x}+e^{-x}-e^{-2x}\ln(1+e^{x})
+              \end{align}
+              The general solution is
+              \begin{equation}
+                \boxed{y=c_{1}e^{-x}+c_{2}e^{-2x}+e^{-x}\ln(1+e^{x})+e^{-2x}+e^{-x}-e^{-2x}\ln(1+e^{x})}
+              \end{equation}
+            \end{sol}
+          \item \( x^2y''-4xy'+4y=0 \)
+            \begin{sol} Let \( y=x^m \)
+              \begin{align}
+                y'&=mx^{m-1} \\
+                y''&=m(m-1)x^{m-2}
+              \end{align}
+              Substituting back
+              \begin{align}
+                x^2m(m-1)x^{m-2}-4xmx^{m-1}+4x^m&=0 \\
+                m(m-1)x^{m} -4mx^{m}+4x^m&=0 \\
+                m(m-1)-4m+4&=0 \\
+                m^2-m-4m+4&=0 \\
+                m^2-5m+4&=0 \\
+                m_{1} &= 1 \\
+                m_{2} &= 4 \\
+                \Aboxed{y &= c_{1}x+c_{2}x^4}
+              .\end{align}
+            \end{sol}
+          \item \( (2x-5)^2y''-2(2x-5)y'+4y=\frac{8x-20}{\ln ^2(2x-5)+1} \)
+            \begin{sol} Using substitution \( u=(2x-5) \)
+              \begin{align}
+                y'&=\frac{dy}{du}\frac{du}{dx} \\
+                &=\frac{dy}{du}\cdot 2 \\
+                y''&=\frac{d^2y}{du^2}\left( \frac{du}{dx} \right)^2+\frac{dy}{du}\frac{d^2u}{dx^2} \\
+                &=\frac{d^2y}{du^2}\cdot 4+\frac{dy}{du}\cdot 0 \\
+                &=4\frac{d^2y}{du^2}
+              \end{align}
+              Substituting back
+              \begin{align}
+                4u^2y''-4uy'+4y&=\frac{4u}{\ln ^2u+1} \\
+                \intertext{Using Cauchy-Euler method}
+                4m^2-8m+4&=0 \\
+                4(m-1)^2&=0 \\
+                m_{1}&=1 \\
+                m_{2}&=1
+              \end{align}
+              \begin{align}
+                \Aboxed{
+                  y_{h} &= c_{1}u+c_{2}u\ln |u|
+                }
+              \end{align}
+              For particular solution
+              \begin{align}
+                4u^2y''-4uy'+4y&=\frac{4u}{\ln ^2u+1} \\
+                y''-\frac{1}{u}y'+\frac{1}{u^2}y&=\frac{1}{4u(\ln ^2u+1)} \\
+                \intertext{Using variation of parameters}
+                y_{p} &= u_{1}y_{1}+u_{2}y_{2} \\
+                u_{i} &= \int \frac{W_{i}}{W} du \\
+                W &= \left| \begin{array}{cc}
+                  y_{1}&y_{2} \\
+                  y_{1}' & y_{2}'
+                \end{array} \right|  \\
+                &= \left| \begin{array}{cc}
+                  u & u\ln |u| \\
+                  1 & 1+\ln |u|
+                \end{array} \right|  \\
+                &= u(1+\ln |u|)-u\ln |u| \\
+                &= u+u\ln |u|-u\ln |u| \\
+                &= u \\
+                \intertext{Where \( u \neq 0 \)}
+                W_{1} &= \left| \begin{array}{cc}
+                  0&u\ln |u| \\
+                  \frac{1}{4u(\ln ^2u+1)} & 1+\ln |u|
+                \end{array} \right|  \\
+                &= -\frac{1}{4u(\ln ^2u+1)}u\ln |u| \\
+                &= -\frac{\ln |u|}{4(\ln ^2u+1)} \\
+                W_{2} &= \left| \begin{array}{cc}
+                  u&0\\
+                  1&\frac{1}{4u(\ln ^2u+1)}\\
+                \end{array} \right| \\
+                &= \frac{1}{4u(\ln ^2u+1)}u \\
+                &= \frac{1}{4(\ln ^2u+1)}
+              \end{align}
+                Then
+                \begin{align}
+                y_{p} &= u\int \frac{-\frac{\ln |u|}{4(\ln ^2u+1)}}{u}du+u\ln |u|\int \frac{\frac{1}{4(\ln ^2u+1)}}{u}du \\
+                &= -u\int \frac{\ln |u|}{4u(\ln ^2u+1)} du+u\ln |u|\int \frac{1}{4u(\ln ^2u+1)}du \\
+                &= -\frac{u}{4} \int \frac{\ln u}{u\ln ^2u+u} du +\frac{u\ln |u|}{4} \int \frac{1}{u(\ln ^2u+1)}du \\
+                &= -\frac{u}{4} \cdot \frac{\ln |\ln^2u +1|}{8} +\frac{u\ln |u|}{4} \tan ^{-1}(\ln ^2u) \\
+                \end{align}
+                Substituting back
+                \begin{align}
+                  y&= c_{1}u+c_{2}u\ln |u| -\frac{u}{4} \cdot \frac{\ln |\ln^2u +1|}{8} +\frac{u\ln |u|}{4} \tan ^{-1}(\ln ^2u) \\
+                  \intertext{Remove absolute values as \(u\) is strictly \( >0 \)}
+                  &= c_{1}u+c_{2}u\ln u -\frac{u}{4} \cdot \frac{\ln (\ln^2u +1)}{8} +\frac{u\ln u}{4} \tan ^{-1}(\ln ^2u) \\
+                  &= c_{1}u+c_{2}u\ln u-\frac{1}{32}u\ln (\ln^2u+1)-\frac{1}{8}u\ln ^2u+\frac{1}{4}u\ln u\tan ^{-1}(\ln ^2u) \\
+                  \intertext{Substitute back \( u=2x-5 \)}
+                  \Aboxed{
+                  y &= \begin{array}{ll}
+                    c_{1}(2x-5)+c_{2}(2x-5)\ln (2x-5) \\
+                    -\frac{1}{32}(2x-5)\ln (\ln^2(2x-5)+1) \\
+                    -\frac{1}{8}(2x-5)\ln ^2(2x-5) \\
+                    +\frac{1}{4}(2x-5)\ln (2x-5)\tan ^{-1}(\ln ^2(2x-5))
+                  \end{array}; x>\frac{5}{2}
+                  }
+                .\end{align}
+            \end{sol}
+    \end{enumerate}
+  \item Given that the roots of the characteristic equation of a specific
+    higher order DE with constant coefficients as
+    \[
+      \lambda = (\pm 3,2\pm 3i,3,4,3)
+    \] 
+    \begin{enumerate}
+      \item What is the order of this differential equation?
+        \begin{sol}
+          The order of the differential equation is 7.
+        \end{sol}
+      \item Write the form of the homogenous solution?
+        \begin{sol}
+          \[
+            y = c_1e^{3x} + c_2e^{-3x} + c_3e^{2x}\cos\left( 3x \right) + c_4e^{2x}\sin\left( 3x \right) + c_5xe^{3x} + c_6e^{4x} + c_7x^2e^{3x}
+          \]
+        \end{sol}
+    \end{enumerate}
+    \newpage
+  \item Solve the following system of ODE's
+    \begin{align*}
+      (D+1)u-(D+1)v&=e^{t} \\
+      (D-1)u+(2D+1)v&=5
+    .\end{align*}
+    \begin{sol}
+      \begin{align}
+        &\left[\begin{array}{cc|c}
+            D+1 & -D-1 & e^{t} \\
+            D-1 & 2D+1 & 5
+        \end{array}\right]\\
+        \xrightarrow{R_{1}=\frac{R_{1}}{D+1}}
+        &\left[\begin{array}{cc|c}
+            1 & -1 & \frac{e^{t}}{D+1} \\
+            D-1 & 2D+1 & 5
+        \end{array}\right]\\
+        \xrightarrow{R_{1}=\frac{R_{2}}{2D+1}}
+        &\left[\begin{array}{cc|c}
+            1+\frac{D-1}{2D+1} & 0 & \frac{e^{t}}{D+1}+\frac{5}{2D+1} \\
+            D-1 & 2D+1 & 5
+        \end{array}\right] \\
+        =
+        &\left[\begin{array}{cc|c}
+            \frac{3D}{2D+1} & 0 & \frac{(2D+1)e^{t}+(D+1)5  }{(D+1)(2D+1)} \\
+            D-1 & 2D+1 & 5
+        \end{array}\right] \\
+        \xrightarrow{R_{1}=R_{1}\cdot \frac{2D+1}{3D}}
+        &\left[\begin{array}{cc|c}
+            1 & 0 & \frac{(2D+1)e^{t}+(D+1)5  }{(D+1)(3D)} \\
+            D-1 & 2D+1 & 5
+        \end{array}\right] \\
+      \end{align}
+        Then
+        \begin{align}
+          u &= \frac{(2D+1)e^{t}+(D+1)5  }{(D+1)(3D)} \\
+          (D+1)(3D)u &= (2D+1)e^{t}+(D+1)5 \\
+          3D^2u+3Du &= 2De^{t}+e^{t}+5D+5 \\
+          3D^2u+3Du &= 3e^{t} + 5 \\
+          \Aboxed{ D^2u+Du &= e^{t} + \frac{5}{3} }
+        \end{align}
+        \begin{align}
+          u'' + u' &= e^{t} + \frac{5}{3} \\
+          \lambda^2 + \lambda &= 0 \\
+          \lambda(\lambda+1) &= 0 \\
+          \lambda_{1} &= 0 \\
+          \lambda_{2} &= -1 \\
+          \intertext{The homogenous solution is}
+          \Aboxed{u_{h} &= c_{1}+c_{2}e^{-t}} \\
+          \intertext{For the particular solution}
+          u_{p} &= Ae^{t} + Bt \\
+          u_{p}' &= Ae^{t} + B \\
+          u_{p}'' &= Ae^{t} \\
+          \intertext{Substituting back}
+          Ae^{t} + B + Ae^{t} &= e^{t} + \frac{5}{3} \\
+          2Ae^{t} + B &= e^{t} + \frac{5}{3}
+        \end{align}
+        \begin{equation}
+          \implies\begin{cases}
+            2A &= 1 \implies A =\frac{1}{2} \\
+            B &= \frac{5}{3}
+          \end{cases}
+        \end{equation}
+        The particular solution is
+        \begin{equation}
+          \boxed{u_{p} = \frac{1}{2}e^{t} + \frac{5}{3}t}
+        \end{equation}
+        The general solution is
+        \begin{equation}
+          \boxed{u = c_{1}+c_{2}e^{-t} + \frac{1}{2}e^{t} + \frac{5}{3}t}
+        \end{equation}
+        Substituting back
+        \begin{align}
+          (D+1)\left( c_{1}+c_{2}e^{-t} + \frac{1}{2}e^{t} + \frac{5}{3}t \right) -(D+1)v&=e^{t} \\
+           -c_{2}e^{-t} + \frac{1}{2}e^{t} + \frac{5}{3} +  c_{1}+c_{2}e^{-t} + \frac{1}{2}e^{t} + \frac{5}{3}t - (D+1)v&=e^{t} \\
+           e^{t} + \frac{5}{3} +  c_{1} + \frac{5}{3}t - (D+1)v&=e^{t}
+        \end{align}
+        \begin{align}
+          -(D+1)v &= -\frac{5}{3} - c_{1} - \frac{5}{3}t \\
+          (D+1)v &= \frac{5}{3} + c_{1} + \frac{5}{3}t \\
+          Dv+v &= \frac{5}{3} + c_{1} + \frac{5}{3}t \\
+          v' + v &= \frac{5}{3} + c_{1} + \frac{5}{3}t \\
+          \lambda + 1 &= 0 \\
+          \lambda &= -1 \\
+          \intertext{The homogenous solution is}
+          \Aboxed{v_{h} &= c_{3}e^{-t}} \\
+          \intertext{For the particular solution}
+          v_{p} &= At + B \\
+          v_{p}' &= A \\
+          \intertext{Substituting back}
+          At + A +B &= \frac{5}{3} + c_{1} + \frac{5}{3}t \\
+          \implies&\begin{cases}
+            A&=\frac{5}{3}\\
+            B&=c_{1}
+          \end{cases} \\
+          \intertext{The particular solution is}
+          v_{p}&=c_{1}+\frac{5}{3}t \\
+          \intertext{The general solution is}
+          \Aboxed{ v&=c_{1}+c_{3}e^{-t}+\frac{5}{3}t}
+        \end{align}
+          Substituting back
+          \begin{align}
+            (D-1)u+(2D+1)v&=5 \\
+            \nonumber\\
+            \begin{array}{ll}
+            &(D-1)\left( c_{1}+c_{2}e^{-t} + \frac{1}{2}e^{t} + \frac{5}{3}t \right) \\
+              +&(2D+1)\left( c_{1}+c_{3}e^{-t}+\frac{5}{3}t \right)
+            \end{array}&=\\
+            \nonumber\\
+            \begin{array}{c}
+              -c_{2}e^{-t}+\frac{1}{2}e^{t}+\frac{5}{3}-c_{1}-c_{2}e^{-t}-\frac{1}{2}e^{t}-\frac{5}{3}t\\
+              -2c_{3}e^{-t}+\frac{10}{3}+c_{1}+c_{3}e^{-t}+\frac{5}{3}t
+            \end{array}&=\\
+            \nonumber\\
+            -2c_{2}e^{-t}+5-c_{3}e^{-t}&=\\
+            -2c_{2}e^{-t}-c_{3}e^{-t}&=0 \\
+            -c_{3}e^{-t}&=2c_{2}e^{-t} \\
+            \implies c_{3}&=-2c_{2}
+          .\end{align}
+          The solution to the system of ODE's is
+          \begin{equation}
+            \begin{cases}
+              u &= c_{1}+c_{2}e^{-t} + \frac{1}{2}e^{t} + \frac{5}{3}t \\
+              v &= c_{1}-2c_{2}e^{-t}+\frac{5}{3}t
+            \end{cases}
+          \end{equation}
+    \end{sol}
+\end{enumerate}
+
+\end{document}
