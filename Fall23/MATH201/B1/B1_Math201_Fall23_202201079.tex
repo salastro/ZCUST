@@ -1,0 +1,43 @@
+\documentclass{zc-ust-hw}
+
+\usepackage{lipsum}
+
+\newcommand*{\name}{SalahDin Rezk}
+\newcommand*{\id}{202201079}
+\newcommand*{\course}{Linear Algebra and Vector Geometry (MATH 201)}
+\newcommand*{\assignment}{Bonus 1}
+
+\begin{document}
+
+\maketitle
+
+Prove that $(AB)^\intercal=B^\intercal A^\intercal$ \\
+
+\begin{proof}
+  Let $A$ be an $m\times n$ matrix and $B$ be an $n\times p$ matrix.
+
+  \begin{align}
+    A_{ij} &= \sum_{i=1}^m \sum_{j=1}^n a_{ij} \\
+    B_{ij} &= \sum_{i=1}^n \sum_{j=1}^p b_{ij}
+  .\end{align}
+  Using the definition of matrix multiplication:
+  \begin{align}
+    AB_{ij} &= \sum_{k=1}^n a_{ik}b_{kj}
+  .\end{align}
+  Using definition of transpose:
+  \begin{align}
+    (AB)^\intercal_{ij} &= AB_{ji} \\
+                        &= \sum_{k=1}^n a_{jk}b_{ki} \label{eq:1}
+  .\end{align}
+  Then:
+  \begin{align}
+    (B^\intercal A^\intercal)_{ij} &= \sum_{k=1}^n b_{ik}^\intercal a_{kj}^\intercal \\
+                                   &= \sum_{k=1}^n b_{ki}a_{jk} \\
+                                   &= \sum_{k=1}^n a_{jk}b_{ki} \label{eq:2}
+  .\end{align}
+  From \eqref{eq:1} and \eqref{eq:2} we conclude that $(AB)^\intercal=B^\intercal A^\intercal$.
+\end{proof}
+\vspace{1em}
+Notice that $(AB)^\intercal\neq A^\intercal B^\intercal$.
+
+\end{document}

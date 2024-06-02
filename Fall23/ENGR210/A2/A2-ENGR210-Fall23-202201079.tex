@@ -1,0 +1,147 @@
+\documentclass{zc-ust-hw}
+
+\usepackage{lipsum}
+\usepackage{circuitikz}
+\usepackage{caption} 
+
+\newcommand*{\name}{SalahDin Rezk}
+\newcommand*{\id}{202201079}
+\newcommand*{\course}{Electric Circuits (ENGR210)}
+\newcommand*{\assignment}{Assignment 2}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+
+  %%%%%%%%%%%%%%%%%%%%
+  \item If the interconnection in Figure~\ref{fig:1} is valid, find the total power
+    developed in the circuit. If the interconnection is not valid, explain why.
+    %%%%%%%%%%%%%%%%%%%%
+    \begin{figure}[htpb]
+    \begin{center}
+    \begin{circuitikz}[american]
+      % Voltage sources
+      \draw (0,0) to [V, l=10V, invert] (4,0);
+      \draw (4,0) to [V, l=40V] (4,-2);
+      \draw (0,0) to [V, l=50V] (0,-2);
+      % Current sources
+      \draw (0,-2) to [I, l=5A] (4,-2);
+    \end{circuitikz}
+    \end{center}
+    \caption{}%
+    \label{fig:1}
+    \end{figure}
+
+    KVL on loop:
+    \begin{align}
+      -50 -10 + 40 &+ V_{\text{source}} = 0 \\
+      V_{\text{source}} &= 20 \text{ V}
+    .\end{align}
+    \begin{align}
+      40 \times -5 &= -200 \text{ W} \\
+      10 \times 5 &= 50 \text{ W} \\
+      50 \times 5 &= 250 \text{ W} \\
+      -20 \times 5 &= -100 \text{ W} \\
+      \Sigma P &= -200+50+250-100 \\
+               &= 0
+    .\end{align}
+
+    \newpage
+
+  %%%%%%%%%%%%%%%%%%%%
+  \item The interconnection of ideal sources can lead to an indeterminate
+    solution. With this thought in mind, explain why the solutions for $v1$ and
+    $v2$ in the circuit in Figure~\ref{fig:2} are not unique.
+  %%%%%%%%%%%%%%%%%%%%
+    \begin{figure}[h]
+    \begin{center}
+    \begin{circuitikz}[american]
+      \draw (0,0) to [I, l=2A, invert, v>=$v_1$] (0,2);
+      \draw (0,0) to [V, l_=8V] (3,0);
+      \draw (3,0) to [I, l=5A, v=$v_3$, *-*] (3,2);
+      \draw (3,2) to (0,2);
+      \draw (3,2) to [V, l^=12V] (7,2);
+      \draw (7,2) to [I, l=3A, v_>=$v_2$] (7,0);
+      \draw (7,0) to (3,0);
+      \draw (3,0) node[below] {$n$};
+    \end{circuitikz}
+    \end{center}
+    \caption{}%
+    \label{fig:2}
+    \end{figure}
+
+    KCL at node $n$:
+    \begin{align}
+      \Sigma I &= 0 \\
+      3 + 2 - 5 &= 0 \implies \text{System is valid.}
+    \end{align}
+    KVL on loop: \\
+    \begin{align}
+      12 - v_3 + v_2 &= 0 \label{eq:1} \\
+      v_1 -8 + v_3 &= 0 \label{eq:2}
+    .\end{align}
+    From \eqref{eq:1} and \eqref{eq:2} the system of equations is free and there is no unique solution.
+
+    \newpage
+
+    %%%%%%%%%%%%%%%%%%%%
+  \item The current $i_x$ the circuit shown in Figure~\ref{fig:3} is 50 mA and the voltage
+    $v_x$ is 3.5 V. Find
+    \begin{align}
+      i_x = 50 \text{ mA} \quad v_x = 3.5 \text{ V}
+    .\end{align}
+    \begin{enumerate}
+      \item $i_1$.
+    \begin{align}
+      i_1 &= \frac{v_x}{R} \\
+          &= \frac{3.5}{175} \\
+          &= 20 \text{ mA}
+    .\end{align}
+      \item $v_1$.
+    \\Applying KCL:
+    \begin{align}
+      i_x &= i_1 + i_2 \\
+      50 &= 20 + i_2 \\
+      i_2 &= 30 \text{ mA}
+    .\end{align}
+    \begin{align}
+      v_1 &= i_2 \times R \\
+          &= 30\times 10^{-3} \times 250 \\ 
+          &= 7.5 \text{ V}
+    .\end{align}
+      \item $v_g$.
+        \\Using KVL:
+        \begin{align}
+          v_1 + 50 i_x-v_g  = 0
+        .\end{align}
+        \begin{align}
+          v_g &= v_1 + 50 i_x \\
+              &= 7.5 + 50 \times 50 \times 10^{-3} \\
+              &= 10 \text{ V}
+        .\end{align}
+      \item the power supplied by the voltage source.
+        \begin{align}
+          P &= v_g i_x = 10 \times 50 \times 10^{-3} \\
+            &= 0.5 \text{ W}
+        .\end{align}
+    \end{enumerate}
+    \begin{figure}[h]
+    \begin{center}
+    \begin{circuitikz}[american]
+      \draw (0,3) to [V, l_=$v_g$] (0,0);
+      \draw (0,3) to [R, l=50 $\Omega$, i=$i_x$] (4,3);
+      \draw (4,3) to [R, l=350 $\Omega$, v=$v_1$, *-*] (4,0);
+      \draw (4,3) to [R, l=300 $\Omega$, i=$i_1$] (8,3);
+      \draw (8,3) to [R, l=175 $\Omega$, v=$v_x$] (8,0);
+      \draw (8,0) to (0,0);
+    \end{circuitikz}
+    \end{center}
+    \caption{}%
+    \label{fig:3}
+    \end{figure}
+
+\end{enumerate}
+
+\end{document}

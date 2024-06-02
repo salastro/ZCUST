@@ -1,0 +1,45 @@
+\documentclass{zc-ust-hw}
+
+\usepackage{lipsum}
+\usepackage[]{caption} 
+\usepackage[]{subcaption} 
+\usepackage[]{pgfplots}
+
+\newcommand*{\name}{SalahDin Ahmed (202201079)}
+\newcommand*{\course}{Thermodynamics, Wave Motion and Optics (PHYS201)}
+\newcommand*{\assignment}{Participation 5}
+
+\begin{document}
+
+\maketitle
+
+Back in 1877, Thomas Edison opened the gate for manufacturing sound record by
+inventing a phonogram that uses sound to etches grooves onto a wax cylinder.
+The old phonogram spins at 33 1/3 rpm (rotations per min). Suppose, you are
+asked to examine the diffraction grating effect by shining laser light onto the
+record as shown the figure. If the laser light is of \(\lambda = 632.8\) nm, you put the
+screen at a distance of 4 m away from the record and you observed an
+interesting red dot on the screen separated by 21 mm each, as illustrated.
+
+\begin{enumerate}
+  \item Deduce the number of ridges per centimeter there are along the radius
+    of the record.
+
+      \begin{align}
+        \lambda &= d\sin \theta  \\
+        d &= \frac{\lambda}{\sin \theta } = \frac{\lambda}{\sin \left( \tan ^{-1} \left( \frac{x}{L} \right) \right)  } \\
+        &= \frac{632.8\times 10^{-9}}{\sin \left( \tan ^{-1} \left(  \frac{21\times 10^{3} }{4.0} \right)  \right) }  \\
+        &= 1.2\times 10^{-2}  \\
+        \frac{1}{d} &= \frac{1}{1.2\times 10^{-2} } = 83 \text{ridges/cm}
+      .\end{align}
+
+  \item If you know that the record has only one song of 4.01 minutes and occupy
+    16 mm on the record. In such case, deduce the number of ridges there are per
+    cm.
+    \begin{align}
+      4.01 \times 33.3 &= 134 \\
+      \frac{134}{1.6} &= 84 \text{ridges/cm}
+    .\end{align}
+\end{enumerate}
+
+\end{document}

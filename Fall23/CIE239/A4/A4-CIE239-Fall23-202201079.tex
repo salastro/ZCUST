@@ -1,0 +1,207 @@
+\documentclass{zc-ust-hw}
+
+\name{SalahDin Ahmed Salh Rezk}
+\id{202201079}
+\course{Digital Design and Computer Architecture (CIE 239)}
+\assignment{Assignment 4}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+
+  \item Assume that registers $R_1$ and $R_{2}$ in the Figure hold two unsigned
+    numbers. When select input $X$ is equal to 1, the adder–subtractor circuit
+    performs the arithmetic operation ``$R_{1}$ + 2's complement of \(R_{2}\).''
+    This sum and the output carry $C_n$ are transferred into $R_1$ and $C$ when
+    $K_1 = 1$ and a positive edge occurs on the clock. 
+
+    \begin{sol}\,
+      \begin{itemize}
+        \item Assume \( C=1 \).
+
+      Perform \(R_{1}-R_{2}\) and $X=1$ 
+
+      \( \therefore R_{1}=1111 \),\hspace{1em} suppose \( R_{2}=1010 \)
+      2's complement of \( R_{2} \) is \( 0110 \)
+      
+      \( R_{1}-R_{2}=10101 \)
+      
+      \( \therefore R_{1}=0101 \) and \( C=1 \)
+
+      \fbox{ So if \( C=1 \) then the value transferred to \( R_{1} \) is equal to \( R_{2}-R_{1} \) }
+
+    \item Assume \( C=0 \).
+      Perform \(R_{2}-R_{1}\)
+
+      2's complement of \( R_{1} \) is \( 1010 \)
+
+      \( R_{2}-R_{1}=1101 \)
+
+      2's complement of \( R_{2}-R_{1} \) is \( 0011 \)
+
+      \fbox{ So if \( C=0 \) then the 2's complement of \( R_{2}-R_{1} \) is equal to \(R_{1}\) }
+  
+      \end{itemize}
+    \end{sol}
+
+  \item The outputs of registers $R_0$, $R_1$, $R_2$, and $R_3$ are connected through
+    4-to-1 multiplexers to the inputs of a fifth register, $R_4$. Each register is
+    8 bits long. The required transfers, as dictated by four control variables,
+    are 
+    \begin{align*}
+      C_{0}: R_{4} \leftarrow R_{0}, \\
+      C_{1}: R_{4} \leftarrow R_{1}, \\
+      C_{2}: R_{4} \leftarrow R_{2}, \\
+      C_{3}: R_{4} \leftarrow R_{3}
+    .\end{align*}
+    
+    \newpage
+    
+    The control variables are mutually exclusive (i.e., only one variable can
+    be equal to 1 at any time) while the other three are equal to 0. Also, no
+    transfer into $R_4$ is to occur for all control variables equal to 0.
+    \begin{enumerate}
+      \item Using registers and a multiplexer, draw a detailed logic diagram of
+        the hardware that implements a single bit of these register transfers. 
+        \begin{sol}\end{sol}
+        \begin{figure}[H]
+          \centering
+          \begin{circuitikz}
+            % Registers
+            \draw (0,0) node[draw,minimum width=1cm,minimum height=1cm] (r0) {$R_0$};
+            \draw (0,-2) node[draw,minimum width=1cm,minimum height=1cm] (r1) {$R_1$};
+            \draw (0,-4) node[draw,minimum width=1cm,minimum height=1cm] (r2) {$R_2$};
+            \draw (0,-6) node[draw,minimum width=1cm,minimum height=1cm] (r3) {$R_3$};
+            % Mux
+            \tikzset{mux 4by1/.style={muxdemux,muxdemux def={Lh=8, NL=4, Rh=4, NB=2, w=2, square pins=1}}}
+            \node[mux 4by1] (mux) at (4,-4) {};
+            % Connections
+            \draw (r0.east) -- ++(1,0) |- (mux.lpin 1);
+            \draw (r1.east) -- ++(1,0) |- (mux.lpin 2);
+            \draw (r2.east) -- ++(1,0) |- (mux.lpin 3);
+            \draw (r3.east) -- ++(1,0) |- (mux.lpin 4);
+            \draw (mux.rpin 1) -- ++(1,0) node[right] {$R_4$};
+            % Select labels
+            \draw (mux.bpin 1) ++(-0.25,0) node[below] {\tt enbl};
+            \draw (mux.bpin 2) ++(0.25,0) node[below] {\tt sel};
+          \end{circuitikz}
+          \caption{}
+        \end{figure}
+        
+      \item Write HDL code for the design. 
+
+        \begin{sol}\,
+          \begin{lstlisting}[language=Verilog]
+module Q_2 (clk, reset, C[0:3], R[0:4]);
+  input clk, reset;
+  input [3:0] C;
+  input [7:0] R[0:3];
+  output [7:0] R[4];
+  reg [7:0] R[0:4];
+  always @(posedge clk, posedge reset)
+    if (reset)
+      R[0:4] <= 0;
+    else
+      case (C)
+        4'b0001: R[4] <= R[0];
+        4'b0010: R[4] <= R[1];
+        4'b0100: R[4] <= R[2];
+        4'b1000: R[4] <= R[3];
+        default: R[4] <= 0;
+      endcase
+endmodule
+          \end{lstlisting}
+        \end{sol}
+    \end{enumerate}
+
+  \item You are designing an FSM to keep track of the mood of four students
+    working in the digital design lab. Each student’s mood is either HAPPY (the
+    circuit works), SAD (the circuit blew up), BUSY (working on the circuit),
+    CLUELESS (confused about the circuit), or ASLEEP (face down on the circuit
+    board). How many states does the FSM have? What is the minimum number of
+    bits necessary to represent these states? 
+    \begin{sol}\,
+      \begin{itemize}
+        \item The FSM has \( 5^4=625 \) states.
+        \item The minimum number of bits necessary to represent these states is \( \lceil \log_{2} 625 = \lceil 9.28 = 10 \) bits.
+      \end{itemize}
+    \end{sol}
+
+  \item You have been enlisted to design a soda machine dispenser for your
+    department lounge. Sodas are partially subsidized by the student chapter of
+    the IEEE, so they cost only 25 cents. The machine accepts nickels, dimes,
+    and quarters. When enough coins have been inserted, it dispenses the soda
+    and returns any necessary change. Design an FSM controller for the soda
+    machine. The FSM inputs are Nickel, Dime, and Quarter, indicating which
+    coin was inserted. Assume that exactly one coin is inserted on each cycle.
+    The outputs are Dispense, ReturnNickel, ReturnDime, and ReturnTwoDimes.
+    When the FSM reaches 25 cents, it asserts Dispense and the necessary Return
+    outputs required to deliver the appropriate change. Then it should be ready
+    to start accepting coins for another soda. 
+
+    \begin{sol}\end{sol}
+    
+    \begin{figure}[H]
+      \centering
+      \begin{tikzpicture}
+        \tikzset{
+          ->, % makes the edges directed
+          node distance=5cm, % specifies the minimum distance between two nodes. Change if necessary.
+          every state/.style={thick, fill=gray!10}, % sets the properties for each ’state’ node
+          initial text=$ $, % sets the text that appears on the start arrow
+        } 
+        \node[state, initial, accepting] (0) {$s_{0}$};
+        \node[state, above right of=0] (1) {$s_{1}$};
+        \node[state, right of=1] (2) {$s_{2}$};
+        \node[state, below right of=2] (3) {$s_{3}$};
+        \node[state, below left of=3] (4) {$s_{4}$};
+        \node[state, left of=4] (5) {$s_{5}$};
+        \draw 
+        (5) edge[loop above] node{n/D+rn} (5)
+        (5) edge[loop below] node{d/D+rd} (5)
+        (5) edge[loop left] node{q/D+rn+r2d} (5)
+        (0) edge[above, bend left] node{n/0} (1)
+        (0) edge[above, bend right] node{d/0} (2)
+        (0) edge[above, bend right] node{q/D} (5)
+        (1) edge[above, bend left] node{n/0} (2)
+        (1) edge node{d/0} (3)
+        (1) edge[above, bend right] node{q/D+rn+rd} (5)
+        (2) edge[above, bend left] node{n/0} (3)
+        (2) edge[above, bend right] node{d/0} (4)
+        (2) edge[below] node{q/D+rd} (5)
+        (3) edge[below, bend left] node{n/0} (4)
+        (3) edge[above, bend left] node{d/D} (5)
+        (3) edge node{q/D+rn+rd} (5)
+        (4) edge[below, bend left] node{n/D} (5)
+        (4) edge[below, bend right] node{d/D+rn} (5)
+        (4) edge[below] node{q/D+r2d} (5);
+          ;
+      \end{tikzpicture}
+      \caption{}
+    \end{figure}
+    
+  \item Analyze the FSM shown in the figure. Write the state transition and
+    output tables and sketch the state transition diagram. Describe in words
+    what the FSM does.  Recall that the s and r register inputs indicate set
+    and reset, respectively. 
+    \begin{sol}
+      \begin{equation}
+        D_{0}=\overline{A}, \quad D_{1}=Q_{0}A, \quad D_{2}=(Q_{1}+Q_{2})A, \quad Q=Q_{2}
+      \end{equation}
+    \end{sol}
+    \begin{table}[H]
+      \centering
+      \begin{tabular}{c|c|c|c|c|c|c|c|c|c|c}
+        \( Q_{0} \) & \( Q_{1} \) & \( Q_{2} \) & \( A \) & \( Q_{0}' \) & \( Q_{1}' \) & \( Q_{2}' \) & \( D_{0} \) & \( D_{1} \) & \( D_{2} \) & \( Q \) \\
+        \hline
+        0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+        \end{tabular}
+      \caption{}
+    \end{table}
+    
+\end{enumerate}
+
+\end{document}

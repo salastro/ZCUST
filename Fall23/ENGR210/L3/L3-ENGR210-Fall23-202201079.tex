@@ -1,0 +1,70 @@
+\documentclass{zc-ust-hw}
+
+\usepackage{lipsum}
+
+\name{SalahDin Ahmed Salh Rezk}
+\id{202201079}
+\course{Electric Circuits (ENGR 210)}
+\assignment{Lab Report 3}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+
+  %%%%%%%%%%%%%%%%%%%%
+  \item
+    \begin{figure}[htpb]
+      \centering
+      \includegraphics[width=0.8\textwidth]{figures/1.png}
+      \caption{}
+      \label{fig:figures-1-png}
+    \end{figure}
+  %%%%%%%%%%%%%%%%%%%%
+    \begin{sol}
+      Using voltage divider rule:
+      \begin{align}
+        v_{3k\Omega} &= 5\cdot \frac{3}{4} = 3.75\,\mathrm{V}\\
+        I_1 &= \frac{5-3.75}{1000} = 1.25\,\mathrm{mA}\\
+        I_2 &= \frac{3.75}{3.3\times 10^3} = 1.136\,\mathrm{mA}\\
+        I_3 &= \frac{3.75}{33\times 10^3} = 0.1136\,\mathrm{mA}\\
+      .\end{align}
+    \end{sol}
+
+    \newpage
+
+  %%%%%%%%%%%%%%%%%%%%
+  \item
+    \begin{figure}[htpb]
+      \centering
+      \includegraphics[width=0.8\textwidth]{figures/2.png}
+      \caption{}
+      \label{fig:figures-2-png}
+    \end{figure}
+  %%%%%%%%%%%%%%%%%%%%
+    \begin{sol}
+      Using node analysis
+      \begin{align}
+        \left( \frac{1}{1000}+\frac{1}{3300}+\frac{1}{470} \right) n_3 - \frac{1}{470}(10)-\frac{1}{470}n_1 - \frac{1}{1000}n_2 &= 0 \\
+        -\frac{1}{220}n_1 + \left( \frac{1}{1000}+\frac{1}{33000}+\frac{1}{220} \right) n_2 - \frac{1}{1000}n_3=0 \\
+        \left( \frac{1}{10000}+\frac{1}{470}+\frac{1}{220} \right) n_1 - \frac{1}{220} n_2 - \frac{1}{470}n_3 &= 0
+      .\end{align}
+      \begin{align}
+        n_1 &= 7.987\,\mathrm{V}\\
+        n_2 &= 8.0038\,\mathrm{V}\\
+        n_3 &= 8.3249\,\mathrm{V}
+      .\end{align}
+      \begin{align}
+        I_{470} &= \frac{1.68}{470} = 0.00360\,\mathrm{A}\\
+        I_{3.3k\Omega} &= \frac{v_3}{3300} = 2.52\,\mathrm{mA}\\
+        I_{1k\Omega} &= \frac{v_3-v_2}{1000} = 0.321\,\mathrm{mA} \\
+        I_{33k\Omega} &= \frac{v_2}{33000} = 0.240\,\mathrm{mA} \\
+        I_{220\Omega} &= \frac{v_2-v_1}{220} = 0.00764\,\mathrm{mA}\\
+        I_{10\mathrm{V}} &= \frac{v_1}{10} = 0.7987\,\mathrm{mA}
+      .\end{align}
+    \end{sol}
+
+\end{enumerate}
+
+\end{document}

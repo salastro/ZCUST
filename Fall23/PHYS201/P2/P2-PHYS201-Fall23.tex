@@ -1,0 +1,72 @@
+\documentclass{zc-ust-hw}
+
+\usepackage{lipsum}
+\usepackage[]{enumitem} 
+\usepackage[]{caption} 
+\usepackage{subcaption}
+
+\newcommand*{\name}{Mohammed Ali, Mohammed Khaled, SalahDin Rezk}
+\newcommand*{\id}{202200594, 202200096, 202201079 }
+\newcommand*{\course}{Thermodynamics, Wave Motion and Optics (PHYS201)}
+\newcommand*{\assignment}{Participation 2}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+  \item Find the output intensity of an optical system of a polarizer followed
+    by two analyzers with  transmission axes at $45^\circ$ to the next one,
+    interns of the initial intensity in case the incident light is:
+    \begin{enumerate}
+      \item Unpolarized
+        \begin{align}
+          I_1 &= \frac{1}{2} I_0 \\
+          I_2 &= I_1 \cos^2(45^\circ) = \frac{1}{4} I_0 \\
+          I_3 &= I_2 \cos^2(45^\circ) = \frac{1}{8} I_0
+        .\end{align}
+      \item Right Circularly Polarized
+        \begin{align}
+          I_1 &= \frac{1}{2} I_0 \\
+          I_2 &= I_1 \cos^2(45^\circ) = \frac{1}{4} I_0 \\
+          I_3 &= I_2 \cos^2(45^\circ) = \frac{1}{8} I_0
+        .\end{align}
+      \item Linearly Polarized at 30 degree with the first polarizer
+        \begin{align}
+          I_1 &= I_0 \cos^2(30^\circ) = \frac{3}{4} I_0 \\
+          I_2 &= I_1 \cos^2(45^\circ) = \frac{3}{8} I_0 \\
+          I_3 &= I_2 \cos^2(45^\circ) = \frac{3}{16} I_0
+        .\end{align}
+    \end{enumerate}
+
+  \item Find the output intensity of a system of a polarizer followed by 99
+    analyzers each of which with transmission axes making angles $1^\circ$ to the
+    previous one, interns of the initial intensity in case the incident light
+    is:
+    \begin{enumerate}
+      \item Unpolarized
+        \begin{align}
+          I_1 &= \frac{1}{2} I_0 \\
+          I_{99} &= I_1 \left( \cos^2(1^\circ) \right)^{99} \\
+                 &= \frac{\cos^{198}(1^\circ)}{2} I_0 \\
+                 &\approx 0.4851 I_0
+        .\end{align}
+      \item Linearly Polarized at 30 degree with the first polarizer
+        \begin{align}
+          I_1 &= I_0 \cos^2(30^\circ) = \frac{3}{4} I_0 \\
+          I_{99} &= I_1 \left( \cos^2(1^\circ) \right)^{99} \\
+                 &= \frac{3 \cos^{198}(1^\circ)}{4} I_0 \\
+                 &\approx 0.7277 I_0
+        .\end{align}
+      \item In part (a), find the relative change in intensity in case of 1
+        polarizer and in case 1 polarizer followed by 99 analysers.
+        \begin{align}
+          \Delta I &= \left| \frac{I_1-I_{99}}{I_0} \right| \\
+                   &= \left| \frac{0.5I_0-0.4851I_0}{I_0} \right| \\
+                   &\approx 0.0149
+        .\end{align}
+    \end{enumerate}
+
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,360 @@
+
+%% solutions.sty
+%% Copyright 2018 Jérôme Lelong <jerome.lelong@gmail.com>
+%
+% This file may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in:
+%
+%    http://www.latex-project.org/lppl.txt
+%
+% and version 1.3 or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% This work consists of the file solutions.sty
+
+
+% This package is devoted to writing exercises along with their
+% solutions in a single source file.
+%
+% Simply add
+%    \usepackage{solutions}
+% This package accepts three options:
+%   - 'nosol' means that the solutions are not included in the output.
+%   - 'separate' indicate that the solutions should be printed right before
+%   \end{document}.
+%   - 'after' prints the solution of an exercise right after its text. This
+%   produces a mixed document where exercise texts and their solutions
+%   alternate.
+%
+% Without any options the solution to a question is put right behind the
+% question text and ends with a black triangle at the end of the line. When
+% the solution to a question ends with a dispalyed equation, we may need to
+% add \endhere at the end of the equation to make sure the black triangle
+% is not displayed on a separate line.
+%
+% Here is a typical usage
+%
+% \begin{exercise}[optional title]
+% Some introductive text.
+% \begin{questions}
+%   \item Question 1.
+%     \solution{Solution to the previous question.}
+%   \item Question 2.
+%     \solution{Solution to the previous question.}
+% \end{questions}
+% Add some extra gobal information if any
+% \begin{questions}[resume]
+% %% include the enumitem package to use the resume option
+%   \item Question 3.
+%     \solution{Solution to the previous question.}
+%   \item Question 4.
+%     \solution{Solution to the previous question.}
+% \end{questions}
+% \end{exercise}
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{solutions}[2021/11/14 package solutions by Jerome Lelong, v1.4]
+\RequirePackage{enumitem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Options
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newif\ifsolutions@nosol
+\newif\ifsolutions@separate
+\newif\ifsolutions@after
+\newif\ifsolutions@inline
+
+\solutions@nosolfalse
+\solutions@separatefalse
+\solutions@afterfalse
+\solutions@inlinefalse
+
+\def\solutions@opterr{%
+  \PackageError{solutions}{Options 'nosol', 'inline', 'separate', 'after' are mutually exclusive.}{}%
+}
+
+% Do not print any solution
+\DeclareOption{nosol}{%
+  \ifsolutions@separate\solutions@opterr\fi
+  \ifsolutions@after\solutions@opterr\fi
+  \ifsolutions@inline\solutions@opterr\fi
+  \solutions@nosoltrue%
+}
+
+% Print each solution after its associated question
+\DeclareOption{inline}{%
+  \ifsolutions@separate\solutions@opterr\fi
+  \ifsolutions@after\solutions@opterr\fi
+  \ifsolutions@nosol\solutions@opterr\fi
+  \solutions@inlinetrue%
+}
+
+% Print the solutions at the end of the document
+\DeclareOption{separate}{%
+  \ifsolutions@nosol\solutions@opterr\fi
+  \ifsolutions@after\solutions@opterr\fi
+  \ifsolutions@inline\solutions@opterr\fi
+  \solutions@separatetrue
+}
+
+% Print the solutions of an exercise right after the exercise
+\DeclareOption{after}{%
+  \ifsolutions@separate\solutions@opterr\fi
+  \ifsolutions@nosol\solutions@opterr\fi
+  \ifsolutions@inline\solutions@opterr\fi
+  \solutions@aftertrue
+}
+
+\DeclareOption*{%
+  \PackageWarning{solutions}{Unknown option `\CurrentOption'}%
+}
+
+\ProcessOptions*
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Configuration
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\solutionsanswerinlinename}{{\bf Solution.}\space}
+\newcommand{\solutionsanswerinlinefont}{\small \itshape}
+\newcommand{\solutionsanswerinlineendsymbol}{$\blacktriangle$}
+\newcommand{\solutionsatenddocumenttitle}{\noindent {\bf Solutions}}
+\newcommand{\solutionsanswerenvname}{Corrig\'e de l'exercice}
+\newcommand{\solutionsanswerfont}{\small}
+
+\newcommand{\solutionsexercisename}{Exercice}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Environnements
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\RequirePackage{amsthm}
+\RequirePackage{amsmath}
+\RequirePackage{trace}
+
+\theoremstyle{definition}
+\newtheorem{exercise}{\solutionsexercisename}
+
+\let\@exoOrig=\exercise
+\let\@endexoOrig=\endexercise
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Solutions in the text
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newif\ifQedDone
+\def\trueendhere{%
+  \leavevmode\tag*{\solutionsanswerinlineendsymbol}%
+  \global\QedDonetrue
+}
+\long\def\truesolution#1{
+  \QedDonefalse
+  \par\vskip10pt\noindent\solutionsanswerinlinename{\solutionsanswerinlinefont#1}%
+  \ifQedDone
+  \else
+    \ignorespaces\unskip\penalty9999%
+    \hbox{}\nobreak\hfill\hbox{\solutionsanswerinlineendsymbol}
+  \fi
+  \par\vskip10pt
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Separate solutions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\gdef\solutions{}
+\def\fakeendhere{}
+\newif\ifStartQuestions
+\newif\ifEndQuestions
+\newif\ifStartSubQuestions
+\newif\ifEndSubQuestions
+\newif\ifStartQuestionsOrSubQuestions
+\newif\ifEndQuestionsOrSubQuestions
+\StartQuestionsfalse
+\EndQuestionsfalse
+\StartSubQuestionsfalse
+\EndSubQuestionsfalse
+
+\def\updateStartIf{\ifStartQuestions%
+    \StartQuestionsOrSubQuestionstrue
+  \else\ifStartSubQuestions
+      \StartQuestionsOrSubQuestionstrue
+    \else\StartQuestionsOrSubQuestionsfalse
+  \fi
+\fi}
+\def\updateEndIf{\ifEndQuestions%
+    \EndQuestionsOrSubQuestionstrue
+  \else\ifEndSubQuestions
+      \EndQuestionsOrSubQuestionstrue
+    \else\EndQuestionsOrSubQuestionsfalse
+  \fi
+\fi}
+
+\newenvironment{@exoSeparateSol}[1][]{%
+  \StartQuestionsfalse
+  \EndQuestionsfalse
+  \StartSubQuestionsfalse
+  \EndSubQuestionsfalse
+  \@exoOrig[#1]%
+  \g@addto@macro\solutions{%
+    \vskip\baselineskip
+    {\bf \noexpand\noindent \solutionsanswerenvname}}
+  % Make sure \theexercise is expanded rightaway
+  \edef\currentexo{{\space\noexpand\bf\theexercise.\space\noexpand}}
+  \expandafter\g@addto@macro\expandafter\solutions\expandafter{\currentexo}
+}
+{\@endexoOrig}
+
+\newenvironment{@exoAfterSol}[1][]{%
+  \@exoOrig[#1]
+  \StartQuestionsfalse
+  \EndQuestionsfalse
+  \StartSubQuestionsfalse
+  \EndSubQuestionsfalse
+  \gdef\solutions{}
+  \g@addto@macro\solutions{%
+    \vskip\baselineskip
+    {\bf \noindent \solutionsanswerenvname\space\theexercise.\space}}
+}
+{%
+  \@endexoOrig
+  \solutions
+}
+
+\gdef\@enumerateOption{}
+\gdef\@subenumerateOption{}
+\newenvironment{questions}[1][\@empty]
+{%
+  \ifx#1\@empty
+    \enumerate 
+    \xdef\@enumerateOption{\@empty}
+  \else
+    \enumerate[#1]
+    % We use an extract macro to make sure, we do not expand the macros inside #1
+    \def\currentEnumOption{#1}
+    \expandafter\gdef\expandafter\@enumerateOption\expandafter{\currentEnumOption}
+  \fi
+  \StartQuestionstrue
+}{%
+  \ifEndQuestions
+    \g@addto@macro\solutions{\end{enumerate}}
+  \fi
+  \EndQuestionsfalse
+  \StartQuestionsfalse%
+  \endenumerate%
+}
+
+\newenvironment{subquestions}[1][\@empty]
+{%
+  \ifx#1\@empty
+    \enumerate 
+    \xdef\@subenumerateOption{\@empty}
+  \else
+    \enumerate[#1]
+    % We use an extract macro to make sure, we do not expand the macros inside #1
+    \def\currentEnumOption{#1}
+    \expandafter\gdef\expandafter\@subenumerateOption\expandafter{\currentEnumOption}
+  \fi
+  \StartSubQuestionstrue
+}{%
+  \ifEndSubQuestions
+    \g@addto@macro\solutions{\end{enumerate}}
+  \fi
+  \EndSubQuestionsfalse
+  \StartSubQuestionsfalse%
+  \endenumerate%
+}
+
+
+\long\def\@separatesolution#1{%
+  % \begin{questions}
+  %    \item 
+  %    \solution
+  %    \item \begin{subquestions}
+  %      \item 
+  %      \solution 
+  % addto@macro: item, enumerate, item
+  \ifStartQuestions\else
+    \ifStartSubQuestions%
+        \g@addto@macro\solutions{\item }%
+    \fi
+  \fi
+  % \begin{questions}
+  %    \item \begin{subquestions}
+  %      \item 
+  %      \solution 
+  % addto@macro: enumerate, item, enumerate, item
+  \ifStartQuestions%
+    \g@addto@macro\solutions{\begin{enumerate}}%
+    \expandafter\g@addto@macro\expandafter\solutions\expandafter{\expandafter[\@enumerateOption]}%
+    % Make sure to switch \ifStartQuestions globally
+    \expandafter\global\StartQuestionsfalse
+    \ifStartSubQuestions%
+      \g@addto@macro\solutions{\item }%
+      \g@addto@macro\solutions{\begin{enumerate}}%
+      \expandafter\g@addto@macro\expandafter\solutions\expandafter{\expandafter[\@subenumerateOption]}%
+      \StartSubQuestionsfalse
+      \EndSubQuestionstrue%
+    \fi
+    % Make sure to switch \ifEndQuestions globally
+    \expandafter\global\EndQuestionstrue%
+  \else
+    \ifStartSubQuestions%
+      \g@addto@macro\solutions{\begin{enumerate}}%
+      \expandafter\g@addto@macro\expandafter\solutions\expandafter{\expandafter[\@subenumerateOption]}%
+      \EndSubQuestionstrue%
+      \StartSubQuestionsfalse
+    \fi
+  \fi
+  \updateStartIf
+  \ifStartQuestionsOrSubQuestions
+    % Make sure to pass enumerate options to the solutions
+    % \ifx\@enumerateOption\@empty \else%
+      % \expandafter\g@addto@macro\expandafter\solutions\expandafter{\expandafter[\@enumerateOption]}%
+    % \fi%
+  \fi
+
+  \updateEndIf
+  \ifEndQuestionsOrSubQuestions
+    \g@addto@macro\solutions{\item {\solutionsanswerfont #1}}%
+  \else%
+    \g@addto@macro\solutions{{\solutionsanswerfont #1}}%
+  \fi%
+  \ignorespaces%
+}
+
+\ifsolutions@nosol%
+  \long\def\@Solution#1{}
+\else%
+  \ifsolutions@separate
+    \def\endhere{\fakeendhere}
+    \let\@Solution\@separatesolution
+    \let\exercise\@exoSeparateSol
+    \let\endexercise\end@exoSeparateSol
+    \AtEndDocument{%
+      \solutionsatenddocumenttitle
+      \solutions
+    }
+  \else
+    \ifsolutions@after
+      \def\endhere{\fakeendhere}
+      \let\@Solution\@separatesolution
+      \let\exercise\@exoAfterSol
+      \let\endexercise\end@exoAfterSol
+    \else%
+      \def\endhere{\trueendhere}
+      \long\def\@Solution#1{\truesolution{#1}}
+    \fi%
+  \fi%
+\fi%
+\let\solution\@Solution
+
+% Compatibility definitions
+\let\exo=\exercise
+\let\endexo=\endexercise
+
+\endinput
+
+%% End of file `solutions.sty'.

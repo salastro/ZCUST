@@ -1,0 +1,139 @@
+\documentclass{zc-ust-hw}
+
+\usepackage{lipsum}
+
+\name{SalahDin Ahmed Salh Rezk}
+\id{202201079}
+\course{Electric Circuits (ENGR 210)}
+\assignment{Assignment 3}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+
+  %%%%%%%%%%%%%%%%%%%%
+  \item Use the node-voltage method to find the total power dissipated in the circuit 
+    Figure~\ref{fig:1}.
+    \begin{figure}[htpb]
+    \begin{center}
+    \begin{circuitikz}[american]
+      % Volt sources
+      \draw (0,0) to [V, l=40V] (0,3);
+      % Resistors
+      \draw (0,3) to [R, l=12$\Omega$] (3,3);
+      \draw (3,3) to [R, l=25$\Omega$] (3,0);
+      \draw (3,3) to [R, l=20$\Omega$, *-*] (6,3);
+      \draw (6,3) to [R, l=40$\Omega$] (6,0);
+      \draw(3,0) to [R, l=40$\Omega$, *-*] (6,0);
+      % Lines
+      \draw (0,0) -- (3,0);
+      \draw (6,0) -- (9,0);
+      \draw (6,3) -- (9,3);
+      \draw (3,3) -- (3,5);
+      \draw (6,3) -- (6,5);
+      % Current sources
+      \draw (9,0) to [I, l=7.5A] (9,3);
+      \draw (3,5) to [I, l=5A] (6,5);
+      % Nodes
+      \node at (3,3) [above right] {$v_1$};
+      \node at (6,3) [above left] {$v_2$};
+      \node at (6,0) [below left] {$v_3$};
+      % Ground
+      \draw (0,0) node[ground]{};
+    \end{circuitikz}
+    \end{center}
+    \caption{}%
+    \label{fig:1}
+    \end{figure}
+  %%%%%%%%%%%%%%%%%%%%
+
+    \begin{gather}
+      v_1 : \frac{v_1 + 40}{12} + \frac{v_1}{25} + \frac{v_1-v_2}{20} + 5 = 0 \\
+      v_2 : \frac{v_2-v_1}{20} + \frac{v_2-v_3}{40} - 5 = 0 \\
+      v_3 : \frac{v_3}{40} + \frac{v_3-v_2}{40} + 7.5 = 0
+    .\end{gather}
+    \begin{align}
+          52v_1-15v_2    &= -2500 \\
+          -2v_1+3v_2-v_3 &= 500 \\
+          2v_3-v_2       &= -300
+    \end{align}
+    \begin{align}
+      v_1 &= -10 V \\
+      v_2 &= 132 V \\
+      v_3 &= -84 V
+    \end{align}
+    \begin{align}
+      P_d(40V)  &= -\frac{v_1+40}{12} \cdot 40V = -100W  \\
+      P_d(5A)   &= -5A \cdot (v_2-v_1) = -710W \\
+      P_d(7.5A) &= -7.5A \cdot (v_2-v_3) = -1620W
+    .\end{align}
+    \begin{align}
+      P_d(R) &= \frac{v^2}{R} \\
+      P_d(12\Omega) &= \frac{(-40-v_1)^2}{12} = 75 W \\
+      P_d(25\Omega) &= \frac{(-10)^2}{25} = 4 W \\
+      P_d(20\Omega) &= \frac{(v_1-v_2)^2}{20} = 1008.2 W \\
+      P_d(40\Omega)_1 &= \frac{(v_2-v_3)^2}{40} = 1166.4 W \\
+      P_d(40\Omega)_2 &= \frac{v_3^2}{40} = 176.4 W
+    .\end{align}
+    \begin{align}
+      \Sigma P_d &= 0 \\
+      \Sigma P_d(R) &= 2430 W
+    .\end{align}
+
+  %%%%%%%%%%%%%%%%%%%%
+  \item Use the mesh-current method to find the total power dissipated in the circuit
+    Figure~\ref{fig:2}.
+    \begin{figure}[htpb]
+    \begin{center}
+    \begin{circuitikz}[american]
+      \draw (0,0) to [V, l=5V] (0,3)
+      to [R, l=38$\Omega$, *-*] (3,3)
+      to [R, l=6$\Omega$, *-*] (6,3)
+      to [V, l=67V] (6,0)
+      to [R, l=40$\Omega$] (3,0)
+      to [R, l=12$\Omega$] (0,0)
+      ;
+      \draw (3,3) to [R, l=30$\Omega$, *-*] (3,0);
+      \draw (0,3) -- (0,5) to [I, l=5A] (6,5) -- (6,3);
+      % Loop currents
+      \draw[->]   (1.25,2) arc(110:-110:5mm) node[midway, left, font=\footnotesize] {$I_1\ $};
+      \draw[->]   (4.25,2) arc(110:-110:5mm) node[midway, left, font=\footnotesize] {$I_2\ $};
+      \draw[->]   (2.75,4.3) arc(110:-110:5mm) node[midway, left, font=\footnotesize] {$I_3\ $};
+    \end{circuitikz}
+    \end{center}
+    \caption{}%
+    \label{fig:2}
+    \end{figure}
+
+    \begin{gather}
+      I_1 : 38(I_1-I_3) + 30(I_1-I_2) + 12I_1 = -5 \\
+      I_2 : 30(I_2-I_1) + 6(I_2-I_3) + 40I_2 = -67 \\
+      I_3 : I_3 = 5
+    .\end{gather}
+    \begin{align}
+      I_1 &= 2.5 A\\
+      I_2 &= 0.5 A
+    .\end{align}
+    \begin{align}
+      P_d(5A) &= -I_3 \cdot (67-5) = -310 W \\
+      P_d(5V) &= -5 \cdot I_1 = -12.5 W \\
+      P_d(67V) &= -67 \cdot I_2 = -33.5 W \\
+    .\end{align}
+    \begin{align}
+      P_d(38\Omega) &= 38 \cdot (I_1-I_3)^2 = 237.5 W \\
+      P_d(30\Omega) &= 30 \cdot (I_1-I_2)^2 = 120 W \\
+      P_d(12\Omega) &= 12 \cdot I_1^2 = 75 W \\
+      P_d(6\Omega) &= 6 \cdot (I_2-I_3)^2 = 121.5 W \\
+      P_d(40\Omega) &= 40 \cdot I_2^2 = 10 W
+    .\end{align}
+    \begin{align}
+      \Sigma P_d = 208 W
+    .\end{align}
+    
+  %%%%%%%%%%%%%%%%%%%%
+
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,67 @@
+\documentclass[aspectratio=169, 10pt]{beamer}
+\usetheme{metropolis}
+
+\title{ReflectoRay}
+\subtitle{Ray Reflection Simulation in Python}
+\author{
+Ahmed Mohammed Abdullah -- 202201293 \\
+Salah Mahmoud Gamal -- 202201517 \\
+SalahDin Ahmed Salh Rezk -- 202201079 \\
+}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+\begin{frame}{Overview}
+  \begin{itemize}
+    \item The Python script simulates the reflection of rays off mirrors.
+    \item Utilizes Turtle graphics for visualization.
+    \item Options to save the simulation as an image or record it as a video.
+  \end{itemize}
+\end{frame}
+
+\section{Script Components}
+\begin{frame}{Script Components}
+  \begin{itemize}
+    \item \texttt{parse\_arguments}: Command line argument parsing.
+    \item \texttt{load\_initial\_conditions}: Loading initial conditions from a JSON file.
+    \item \texttt{setup\_screen}: Setting up the Turtle screen for simulation.
+    \item \texttt{draw\_mirrors}: Drawing mirrors on the Turtle screen.
+    \item \texttt{create\_ray}: Creating a Turtle object representing a ray.
+    \item \texttt{simulate\_rays}: Simulating the reflection of rays off mirrors.
+  \end{itemize}
+\end{frame}
+
+\section{Simulation Process}
+\begin{frame}{Simulation Process}
+  \begin{itemize}
+    \item Mirrors, sources, and angles are initialized.
+    \item Turtle graphics used for visualization.
+    \item Rays are simulated, and reflections are calculated.
+    \item Options to save images or record videos.
+  \end{itemize}
+\end{frame}
+
+\section{Run Simulation}
+\begin{frame}{Running the Simulation}
+  \begin{itemize}
+    \item Execute the script from the command line.
+    \item Specify optional arguments: \texttt{-i} (image) and \texttt{-v} (video).
+    \item Initial conditions loaded from \texttt{initial\_conditions.json}.
+  \end{itemize}
+\end{frame}
+
+\section{Conclusion}
+\begin{frame}{Conclusion}
+  \begin{itemize}
+    \item Turtle graphics provides a simple way to visualize ray reflection.
+    \item Options for saving images and videos enhance the utility of the script.
+    \item Further customization and improvements can be made based on specific requirements.
+  \end{itemize}
+\end{frame}
+
+\end{document}
+

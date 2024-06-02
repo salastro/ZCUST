@@ -1,0 +1,243 @@
+\documentclass{zc-ust-hw}
+
+\usepackage{lipsum}
+\usepackage{circuitikz}
+\usepackage{caption}
+\usepackage{tabularx}
+\usepackage{pgfplots}
+
+\newcommand*{\name}{SalahDin Rezk}
+\newcommand*{\id}{202201079}
+\newcommand*{\course}{Electric Circuits (ENGR 210)}
+\newcommand*{\assignment}{Assignment 1}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+
+  %%%%%%%%%%%%%%%%%%%%
+  \item The numerical values of the voltages and currents in the
+    interconnection seen in Fig. 1. Does the interconnection satisfy the power
+    check?
+    %%%%%%%%%%%%%%%%%%%%
+
+    \begin{figure}[h]
+      \centering
+      \raisebox{-0.5\height}{
+        \begin{circuitikz}[american, raised voltages]
+          \draw (0,0) to [twoport, t=a, v^=$v_{a}$, f_=$i_a$] ++ (0,6);
+          \draw (0,6) to (3,6);
+          \draw (3,6) to [twoport, t=b, v_=$v_{b}$, f<=$i_a$] (3,3);
+          \draw (3,3) to [twoport, t=c, v_=$v_{c}$, f=$i_c$] (3,0);
+          \draw (3,0) to (0,0);
+          \draw (3,6) to [twoport, t=d, v^<=$v_{d}$, f_<=$i_d$] (8,6);
+          \draw (8,6) to [twoport, t=g, v^=$v_{g}$, f_<=$i_g$] (8,3);
+          \draw (8,3) to [twoport, t=e, v_<=$v_{e}$, f^>=$i_e$] (3,3);
+          \draw (8,3) to [twoport, t=h, v^<=$v_{h}$, f_<=$i_h$] (8,0);
+          \draw (8,0) to [twoport, t=f, v^<=$v_{f}$, f_<=$i_f$] (3,0);
+        \end{circuitikz}
+      }
+      \begin{tabularx}{\linewidth/3}{X X X}
+        Element & Voltage & Current \\
+        a & 990 & -22.5 \\
+        b & 600 & -30 \\
+        c & 300 & 60 \\
+        d & 105 & 52.5 \\
+        e & -120 & 30 \\
+        f & 165 & 82.5 \\
+        g & 585 & 52.5 \\
+        h & -585 & 82.5 \\
+      \end{tabularx}
+      \caption{}
+    \end{figure}
+
+    \begin{align}
+      P_{a} &= v_{a}i_{a} &&= 990 \times -22.5 &= -22275 \text{ W} \\
+      P_{b} &= v_{b}i_{b} &&= 600 \times -30   &= -18000 \text{ W} \\
+      P_{c} &= v_{c}i_{c} &&= 300 \times 60    &= 18000 \text{ W} \\
+      P_{d} &= v_{d}i_{d} &&= 105 \times 52.5  &= 5512.5 \text{ W} \\
+      P_{e} &= v_{e}i_{e} &&= -120 \times 30   &= -3600 \text{ W} \\
+      P_{f} &= v_{f}i_{f} &&= 165 \times 82.5  &= 13612.5 \text{ W} \\
+      P_{g} &= v_{g}i_{g} &&= 585 \times 52.5  &= 30712.5 \text{ W} \\
+      P_{h} &= v_{h}i_{h} &&= -585 \times 82.5 &= -48262.5 \text{ W} \\
+    .\end{align}
+    \begin{align}
+      P_{\text{total}} &= P_{a} + P_{b} + P_{c} + P_{d} + P_{e} + P_{f} + P_{g} + P_{h} \\
+                       &= -22275 - 18000 + 18000 + 5512.5 - 3600 + 13612.5 + 30712.5 - 48262.5 \\
+                       &= -24300
+    .\end{align}
+
+    \begin{center}
+      \boxed{\text{The interconnection does not satisfy the power check.}}
+    \end{center}
+
+    \newpage
+
+  \item The voltage and current at the terminals of the circuit element in Fig.
+    2 are zero for $t < 0$. For $t \ge 0$ they are:
+    \begin{align*}
+      v &= 50e^{-1600t}-50e^{-400t} \text{ V} \\
+      i &= 5e^{-1600t}-5e^{-400t} \text{ mA}
+    \end{align*}
+    \begin{enumerate}
+      \item Find the power at $t=625 \,\mu\text{s}$.
+        \begin{align}
+          P(t) = v(t)i(t) =& (50e^{-1600t}-50e^{-400t})(5e^{-1600t}-5e^{-400t}) \times 10^{-3} \\
+          P(625\times 10^{-6}) =&
+                                \left( 
+                                50e^{-1600(625\times 10^{-6})}-50e^{-400(625\times 10^{-6})}
+                              \right)  \\
+                                &\left( 
+            5e^{-1600(625\times 10^{-6})}-5e^{-400(625\times 10^{-6})}
+          \right) 
+          \times 10^{-3} \\
+                                &= 0.0420{ W}
+        .\end{align}
+        
+      \item How much energy is delivered to the circuit element at $t=625\, \mu\text{s}$?
+        \begin{align}
+          E(t)&=\int_{0}^{t} P(x) \, dx \\
+              &= \int_{0}^{625\times 10^{-6}} \left( 
+                (50e^{-1600x}-50e^{-400x})(5e^{-1600x}-5e^{-400x}) \times 10^{-3}
+              \right) \, dx \\
+              &= 1.22 \times 10^{-5} \text{ J}
+        .\end{align}
+      \item Find the total energy delivered to the element.
+        \begin{align}
+          E_{\text{total}} &= \lim_{t\to\infty} E(t) \\
+                           &= \lim_{t\to\infty} \int_{0}^{t} P(x) \, dx \\
+                           &= \frac{9}{6400} \approx 1.41\times 10^{-4} \text{ J}
+        .\end{align}
+    \end{enumerate}
+
+  \item An industrial battery is charged over a period of several hours at a
+    constant voltage of 120 V. Initially, the current is 10 mA and increases
+    linearly to 15 mA in 10 ks. From 10 ks to 20 ks, the current is constant at
+    15 mA. From 20 ks to 30 ks the current decreases linearly to 10 mA. At 30
+    ks the power is disconnected from the battery. 
+
+    \begin{enumerate}
+      \item Sketch the voltage, current and power from $t=0$ to $t=30$ ks.
+
+        \begin{figure}[h]
+          \centering
+          \begin{tikzpicture}
+            \begin{axis}[
+              axis lines = left,
+              xlabel = {$t$ ks},
+              ylabel = {$i(t)$ mA},
+              xmin = 0,
+              xmax = 30,
+              ymin = 0,
+              ymax = 20,
+              xtick = {0,10,20,30},
+              xticklabels = {0,10,20,30},
+              ytick = {0,5,10,15},
+              yticklabels = {0,5, 10,15},
+              ]
+              \addplot [
+                domain=0:10,
+                samples=2,
+                color=red,
+                ]
+                {0.5*x+10};
+              \addplot [
+                domain=10:20,
+                samples=2,
+                color=red,
+                ]
+                {15};
+              \addplot [
+                domain=20:30,
+                samples=2,
+                color=red,
+                ]
+                {-0.5*x+25};
+            \end{axis}
+          \end{tikzpicture}
+          \caption{}
+        \end{figure}
+        
+        \begin{figure}[h]
+          \centering
+          \begin{tikzpicture}
+            \begin{axis}[
+              axis lines = left,
+              xlabel = {$t$ ks},
+              ylabel = {$v(t)$},
+              xmin = 0,
+              xmax = 30,
+              ymin = 0,
+              ymax = 240,
+              xtick = {0,10,20,30},
+              xticklabels = {0,10,20,30},
+              ytick = {0, 120},
+              yticklabels = {0, 120},
+              ]
+              \addplot [
+                domain=0:30,
+                samples=2,
+                color=blue,
+                ]
+                {120};
+            \end{axis}
+          \end{tikzpicture}
+          \caption{}
+        \end{figure}
+
+        \begin{figure}[h]
+          \centering
+          \begin{tikzpicture}
+            \begin{axis}[
+              axis lines = left,
+              xlabel = {$t$ ks},
+              ylabel = {$P(t)$},
+              xmin = 0,
+              xmax = 30,
+              ymin = 0,
+              ymax = 2400,
+              xtick = {0,10,20,30},
+              xticklabels = {0,10,20,30},
+              ytick = {0,600,1200,1800},
+              yticklabels = {0,600,1200,1800},
+              ]
+              \addplot [
+                domain=0:10,
+                samples=2,
+                color=black,
+                ]
+                {60*x+1200};
+              \addplot [
+                domain=10:20,
+                samples=2,
+                color=black,
+                ]
+                {1800};
+              \addplot [
+                domain=20:30,
+                samples=2,
+                color=black,
+                ]
+                {-60*x+3000};
+            \end{axis}
+          \end{tikzpicture}
+          \caption{}
+        \end{figure}
+
+      \item Using the sketch of the power, find the total energy delivered to the battery.
+
+        \begin{align}
+          E_{\text{total}} &= \int_{0}^{30k} P(t) \, dt \\
+                           &= ( 30k\times 1200 ) \\
+                           &+ ( 10k\times 600 ) \\
+                           &+ ( 10k\times 600 \times \frac{1}{2} ) \\
+                           &+ ( 10k\times 600 \times \frac{1}{2} ) \\
+                           &= 4.8 \times 10^7 \text{ J}
+        .\end{align}
+    \end{enumerate}
+
+\end{enumerate}
+
+\end{document}

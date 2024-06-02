@@ -1,0 +1,104 @@
+\documentclass{article}
+
+% Geometry package
+\usepackage[a4paper, margin=1in]{geometry}
+
+% Other packages
+\usepackage{hyperref}
+
+% Title
+\renewcommand{\maketitle}{
+  \begin{flushleft}
+    ZC - University of Science and Technology
+    \hfill Spring 2023 \\
+    Communications \& Information Engineering Program
+    \hfill Team: \textbf{ReflectoRay} \\
+    CSCI 101: Introduction to Computer Science
+  \end{flushleft}
+  \begin{center}
+    \LARGE Project Proposal
+  \end{center}
+  \begin{flushleft}
+    Team: \textbf{ReflectoRay} \\
+    Team Members: \\
+    \textbf{
+    \begin{tabular}{ccc}
+      202201079 & SalahDin Ahmed Salh Rezk & \href{mailto:s-salahdin.rezk@zewailcity.edu.eg}{s-salahdin.rezk@zewailcity.edu.eg} \\
+      202201293 & Ahmed Muhammad Abdullah & \href{mailto:s-ahmed.abdullah@zewailcity.edu.eg}{s-ahmed.abdullah@zewailcity.edu.eg} \\
+      202201517 & Salah Mahmoud Gamal & \href{mailto:s-salah.gamal@zewailcity.edu.eg}{s-salah.gamal@zewailcity.edu.eg}
+    \end{tabular} } \\
+  Team Contact: \textbf{\href{mailto:s-salahdin.rezk@zewailcity.edu.eg}{s-salahdin.rezk@zewailcity.edu.eg}}
+  \end{flushleft}
+  }
+
+% Document
+\begin{document}
+
+% front matter
+\maketitle
+\tableofcontents
+
+% main matter
+\section{Project Overview}
+
+\subsection{Background}
+
+The Ray Reflection Simulation is a Python program that simulates the reflection of rays off mirrors. The simulation uses the Turtle graphics library to visualize the behavior of rays as they interact with mirrors, allowing users to explore principles of reflection and geometric optics.
+
+\subsection{Objectives}
+
+\begin{itemize}
+    \item Create an interactive and visual simulation of ray reflection.
+    \item Allow users to define the initial conditions of the simulation through a JSON file.
+    \item Simulate the reflection of rays off user-defined mirrors and sources.
+    \item Provide options to save the simulation as an image or record it as a video.
+\end{itemize}
+
+\section{Technical Details}
+
+\subsection{Technologies Used}
+
+\begin{itemize}
+    \item Python
+    \item Turtle graphics library
+    \item OpenCV (for video creation)
+    \item PIL (Python Imaging Library)
+    \item Rich (for progress visualization)
+    \item TemporaryDirectory (for temporary file management)
+\end{itemize}
+
+\subsection{Key Features}
+
+\begin{itemize}
+    \item \textbf{Configurability:} Users can define the initial conditions of the simulation, including mirror positions, source locations, initial angles of rays, and the number of iterations.
+    \item \textbf{Interactive Visualization:} The simulation provides an interactive visual representation of ray reflection using the Turtle graphics library.
+    \item \textbf{Image and Video Output:} Users can choose to save the simulation as a static image (PNG) or as a video (MP4). The video creation utilizes OpenCV.
+    \item \textbf{Progress Visualization:} The Rich library is employed to display a progress bar during the simulation, providing feedback on the simulation's progress.
+\end{itemize}
+
+\section{Implementation Plan}
+
+\subsection{Milestones}
+
+\begin{enumerate}
+    \item \textbf{Basic Simulation Framework:} Implement the core functionality for ray reflection simulation using Turtle graphics.
+    \item \textbf{User Configuration:} Enable users to specify initial conditions through a JSON file, including mirror positions, source locations, initial angles, and simulation parameters.
+    \item \textbf{Visualization Enhancements:} Improve the visualization by adding features such as different colors for rays, graphical representation of mirrors, and dynamic updates.
+    \item \textbf{Image Output:} Implement the functionality to save the simulation as a static image (PNG).
+    \item \textbf{Video Output:} Integrate OpenCV to record and compile the simulation frames into a video (MP4).
+    \item \textbf{User Interface (Optional):} Consider adding a simple graphical user interface (GUI) for a more user-friendly experience.
+\end{enumerate}
+
+\subsection{Testing}
+
+\begin{itemize}
+    \item Conduct unit tests for individual functions and components.
+    \item Perform integration testing to ensure seamless interaction between different modules.
+    \item Conduct user acceptance testing to verify that the simulation meets user expectations.
+\end{itemize}
+
+\section{Conclusion}
+
+The Ray Reflection Simulation project aims to provide an educational and interactive tool for understanding the principles of ray reflection. By allowing users to configure initial conditions and visualize the behavior of rays, the simulation promotes learning in the field of geometric optics. The implementation plan outlines key milestones to ensure a systematic and successful development process.
+
+\end{document}

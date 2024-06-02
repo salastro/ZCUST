@@ -1,0 +1,357 @@
+\documentclass{article}
+
+% Geometry package
+\usepackage[a4paper, margin=1in]{geometry}
+
+% Math packages
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+% Graphics packages
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.17}
+
+% Other packages
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{caption} 
+
+\usepackage{import}
+\usepackage{pdfpages}
+\usepackage{xcolor}
+
+\newcommand{\incfig}[2][1]{%
+    \def\svgwidth{#1\columnwidth}
+    \import{./figures/}{#2.pdf_tex}
+}
+
+% Title
+\title{PHYS201 -- Midterm 1 -- Solutions}
+\author{SalahDin Rezk}
+\date{\today}
+
+% Document
+\begin{document}
+
+% front matter
+\maketitle
+
+% main matter
+\begin{enumerate}
+  \item Problem 1
+    \begin{enumerate}
+      \item Write down a possible function of the time- and space-dependent
+        electric field $E(x, y, z, t)$ of a circularly polarized light wave of
+        frequency $f$ and amplitude $E_0$ traveling in the positive $z$-direction in
+        space. Indicate whether the function represents RHCP or LHCP.
+        \begin{equation}
+          k = 2\pi \frac{f}{c} \quad \omega = 2\pi f \quad E(x,t) = E_0 e^{(kx-\omega t)i}
+        .\end{equation}
+        Since the wave is travelling in the positive $z$-direction, then $E(z,t)=E_0e^{(kz-\omega t)i}$
+        \begin{align}
+          E(z,t)&=E_0e^{(kz-\omega t)i} \\
+                &= E_0 e^{(2\pi \frac{f}{c}z - 2\pi ft)i} \\
+                &= \cos \left( 2\pi \frac{f}{c}z-2\pi ft \right) + \sin \left( 2\pi \frac{f}{c}z-2\pi ft \right)i \\
+                &\implies \phi = \frac{\pi}{2}
+        .\end{align}
+        A phase difference of $\frac{\pi}{2}$ indicates RHCP.
+    \end{enumerate}
+  \item Utilizing Snell's law of refraction, demonstrate that an object
+    observed through a glass slide of specific thickness seems closer, with a
+    distance shift given by $\Delta L' = d (1-1/n)$, where d represents the glass slide
+    thickness, and n is its refractive index. The small angle approximation can
+    be applied for the analysis.
+\begin{figure}[ht]
+    \centering
+    \incfig{slap}
+    \caption{}
+    \label{fig:slap}
+\end{figure}
+    \begin{align}
+      \Delta &= d-x \\
+      x &= h\cot \theta_1 \\
+      h &= d\tan\theta_2
+    .\end{align}
+    Using small angle approximation:
+    \begin{align}
+      \sin\theta &\approx \theta \\
+      \cos\theta &\approx 1 \\
+      \tan\theta &\approx \theta
+    .\end{align}
+    For Snell's law:
+    \begin{align}
+      \sin\theta_1&=n\sin\theta_2 \\
+      \theta_1 &\approx n\theta_2
+    .\end{align}
+    Then:
+    \begin{align}
+      h   & = d\theta_2 \\
+      x   & = \frac{d\theta_2}{\theta_1} \\
+      \Delta L &= d-\frac{d\theta_2}{\theta_1} \\
+          & = d-\frac{d\theta_2}{n\theta_2} \\
+          & = d\left( 1-\frac{1}{n} \right)
+    .\end{align}
+
+  \item Problem 2
+    \begin{enumerate}
+      \item Suppose a situation in which a uniform rope is suspended from a
+        ceiling, with a mass of $m$ and a length of $L$.
+        \begin{enumerate}
+          \item Justify that the velocity of a transverse wave along the rope
+            is dependent on $y$, the distance measured from the lower end, and is
+            expressed as $v = \sqrt{gy}$.
+
+            \begin{equation}
+              v=\sqrt{\frac{T}{\mu}} \quad \mu = \frac{m}{L} \quad T=mg
+            .\end{equation}
+            Since it is a rope of a mass:
+            \begin{align}
+              \mu(y) & =\frac{m}{y}\\
+              T(y) & = \mu(y)yg \\
+            \end{align}
+            \begin{align}
+              v & = \sqrt{\frac{\mu(y)mg}{\mu(y)}}  \\
+                & = \sqrt{mg}
+            .\end{align}
+            \newpage
+          \item What is the lowest refractive index required for the plastic
+            rod to guarantee total reflection of any ray entering at the end?
+            \begin{figure}[ht]
+                \centering
+                \incfig{refind}
+                \caption{}
+                \label{fig:refind}
+            \end{figure}
+            \begin{equation}
+              \sin\theta_i = n\sin\alpha \quad \sin\theta_c = \frac{1}{n} \\
+            .\end{equation}
+            \begin{align}
+              \theta_r &> \theta_c \\
+              \cos\theta_r &< \cos\theta_c \\
+              \cos\theta_r &< \cos\sin^{-1}\frac{1}{n} \\
+              \cos\left( \frac{\pi}{2}-\alpha \right) &< \cos\sin^{-1}\frac{1}{n} \\
+              \sin\alpha &< \cos\sin^{-1}\frac{1}{n} \\
+              \sin\theta_i\cdot \frac{1}{n} &< \cos\sin^{-1}\frac{1}{n} \\
+              \sin\theta_i &< n\cos\sin^{-1}\frac{1}{n}
+            .\end{align}
+            \begin{equation}
+              \max( \sin\theta_i ) = 1 \implies 1 < n\cos\sin^{-1}\frac{1}{n}
+            \end{equation}
+            \begin{align}
+              1 &< n\cos\sin^{-1}\frac{1}{n} \\
+              \frac{1}{n} &< \cos\sin^{-1}\frac{1}{n} \\
+              \cos^{-1}\frac{1}{n} &< \sin^{-1}\frac{1}{n}
+            .\end{align}
+            \begin{equation}
+              \cos ^{-1}x < \sin ^{-1}x \implies \theta=\frac{\pi}{4} \implies x<\frac{1}{\sqrt{2}}
+            .\end{equation}
+            \begin{align}
+              \frac{1}{n} &< \frac{1}{\sqrt{2}} \\
+              n &> \sqrt{2}
+            .\end{align}
+        \end{enumerate}
+
+    \end{enumerate}
+
+    \newpage
+
+  \item Problem 3
+    \begin{enumerate}
+      \item The rubber band variety employed within certain baseballs
+        adheres to Hooke's law across a broad elongation range. A section
+        of this material possesses an unstretched length $L$ and a mass $m$.
+        Upon applying a force $F$, the band extends an additional length $\Delta L$.
+        \begin{enumerate}
+          \item Find the speed of transverse waves on this stretched rubber
+            band in terms of $m$, $\Delta L$, and the spring constant $k$.
+
+            \begin{equation}
+              v=\sqrt{\frac{T}{\mu}} \quad T=k\Delta L \quad \mu=\frac{m}{L}
+            \end{equation}
+            Since the rope is stretched:
+            \begin{equation}
+              \mu=\frac{m}{L+\Delta L}
+            \end{equation}
+            Then:
+            \begin{align}
+              v & = \sqrt{\frac{k\Delta L}{m/(L+\Delta L}} \\
+                & = \sqrt{\frac{k}{m}\Delta L(L+\Delta L)}
+            .\end{align}
+          \item Utilizing the result from part (a), illustrate that the
+            time required for a transverse pulse to travel the length of
+            the rubber band is proportionate to $L/\sqrt{\Delta L}$ when $\Delta L \ll L$ and
+            remains constant when $\Delta L \gg L$.
+            \begin{align}
+              v & = \frac{d}{t} \\
+                & = \frac{L+\Delta L}{t}
+            .\end{align}
+            \begin{align}
+              t &= \frac{L+\Delta L}{\sqrt{\frac{k}{m}\Delta L(L+\Delta L)} } \\
+                &= \sqrt{\frac{k(L+\Delta L)}{m\Delta L}}  \\
+                &= \sqrt{\frac{k}{m}\left(\frac{L}{\Delta L}+1\right)} 
+            .\end{align}
+            \begin{align}
+              \Delta L \gg L \iff v&=\sqrt{\frac{k}{m}\left( \frac{0}{\Delta L}+1 \right) } \\
+              &= \sqrt{\frac{k}{m}} \quad \text{(constant)} \\
+              \Delta L \ll L \iff v&=\sqrt{\frac{k}{m}\left( \frac{L}{\Delta L}\right) } \\
+                                   &\implies t \propto \frac{1}{\sqrt{\Delta L}}
+            .\end{align}
+        \end{enumerate}
+
+        \newpage
+
+      \item An increase in the index of refraction of glass can be achieved
+        through impurity diffusion, allowing for the creation of a lens with
+        consistent thickness. Given a disk of radius $a$ and thickness $d$,
+        determine the radial variation of the index of refraction, $n(r)$, needed
+        to produce a lens with a focal length $F$. Assume a thin lens ($d \ll a$).
+
+        \begin{figure}[ht]
+          \centering
+          \incfig{lens}
+          \caption{}
+          \label{fig:lens}
+        \end{figure}
+        Since an image forms at $F$, then time taken for any light ray to reach $F$
+        is the same. Let $t(r)$ be the time taken for a light ray to reach $F$ from
+        a distance $r$ from the center of the lens, $t_n$ is time taken in the lens,
+        and $t_a$ is time taken in air.
+        \begin{equation}
+          t=\frac{c}{d\cdot n}
+        \end{equation}
+        \begin{align}
+          \Sigma t(r) &= \Sigma t(0) \\
+          t_n(r) + t_a(r) &= t_n(0) + t_{a}(0) \\
+          \frac{c}{d\cdot n(r)}+\frac{c}{\sqrt{F^2+r^2} }&= \frac{c}{d\cdot n(0)}+\frac{c}{F} \\
+          \frac{1}{d\cdot n(r)}+\frac{1}{\sqrt{F^2+r^2} }&= \frac{1}{d\cdot n(0)}+\frac{1}{F}
+        \end{align}
+        \begin{align}
+          \frac{1}{d\cdot n(r)}&= \frac{1}{d\cdot n(0)}+\frac{1}{F}-\frac{1}{\sqrt{F^2+r^2} } \\
+          \frac{1}{n(r)}&= \frac{1}{n(0)}+d\left( \frac{1}{F}-\frac{1}{\sqrt{F^2+r^2} } \right)
+        .\end{align}
+        Under the assumption that $n(0)=1$:
+        \begin{align}
+          \frac{1}{n(r)} &= 1+d\left( \frac{1}{F}-\frac{1}{\sqrt{F^2+r^2} } \right)\\
+          n(r) &= \frac{1}{1+d\left[F^{-1}-( F^2+r^2 )^{-1/2} \right] }
+        \end{align}
+    \end{enumerate}
+
+    \newpage
+
+  \item Problem 4
+    \begin{enumerate}
+      \item Suppose you designed a setup involving two point sources, $S_1$ and
+        $S_2$, emitting sound waves with a wavelength $\lambda$ of 2.0 m. The emissions
+        are isotropic and synchronized. Suppose $S_1$ is placed at (0,0) and $S_2$ is
+        placed at (0, $-16.0$ m). At any point $P$ along the $x$-axis, the waves from
+        $S_2$ and $S_2$ interfere following the superposition principle.
+        \begin{enumerate}
+          \item Plot the configuration in $(x,y)$ the plan.
+            \begin{figure}[ht]
+              \centering
+              \incfig{plot}
+              \caption{}
+              \label{fig:plot}
+            \end{figure}
+          \item When $P$ is infinitely far away,
+            \begin{enumerate}
+              \item What is the phase difference at point $P$ between the
+                arriving waves from $S_2$ and $S_2$?
+                \begin{align}
+                  \Delta \phi &= \frac{2\pi}{\lambda}\Delta x \\
+                              &= \frac{2\pi}{\lambda}\left( \sqrt{16^2+x^2} -x \right) \\
+                  \lim_{x \to \infty} &= \frac{2\pi}{\lambda}\left( x -x \right) \\
+                                      &= 0
+                .\end{align}
+              \item Consequently, what type of interference do they produce
+                at point $P$?
+                \\\bf{Maximum Constructive Interference}
+            \end{enumerate}
+          \item Suppose now we move point $P$ along the $x$-axis toward the source $S_1$.
+            \begin{enumerate}
+              \item Will the phase difference between the waves increase or
+                decrease?
+              \item At what distance $x$ will the waves exhibit a phase
+                difference of (I) $0.5\lambda$, (II) $1.0\lambda$, and (III) $1.5\lambda$?
+                \begin{align}
+                  \Delta \phi &= \frac{2\pi}{\lambda}\Delta x \\
+                  n\lambda &= \frac{2\pi}{\lambda}\left( \sqrt{16^2+x^2} -x \right) \\
+                  \frac{n\lambda^2}{2\pi} &= \sqrt{16^2+x^2} -x
+                .\end{align}
+                \begin{gather}
+                  \Delta\phi=0.5\lambda \implies x=401\\
+                  \Delta\phi=1.0\lambda \implies x=200\\
+                  \Delta\phi=1.5\lambda \implies x=134\\
+                \end{gather}
+            \end{enumerate}
+        \end{enumerate}
+    \end{enumerate}
+
+  \item A natural light beam of irradiance $I_0$ is incident upon a polaroid. The
+    transmitted beam is incident upon a second polaroid whose transmission axis
+    is aligned with the first at time $t = 0$, and rotated about the optical axis
+    with an angular speed $\omega$ (radians per second).
+    \begin{enumerate}
+      \item Derive an expression for the transmitted irradiance $I(t)$ out of the
+        second polaroid as a function of time, and as a fraction of $I_0$.
+        \begin{gather}
+          I_1 = \frac{1}{2} I_0 \quad I_2 = I_1\cos^2\theta \quad \theta = \omega t \\
+          I(t) = \frac{1}{2} I_0 \cos^2(\omega t)
+        \end{gather}
+      \item Plot this transmitted irradiance as a function of time. Be sure to
+        indicate the scale of each axis accurately.
+        \begin{figure}[htpb]
+        \begin{center}
+        \begin{tikzpicture}[scale=0.80, transform shape]
+          % PGF plot for cos^2(x)
+          \begin{axis}[
+            axis lines = left,
+            xlabel = $t$,
+            ylabel = {$I(t)$},
+            xmin=0, xmax=2*pi,
+            ymin=0, ymax=1,
+            xtick={0,pi/2,pi,3*pi/2,2*pi},
+            xticklabels={$0$,$\frac{\pi}{2\omega}$,$\frac{\pi}{\omega}$,$\frac{3\pi}{2\omega}$,$\frac{2\pi}{\omega}$},
+            ytick={0,1},
+            yticklabels={$0$,$\frac{1}{2}I_0$},
+            ]
+            \addplot [
+              domain=0:2*pi,
+              samples=100,
+              color=red,
+              ]
+              {cos(deg(x))^2};
+          \end{axis}
+        \end{tikzpicture}
+        \end{center}
+        \caption{}%
+        \label{fig:}
+        \end{figure}
+        
+      \item If a third polaroid were now placed to the right of the rotating
+        polaroid, with its transmission axis oriented at 90$^{\circ}$ to that of the
+        first (fixed) polaroid, how many maxima of the transmitted irradiance
+        would occur per each complete (360$^{\circ}$) revolution of the rotating
+        polaroid?
+        \begin{figure}[H]
+          \centering
+          \incfig[0.75]{polaroid}
+          \caption{}
+          \label{fig:polaroid}
+        \end{figure}
+        \begin{align}
+          I(t) &= \frac{1}{2} I_0 \cos^2(\omega t)\cos^2(\frac{\pi}{2}-\omega t) \\
+               &= \frac{1}{2} I_0 \cos^2(\omega t)\sin^2(\omega t) \\
+               &= \frac{1}{2} I_0 \left[ \cos(\omega t)\sin(\omega t) \right]^2 \\
+               &= \frac{1}{8} I_0 \left[\frac{\sin(2\omega t)}{2}\right]^2\\
+               &= \frac{1}{8} I_0 \sin^2(2\omega t)\\
+               &\implies \text{4 maxima per revolution}
+        .\end{align}
+    \end{enumerate}
+
+\end{enumerate}
+
+\end{document}

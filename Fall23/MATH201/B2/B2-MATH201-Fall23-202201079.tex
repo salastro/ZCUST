@@ -1,0 +1,157 @@
+\documentclass{zc-ust-hw}
+
+\usepackage{thmtools}
+
+% Theorem
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+
+\name{SalahDin Ahmed Salh Rezk}
+\id{202201079}
+\course{Linear Algebra (MATH 201)}
+\assignment{Bonus 2}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+
+  %%%%%%%%%%%%%%%%%%%%
+  \item Prove that every square matrix can be written as a matrix
+    multiplication of two symmetric matrices
+  %%%%%%%%%%%%%%%%%%%%
+
+    \begin{proof}
+      Assume simpler case of $2 \times 2$ matrix:
+      \begin{equation}
+        A=\begin{bmatrix} a_{11} & a_{12}\\ a_{21} & a_{22} \end{bmatrix}
+        \quad
+        B=\begin{bmatrix} b_{11} & b_{12} \\ b_{12} & b_{22} \end{bmatrix}
+        \quad
+        C=\begin{bmatrix} c_{11} & c_{12} \\ c_{12} & c_{22} \end{bmatrix}
+        \quad
+        \text{such that}
+        \quad
+        A=BC
+      .\end{equation}
+      \begin{equation}
+        BC =
+        \begin{bmatrix} 
+          b_{11}\cdot c_{11} + b_{12}\cdot c_{12} & b_{11}\cdot c_{12} + b_{12}\cdot c_{22} \\
+          b_{21}\cdot c_{11} + b_{22}\cdot c_{12} & b_{21}\cdot c_{12} + b_{22}\cdot c_{22}
+        \end{bmatrix} 
+      .\end{equation}
+      \begin{equation}
+        \implies \begin{cases}
+          a_{11} = b_{11}\cdot c_{11} + b_{12}\cdot c_{12} \\
+          a_{12} = b_{11}\cdot c_{12} + b_{12}\cdot c_{22} \\
+          a_{21} = b_{21}\cdot c_{11} + b_{22}\cdot c_{12} \\
+          a_{22} = b_{21}\cdot c_{12} + b_{22}\cdot c_{22}
+        \end{cases}
+      \end{equation}
+      In this system of equations, we have 6 unknowns and 4 equations, thus we
+      can choose any two variables to be free variables. Let's choose $b_{11}$
+      and $b_{22}$ to be free variables. Then we can solve the system of
+      equations for $b_{12}$ and $b_{21}$:
+      \begin{equation}
+        \begin{cases}
+          b_{12} = \dfrac{a_{12} - b_{11}\cdot c_{12}}{c_{22}} \\
+          \\
+          b_{21} = \dfrac{a_{21} - b_{22}\cdot c_{12}}{c_{11}}
+        \end{cases}
+      \end{equation}
+      Thus, there always exists a solution for $B$ and $C$ such that $A=BC$, where
+      $B$ and $C$ are symmetric matrices, such that $c_{22}, c_{11} \neq 0$.
+
+      This can be generalized to any $n \times n$ matrix as follows:
+      \begin{equation}
+        \sum_{i=1}^{n} \sum_{j=1}^{n} a_{ij} = \sum_{i=1}^{n} \sum_{j=1}^{n} b_{ij} \cdot c_{ij}
+        \iff
+        \begin{cases}
+          a_{11} = b_{11}\cdot c_{11} + b_{12}\cdot c_{12} + \cdots + b_{1n}\cdot c_{1n} \\
+          a_{12} = b_{11}\cdot c_{12} + b_{12}\cdot c_{22} + \cdots + b_{1n}\cdot c_{2n} \\
+          \vdots \\
+          a_{1n} = b_{11}\cdot c_{1n} + b_{12}\cdot c_{2n} + \cdots + b_{1n}\cdot c_{nn} \\
+          a_{21} = b_{21}\cdot c_{11} + b_{22}\cdot c_{12} + \cdots + b_{2n}\cdot c_{1n} \\
+          \vdots \\
+          a_{nn} = b_{n1}\cdot c_{1n} + b_{n2}\cdot c_{2n} + \cdots + b_{nn}\cdot c_{nn}
+        \end{cases}
+      .\end{equation}
+      \begin{equation}
+        \implies \begin{cases}
+          b_{12} = \dfrac{a_{12} - b_{11}\cdot c_{12} - \cdots - b_{1n}\cdot c_{2n}}{c_{22}} \\
+          b_{21} = \dfrac{a_{21} - b_{22}\cdot c_{12} - \cdots - b_{2n}\cdot c_{1n}}{c_{11}} \\
+          \vdots \\
+          b_{1n} = \dfrac{a_{1n} - b_{11}\cdot c_{1n} - \cdots - b_{1,n-1}\cdot c_{nn}}{c_{nn}} \\
+          b_{n1} = \dfrac{a_{n1} - b_{n2}\cdot c_{11} - \cdots - b_{n,n-1}\cdot c_{1n}}{c_{nn}} \\
+        \end{cases}
+      \end{equation}
+      Therefore, there always exists $n^2$ equations and $n(n+1)$ unknowns,
+      thus we can choose $n$ variables to be free variables. Then we can always
+      solve the system of equations for the remaining $n^2 - n$ variables, such
+      that $c_{ii} \neq 0$ for all $i \in \{1, 2, \cdots, n\}$.
+    \end{proof}
+
+  %%%%%%%%%%%%%%%%%%%%
+  \item Given that A, B, and C are Three matrices...A commutes with B....B
+    commutes with C, then prove that A commutes with some Polynomial matrix
+    function of C.
+  %%%%%%%%%%%%%%%%%%%%
+    \begin{theorem}
+      \label{thm:commutativity}
+      If the set of matrices considered is restricted to Hermitian matrices
+      without multiple eigenvalues, then commutativity is transitive.
+      \begin{equation*}
+        A\cdot B=B\cdot A \land B\cdot C=C\cdot B \implies A\cdot C=C\cdot A
+      .\end{equation*}
+    \end{theorem}
+    Under this restriction, the proof is trivial:
+    \begin{proof}
+      Let $P(C)$ be a polynomial matrix function of $C$, such that
+      \begin{equation}
+        P(C) = \sum_{i=0}^{n} a_i C^i
+      .\end{equation}
+      As such, we are trying to prove that
+      \begin{equation}
+        A\cdot B=B\cdot A \land B\cdot C=C\cdot B \implies A\cdot P(C)=P(C)\cdot A
+      \end{equation}
+      Then:
+      \begin{align}
+        A\cdot P(C) &\overset{?}{=} P(C)\cdot A \\
+        A\cdot \sum_{i=0}^{n} a_i C^i &\overset{?}{=} \sum_{i=0}^{n} a_i C^i \cdot A \\
+        A(a_0 I + a_1 C + a_2 C^2 + \cdots + a_n C^n) &\overset{?}{=} (a_0 I + a_1 C + a_2 C^2 + \cdots + a_n C^n) \cdot A \\
+        a_0 A + a_1 AC + a_2 AC^2 + \cdots + a_n AC^n &\overset{?}{=} a_0 A + a_1 CA + a_2 C^2A + \cdots + a_n C^nA \\
+        a_1 AC + a_2 AC^2 + \cdots + a_n AC^n &\overset{?}{=} a_1 CA + a_2 C^2A + \cdots + a_n C^nA
+      \end{align}
+      \begin{equation}
+        \implies 
+        \begin{cases}
+          \begin{split}
+            a_1 AC &\overset{?}{=} a_1 CA \\
+            a_2 AC^2 &\overset{?}{=} a_2 C^2A \\
+            \vdots \\
+            a_n AC^n &\overset{?}{=} a_n C^nA
+          \end{split}
+        \end{cases}
+        \implies
+        \begin{cases}
+          \begin{split}
+            AC &\overset{?}{=} CA \\
+            AC^2 &\overset{?}{=} C^2A \\
+            \vdots \\
+            AC^n &\overset{?}{=} C^nA
+          \end{split}
+        \end{cases}
+      \end{equation}
+      Using Theorem~\ref{thm:commutativity}, $AC^i = C^iA$ for all $i \in \N$, by induction.
+
+      Therefore, $A\cdot P(C)=P(C)\cdot A$.
+    \end{proof}
+    Note that this proof does not hold for non-Hermitian matrices or Hermitian
+    matrices with multiple eigenvalues, as Theorem~\ref{thm:commutativity} does
+    not hold in those cases.
+
+\end{enumerate}
+
+\end{document}
