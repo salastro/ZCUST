@@ -1,0 +1,15 @@
+
+=== Results ===
+Covariance: 0.5331
+Correlation Coefficient: 0.0110
+
+Statistical Measures for Z:
+Mean = 5.0163
+Variance = 64.4913
+Third Moment = 28.4972
+
+Statistical Measures for W:
+Mean = 17.1074
+Variance = 36.4888
+Third Moment = -3.5112
+

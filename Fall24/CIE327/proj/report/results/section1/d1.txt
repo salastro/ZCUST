@@ -1,0 +1,12 @@
+
+=== Results ===
+
+Statistical Measures:
+Mean = 1.4991
+Variance = 1.0487
+Third Moment = 0.4307
+
+Values at t = 0:
+M(0) = 1.0000
+M'(0) = 1.4991 (Mean)
+M''(0) = 3.2960

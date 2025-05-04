@@ -1,0 +1,15 @@
+
+=== Results ===
+Covariance: -0.0031
+Correlation Coefficient: -0.0003
+
+Statistical Measures for X:
+Mean = 19.9998
+Variance = 200.0593
+Third Moment = 4019.8996
+
+Statistical Measures for Y:
+Mean = 0.6006
+Variance = 0.4797
+Third Moment = 0.2870
+

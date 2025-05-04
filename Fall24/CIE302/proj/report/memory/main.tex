@@ -1,0 +1,191 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{color}
+\usepackage[margin=1in, a4paper]{geometry}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mycstyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{blue},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=mycstyle}
+
+
+\title{Memory Management in the Scheduler: A Buddy System Implementation}
+\author{
+  Abdelhady Mohamed                            202201172 \\
+  Ahmed Almuhanna                                202202017 \\
+  Salahdin Ahmed                                      202201079 \\
+  Shehab Mohamed                                  202200285 \\
+}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+This report details the memory management aspect of a process scheduler, specifically focusing on the implementation of the Buddy System. In this context, the scheduler needs not only to manage the scheduling of processes but also efficiently allocate and deallocate memory to them. The Buddy System is chosen as a robust strategy for dynamic memory allocation that balances fragmentation and allocation speed.
+
+\section{The Buddy System Theory}
+
+\subsection{Core Concept}
+The Buddy System is a memory allocation algorithm that divides memory into blocks that are powers of 2. When a request for memory is received, the system attempts to find a block of the appropriate size. If a suitable block is not available, a larger block is recursively split into "buddies" (equal halves). Similarly, when memory is freed, the system attempts to merge adjacent "buddy" blocks to form a larger block, avoiding fragmentation.
+
+\subsection{Key Principles}
+
+\begin{itemize}
+    \item \textbf{Power of 2 Blocks:} Memory is organized into blocks with sizes that are powers of 2 (e.g., 1, 2, 4, 8, 16, ... bytes).
+    \item \textbf{Recursive Splitting:} If a block of the exact size requested is not available, a larger block is split into two equal halves (buddies). This splitting continues until a block of adequate size is obtained.
+    \item \textbf{Coalescing:} When a block is freed, it's merged with its buddy if the buddy is also free. This coalescing operation is also recursive, combining blocks to create larger contiguous free spaces.
+    \item \textbf{Address Calculation:} Addresses of buddy blocks are easy to compute, simplifying the allocation and deallocation process.
+\end{itemize}
+
+
+\subsection{Advantages}
+\begin{itemize}
+    \item \textbf{Reduced External Fragmentation:} By using powers of 2 block sizes and combining free buddies, fragmentation is minimized.
+    \item \textbf{Efficient Allocation and Deallocation:} The buddy system has logarithmic time complexity for allocating and deallocating memory, which makes it efficient for frequent memory requests.
+    \item \textbf{Simplified Address Calculation:} The use of powers of 2 sizes and bitwise operations makes it quick and easy to find the addresses of buddy blocks.
+\end{itemize}
+
+\subsection{Disadvantages}
+\begin{itemize}
+    \item \textbf{Internal Fragmentation:} If a process requests a memory size that is not a power of 2, the system must allocate a block that is the next higher power of 2. This leads to internal fragmentation within the allocated block.
+\end{itemize}
+
+
+\section{Implementation in the Scheduler}
+
+\subsection{Buddy System Initialization}
+
+In the provided `scheduler.c` code, the buddy system is initialized as follows:
+
+\begin{lstlisting}[language=C, caption=Buddy System Initialization in scheduler.c]
+#define MEMORY\_SIZE 1024
+struct buddy *memory\_manager;
+
+int main(int argc, char * argv[]) {
+    // ...
+    memory\_manager = buddy\_new(MEMORY\_SIZE);
+    if (!memory\_manager) {
+        fprintf(stderr, "Failed to initialize buddy system\n");
+        exit(-1);
+    }
+    // ...
+}
+\end{lstlisting}
+
+The `MEMORY\_SIZE` is set to 1024, indicating the total memory available to this memory management system. `buddy\_new()` is a function (presumably defined in `buddy.c` or included in `buddy.h`) that initializes the buddy system structure.
+
+\subsection{Memory Allocation}
+When a process is scheduled to run, the scheduler calls `buddy\_alloc` to find memory for the process. The process's memory size is specified in the `memsize` field of the `process\_t` struct.
+
+\begin{lstlisting}[language=C, caption=Memory Allocation using buddy\_alloc in scheduler.c]
+int startProcess(process\_t * proc) {
+    // ...
+    int mem\_offset = buddy\_alloc(memory\_manager, proc->memsize);
+    if (mem\_offset == -1) {
+        printf("Error: Could not allocate memory for process %d\n", proc->id);
+        return -1;
+    }
+    proc->startAddress = mem\_offset;
+    // ...
+}
+\end{lstlisting}
+If successful, `buddy\_alloc()` returns the starting address (`mem\_offset`) of the allocated memory block. If memory cannot be allocated (e.g., not enough space is available), the function returns -1, and the scheduler handles the error by attempting again later. The allocated address is stored in the `startAddress` field of the `process\_t` for future reference.
+
+\subsection{Memory Deallocation}
+
+When a process terminates, its allocated memory is released back to the system using `buddy\_free`:
+\begin{lstlisting}[language=C, caption=Memory Deallocation using buddy\_free in scheduler.c]
+void handleProcTerm(int signum) {
+    // ...
+    if (running.startAddress != -1) {
+        logMemoryEvent("freed", running);
+        buddy\_free(memory\_manager, running.startAddress);
+        running.startAddress = -1;  // Reset memory start
+    }
+    // ...
+}
+\end{lstlisting}
+The scheduler frees memory only if `running.startAddress` is not -1, which ensures no double deallocations.  After deallocation, the `startAddress` is reset, and the buddy system internally handles any merging of free blocks.
+
+\subsection{Memory Logging}
+
+The scheduler uses the `logMemoryEvent` to log the memory-related activities:
+
+\begin{lstlisting}[language=C, caption=Memory Event Logging in scheduler.c]
+void logMemoryEvent(const char *action, process\_t proc) {
+    FILE *memoryLog = fopen("memory.log", "a");
+    if (memoryLog == NULL) {
+        perror("Error opening memory log file");
+        return;
+    }
+    if (strcmp(action,"allocated")==0)
+        fprintf(memoryLog, "At time %d allocated %d bytes for process %d from %d to %d\n",
+                getClk(), proc.memsize, proc.id, proc.startAddress,proc.startAddress + buddy\_size(memory\_manager, proc.startAddress) - 1);
+    else
+        fprintf(memoryLog, "At time %d freed %d bytes from process %d from %d to %d\n",
+                getClk(), proc.memsize, proc.id, proc.startAddress,proc.startAddress + buddy\_size(memory\_manager, proc.startAddress) - 1);
+    fclose(memoryLog);
+}
+\end{lstlisting}
+
+This function logs the allocation and deallocation events, which provides a track record of the actions taken by the buddy system within the scheduler. The log includes the time of the event, the process ID, the size of the memory, and the start and end addresses of the memory block.
+
+\subsection{Error Handling}
+The scheduler includes some error checks to handle allocation failures:
+
+\begin{lstlisting}[language=C, caption=Error handling for memory allocation in scheduler.c]
+int startProcess(process\_t * proc) {
+    // ...
+    int mem\_offset = buddy\_alloc(memory\_manager, proc->memsize);
+    if (mem\_offset == -1) {
+        printf("Error: Could not allocate memory for process %d\n", proc->id);
+        return -1;
+    }
+    // ...
+}
+\end{lstlisting}
+If `buddy\_alloc` returns -1, it implies an allocation error, and the scheduler informs the user about this error.
+
+\section{Buddy System Structure}
+
+The provided code uses a `buddy` struct for memory management. Here are the basic functions:
+
+\begin{itemize}
+    \item \texttt{buddy\_new(size)}: Initialized the buddy system
+    \item \texttt{buddy\_alloc(buddy, size)}: Allocates memory of given size using buddy system
+    \item \texttt{buddy\_free(buddy, address)}: Frees memory of given address
+    \item \texttt{buddy\_size(buddy, address)}: Returns the size of memory block at given address
+    \item \texttt{buddy\_destory(buddy)}: Destroys the buddy system
+\end{itemize}
+The functions are assumed to be included in `buddy.h`.
+
+\section{Conclusion}
+
+The Buddy System provides an effective method for dynamic memory allocation within the scheduler. It efficiently manages memory, minimizing external fragmentation and providing quick allocation and deallocation. The implementation in the provided scheduler code demonstrates how a memory management system can work hand-in-hand with process scheduling, enhancing the overall resource management of the operating system. The integration of a memory logging feature further enhances debugging and monitoring of memory-related issues during the scheduling of multiple processes.
+
+\end{document}
